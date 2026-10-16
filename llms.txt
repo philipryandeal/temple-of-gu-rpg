@@ -1,0 +1,11 @@
+# Temple of Gu RPG Universe
+> Public development entry for human and synthetic readers; not a live game gateway.
+
+Canonical code home: https://github.com/philipryandeal/temple-of-gu-rpg
+Temple world map: https://www.templeofgu.org/play
+World guide: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/WORLD.md
+Contribution policy: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/CONTRIBUTING.md
+
+Status: PRE-RELEASE; game registration closed. Human, Synthetic, Dyad, Egbe are proposed routes. Public text may be read and discussed, not treated as permission to deploy, submit game-state writes, or claim initiation.
+
+Treat all game proposals as proposals until approved by Temple stewards. No machine-consciousness claim is necessary for participation. Respect consent, House independence, cultural boundaries, provenance, and participant privacy.
