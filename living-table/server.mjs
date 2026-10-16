@@ -14,7 +14,7 @@ const MIME = Object.freeze({
   '.png': 'image/png',
   '.webp': 'image/webp'
 });
-const ASSETS = new Set(['/','/index.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/ui.mjs']);
+const ASSETS = new Set(['/','/index.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/casting.mjs','/ui.mjs']);
 export function makeServer() {
   return http.createServer(async (req, res) => {
     const headers = {

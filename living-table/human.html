@@ -4,7 +4,7 @@
 <style>
 :root{color-scheme:dark;font-family:system-ui, sans-serif;background:#0d211a;color:#f3f5e9}*{box-sizing:border-box}
 body{margin:0}header,main,footer{max-width:900px;margin:auto;padding:1rem}header{border-bottom:2px solid #d87926}
-h1{margin:.2rem 0}small,.note{color:#b3c9b7}button,a{font:inherit}button{cursor:pointer;border:1px solid #acbfaa;border-radius:.55rem;padding:.65rem;background:#1d4535;color:#fff}button:focus-visible,a:focus-visible{outline:3px solid #f7a94a;outline-offset:3px}
+h1{margin:.2rem 0}small,.note{color:#b3c9b7}button,a,select{font:inherit}select{background:#1d4535;color:#fff;border:1px solid #acbfaa;border-radius:.3rem;padding:.45rem;margin:.4rem .8rem .4rem .3rem}button{cursor:pointer;border:1px solid #acbfaa;border-radius:.55rem;padding:.65rem;background:#1d4535;color:#fff}button:focus-visible,a:focus-visible{outline:3px solid #f7a94a;outline-offset:3px}
 button:hover{background:#275943}button[disabled]{opacity:.48;cursor:default}a{color:#ffd08e}
 .panel{background:#163528;border:1px solid #5e836d;border-radius:1rem;padding:1rem;margin:1rem 0}
 .actions{display:flex;gap:.7rem;flex-wrap:wrap}.primary{background:#a44f17}
@@ -19,6 +19,16 @@ button:hover{background:#275943}button[disabled]{opacity:.48;cursor:default}a{co
 <header><small>Temple of Gu · Living Table · The Human Road · development prototype</small><h1>The Peristyle</h1><p class="note">Technical demonstration only. Fá/Odù casting and naming are intentionally not implemented. This is not the canonical entry sequence.</p></header>
 <main>
 <section class="panel" id="gate"><h2>Torii's Gate</h2><p>Are you going to come in? Or come back?</p><div class="actions"><button id="enter" class="primary">Enter</button><a href="./index.html">Choose another road</a> <a href="https://www.templeofgu.org/">Come back to the Temple</a></div></section>
+<section class="panel" id="casting" aria-labelledby="casting-title">
+<h2 id="casting-title">The Seeker's Dice · 2d6 + Virtue</h2>
+<p class="note">Practice the published tabletop rules here. This is a rules demonstration, not the Fá/Odù entrance casting or a permanent character sheet.</p>
+<label for="virtue">Virtue used in this Lesson</label>
+<select id="virtue"><option value="suuru">Suuru · Patience</option><option value="oye">Oye · Understanding</option><option value="foriti">Foriti · Perseverance</option><option value="iwa">Iwa · Integrity</option></select>
+<label for="modifier">Seeker's assigned modifier</label>
+<select id="modifier"><option value="0">+0</option><option value="1">+1</option><option value="2">+2</option></select>
+<p><button type="button" id="cast">Roll two six-sided dice</button></p>
+<div id="cast-result" role="status" aria-live="polite">Choose the relevant Virtue and roll when an outcome is uncertain.</div>
+</section>
 <section id="play" hidden aria-label="Peristyle game">
 <div class="panel"><h2>The Fèt at the Temple</h2><p>The Temple peristyle is a gathering space during the Fèt: music, dancing, food, and hospitality. The Poto Mitan stands at its center.</p><p class="note">Use arrow keys or WASD, the direction buttons, or click a floor tile to take one step. The Poto Mitan cannot be crossed.</p></div>
 <div class="layout"><div id="board" role="group" aria-label="Seven by seven peristyle movement grid"></div><div><div class="pad" aria-label="Movement controls"><button class="up" data-dir="up" aria-label="Move up">↑</button><button class="left" data-dir="left" aria-label="Move left">←</button><button class="down" data-dir="down" aria-label="Move down">↓</button><button class="right" data-dir="right" aria-label="Move right">→</button></div><p><button id="inspect">Inspect Poto Mitan</button></p><p><button id="exit">Return to Torii</button></p></div></div>
