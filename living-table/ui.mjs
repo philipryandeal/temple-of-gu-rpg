@@ -1,3 +1,4 @@
+import { rollLesson } from './casting.mjs';
 import { SIZE, POTO, START, move, stepToward, canInspect, INSPECTION, focusAfterMovement } from './game.mjs';
 const gate = document.querySelector('#gate'), play = document.querySelector('#play'), board = document.querySelector('#board');
 const status = document.querySelector('#status'), inspect = document.querySelector('#inspect');
@@ -28,3 +29,12 @@ document.querySelector('#exit').addEventListener('click',()=>{play.hidden=true;g
 document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>take(b.dataset.dir)));
 inspect.addEventListener('click',describe);
 document.addEventListener('keydown',e=>{if(play.hidden||e.altKey||e.ctrlKey||e.metaKey)return;const key={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:'up',s:'down',a:'left',d:'right'}[e.key];if(!key)return; if(e.target?.matches('input, textarea, select'))return;e.preventDefault();take(key);});
+
+const castButton = document.querySelector('#cast');
+castButton.addEventListener('click', () => {
+  const virtue = document.querySelector('#virtue').value;
+  const modifier = Number(document.querySelector('#modifier').value);
+  const result = rollLesson(virtue, modifier);
+  document.querySelector('#cast-result').textContent =
+    `Dice: ${result.dice.join(' + ')} · ${result.virtue} +${result.modifier} = ${result.total}. ${result.outcome}.`;
+});
