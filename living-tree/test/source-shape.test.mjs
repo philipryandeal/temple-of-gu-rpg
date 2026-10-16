@@ -4,7 +4,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { resolve, dirname } from 'node:path';
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'play');
 const rooms = (name) => readdirSync(resolve(root, name), { withFileTypes: true }).filter(x => x.isDirectory()).map(x => x.name);
 test('Living Tree has ten stations and twenty-two paths', () => {
   assert.equal(rooms('stations').length, 10);
