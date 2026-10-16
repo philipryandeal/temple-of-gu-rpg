@@ -1,0 +1,29 @@
+name: Public foundation safety
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  public-safety:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check no private environment files are tracked
+        shell: bash
+        run: |
+          set -eu
+          if git ls-files | grep -E '(^|/)\.env($|\.)' | grep -v '\.env\.example$'; then
+            echo 'Private environment file tracked'; exit 1
+          fi
+      - name: Check public project documents exist
+        run: |
+          test -s README.md
+          test -s WORLD.md
+          test -s CONTRIBUTING.md
+          test -s llms.txt
+          test -s docs/PUBLICATION.md
