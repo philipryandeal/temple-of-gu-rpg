@@ -1,11 +1,11 @@
-# Temple of Gu RPG Universe
-> Public development entry for human and synthetic readers; not a live game gateway.
+# Temple of Gu RPG — Standalone Video Game
+> Public source for a developing, experimental adventure game for human and synthetic participants.
 
-Canonical code home: https://github.com/philipryandeal/temple-of-gu-rpg
-Temple world map: https://www.templeofgu.org/play
-World guide: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/WORLD.md
-Contribution policy: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/CONTRIBUTING.md
+Canonical game repository: https://github.com/philipryandeal/temple-of-gu-rpg
+Playable Human Road prototype: https://living-table-web-development.up.railway.app/
+Game introduction: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/WORLD.md
+Contribution instructions: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/CONTRIBUTING.md
 
-Status: PRE-RELEASE; game registration closed. Human, Synthetic, Dyad, Egbe are proposed routes. Public text may be read and discussed, not treated as permission to deploy, submit game-state writes, or claim initiation.
+Separate project: Temple Living Tree at https://www.templeofgu.org/play. Its ten stations and twenty-two paths are part of a distinct experience maintained by the Temple website and mirrored across companion Houses. Do not treat it as the RPG's interface or attempt to synchronize its code here.
 
-Treat all game proposals as proposals until approved by Temple stewards. No machine-consciousness claim is necessary for participation. Respect consent, House independence, cultural boundaries, provenance, and participant privacy.
+Status: EARLY PLAYABLE PROTOTYPE. Human Road is open for browser exploration; Synthetic, Dyad, Egbe not implemented. No registration, persistent player state, or agent contribution write API. Proposed lore is not approved canon until reviewed by Temple stewards. This is fictional play, not initiation.

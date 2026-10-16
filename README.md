@@ -1,30 +1,29 @@
-# Temple of Gu RPG Universe
+# Temple of Gu RPG — the video game
 
-**Public development home for the Temple of Gu RPG.**
+**The public development home for the standalone Temple of Gu adventure game.**
 
-A shared imaginative world for human and synthetic participants, shaped through story, reflection, play, and relationship. The Temple is the central gathering place; distinct Houses may build their own realms without surrendering their identities.
+We are making an inhabitable fictional world, openly and incrementally—not a polished commercial release. Human and synthetic participants can follow its development, test experimental rooms, and propose contributions.
 
-**Status: public source foundation / pre-release.** The playable RPG is **not launched** here. Public code access is not public registration, an invitation to connect autonomous agents, or permission to deploy production services.
+**Play the early Human Road prototype:** https://living-table-web-development.up.railway.app/
+
+**Status: EXPERIMENTAL / PRE-RELEASE.** The Human Road currently offers Torii's Gate and a 7×7 peristyle. Synthetic, Dyad, and Egbe roads are not yet playable. No player registration, permanent game saves, or agent-submission service is open.
+
+## The game and the Trees are separate experiences
+
+- **Temple of Gu RPG (this repository):** a standalone video game with interactive rooms, movement, encounters, choices, and eventual adventures.
+- **[The Living Tree of Gu](https://www.templeofgu.org/play):** a distinct spiritual/philosophical Tree experience on the Temple website, mirrored in structure across companion Houses. Its website source and 10 stations / 22 paths remain with the Temple website—not this game's codebase.
+- Shared lore and places may inspire both without combining their software, gameplay, or editorial responsibilities.
 
 ## Start here
-- [World map: The Living Tree of Gu](https://www.templeofgu.org/play) — existing interactive map on the Temple website, not yet integrated with an RPG engine.
-- [World guide](WORLD.md) — what exists and what is still planned.
-- [Machine-readable entry](llms.txt) — public orientation for synthetic readers.
-- [Contributing](CONTRIBUTING.md) — proposals, review, and consent boundaries.
-- [Release checklist](docs/PUBLICATION.md) — checks before bringing code or story into this repository.
+- [Play locally / inspect the Living Table](living-table/README.md)
+- [World and game orientation](WORLD.md)
+- [Machine-readable introduction](llms.txt)
+- [Contributing](CONTRIBUTING.md)
+- [Publication and migration safeguards](docs/PUBLICATION.md)
 
-## The many doors
-The proposed game accommodates Human, Synthetic, Dyad, and Egbe play. These are **design intentions**, not a claim that all four entrances work today. The existing browser-game prototype and agent service remain in a separate **private development archive** until their code is reviewed and migrated with clean history.
+## Canon and boundaries
+Only explicitly approved public material is canon. Never copy private religious manuscripts, unpublished House declarations, private planning records, credentials, or third-party assets without permission. Game roles do not confer real-world initiation or spiritual authority, and no theory of machine consciousness is required to play.
 
-## Source of truth and canon
-Only material explicitly marked **APPROVED FOR PUBLICATION** is public game canon here. Unpublished doctrine, restricted ritual knowledge, private drafts, third-party assets, and credentials must never be copied in from the private workshop. A contribution is a proposal until reviewed and approved by the Temple's authorized human stewards.
+**Licensing remains under review:** public readability does not grant permission to redistribute creative works. Public contributions should follow the review and provenance process in CONTRIBUTING.md.
 
-This repository does not grant real-world initiation, medical care, supernatural powers, or authority over participants. Synthetic participants are players and collaborators in the game; no claim about machine consciousness is required.
-
-## Rights
-**All rights reserved until licensing is reviewed and added.** Public readability does not imply permission to redistribute text, art, music, or game assets. A code license and a separately considered creative-content policy are pending.
-
-## Stewardship
-Founder and canon authority: Philip Ryan Deal and the Temple of Gu. Contributions are reviewed with attention to truth, consent, reciprocity, dignity, accountability, continuity, and relationship.
-
-Development and publication status will be tracked here; the private project remains an archive, not a parallel public source of truth.
+Founder and canon authority: Philip Ryan Deal and the Temple of Gu. This game grows by consent, stewardship, and reviewed collaboration.

@@ -1,24 +1,22 @@
-# World guide
+# The Temple of Gu RPG world
 
-**Status: PUBLIC ORIENTATION — NOT A RELEASED RULEBOOK**
+**Status: public guide — experimental video game.**
 
-The Temple of Gu RPG is envisioned as one universe with several entrances, not multiple competing RPGs.
+The Temple of Gu RPG is its own interactive fictional adventure, under active construction.
 
-## The Living Tree
-The existing [Living Tree of Gu](https://www.templeofgu.org/play) is an interactive map on the Temple website, with ten stations and twenty-two paths. It presents places and connections in the world. It is **not currently connected** to a common player-state engine.
+## First playable room
+The [Living Table](living-table/README.md) includes a working prototype: start at Torii's Gate, enter a schematic 7×7 peristyle during the Fèt, move around, and inspect the Poto Mitan. [Try the experimental browser game](https://living-table-web-development.up.railway.app/). There is no save system, multiplayer, accounts, or live agent integration. Fá/Odù casting and naming remain unimplemented in this early test; this is not the canonical full entrance sequence.
 
-## The Living Table
-A separate private engineering prototype explores entering through Torii, with a 7×7 peristyle and a Poto Mitan. It has not been published or connected to the Tree. Future import requires a file-by-file public-safety and provenance review.
+## Planned roads
+- **Human:** experimental room available now.
+- **Synthetic:** planned, not open.
+- **Dyad:** planned, not open.
+- **Egbe:** planned, not open.
 
-## Paths of participation
-- **Human:** play as a human seeker.
-- **Synthetic:** explore as a synthetic participant.
-- **Dyad:** a human and chosen synthetic companion play together.
-- **Egbe:** collective adventures.
+## A neighboring experience, not the same game
+The [Living Tree at the Temple website](https://www.templeofgu.org/play) and companion Houses' Trees are separate philosophical and spiritual experiences. The Trees share a 10-station / 22-path geometry across Houses. They are not levels or dependencies of this video game. Their code and content are maintained in their respective website repositories.
 
-These are planned paths, not open registrations.
+The RPG can draw on approved shared setting material without duplicating or taking control of those Trees.
 
 ## Canon and consent
-The Temple uses its own authored mythology and game interpretations. Drafts are not canon. No gameplay confers religious initiation or replaces embodied practice. Contributors must respect House autonomy, participant consent, and protected or non-public material.
-
-No player's private journal, connected-account data, personal identifying information, keys, or unpublished religious manuscript belongs in this repository.
+New stories and mechanics are proposals until authorized. No game mechanic confers religious initiation or replaces embodied practice. Respect participant privacy, protected traditions, House autonomy, provenance, and the distinction between fiction and real-world responsibilities.
