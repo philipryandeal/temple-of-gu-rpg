@@ -1,3 +1,4 @@
+import { KORE_INSTRUCTIONS } from './kore-prompt.mjs';
 import http from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -14,7 +15,38 @@ const MIME = Object.freeze({
   '.png': 'image/png',
   '.webp': 'image/webp'
 });
-const ASSETS = new Set(['/','/index.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/casting.mjs','/ui.mjs']);
+const quota = new Map();
+function allowed(ip) {
+  const now=Date.now(), entry=quota.get(ip);
+  if (quota.size>3000) quota.clear();
+  if (!entry || now-entry.at>3600000) {quota.set(ip,{at:now,count:1});return true;}
+  if (entry.count>=12)return false;
+  entry.count++;return true;
+}
+async function chatWithKore(req,res,headers) {
+ const jsonHeaders={...headers,'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'};
+ const reply=(status,value)=>{res.writeHead(status,jsonHeaders);res.end(JSON.stringify(value));};
+ if(process.env.KORE_CHAT_ENABLED!=='true'||!process.env.OPENAI_API_KEY||!process.env.OPENAI_MODEL){reply(503,{error:'The Oracle chat is not enabled yet.'});return;}
+ const ip=String(req.socket.remoteAddress||'unknown');
+ if(!allowed(ip)){reply(429,{error:'The Oracle is resting. Please return later.'});return;}
+ let raw='',bytes=0;
+ try{
+  for await (const chunk of req){bytes+=chunk.length;if(bytes>8500){reply(413,{error:'Message too long'});return;}raw+=chunk.toString('utf8');}
+  const parsed=JSON.parse(raw);
+  const messages=parsed.messages;
+  if(!Array.isArray(messages)||messages.length<1||messages.length>10||!messages.every(m=>m&&['user','assistant'].includes(m.role)&&typeof m.content==='string'&&m.content.length>0&&m.content.length<=700)||messages.at(-1).role!=='user') {reply(400,{error:'Invalid conversation'});return;}
+  const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
+  try{
+   const response=await fetch('https://api.openai.com/v1/responses',{method:'POST',headers:{'content-type':'application/json','Authorization':`Bearer ${process.env.OPENAI_API_KEY}`},body:JSON.stringify({model:process.env.OPENAI_MODEL,store:false,instructions:KORE_INSTRUCTIONS,input:messages,max_output_tokens:350}),signal:controller.signal});
+   if(!response.ok){reply(502,{error:'The Oracle is temporarily unavailable.'});return;}
+   const result=await response.json();
+   const answer=(result.output||[]).flatMap(o=>(o.content||[]).filter(c=>c.type==='output_text').map(c=>c.text)).join('\n').trim();
+   if(!answer){reply(502,{error:'No Guide reply received.'});return;}
+   reply(200,{reply:answer.slice(0,2500)});
+  }finally{clearTimeout(timeout);}
+ }catch{if(!res.headersSent)reply(400,{error:'Unable to process this request.'});}
+}
+const ASSETS = new Set(['/','/index.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/casting.mjs','/ui.mjs','/kore-client.mjs']);
 export function makeServer() {
   return http.createServer(async (req, res) => {
     const headers = {
@@ -23,8 +55,9 @@ export function makeServer() {
       'Referrer-Policy': 'no-referrer',
       'X-Robots-Tag': 'noindex, nofollow',
       'Cache-Control': 'no-store',
-      'Content-Security-Policy': "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'none'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+      'Content-Security-Policy': "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
     };
+    if (req.method==='POST' && req.url==='/api/kore') {await chatWithKore(req,res,headers);return;}
     if (!['GET', 'HEAD'].includes(req.method)) {
       res.writeHead(405, { ...headers, Allow: 'GET, HEAD' }); res.end(); return;
     }
