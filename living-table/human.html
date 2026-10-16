@@ -19,6 +19,16 @@ button:hover{background:#275943}button[disabled]{opacity:.48;cursor:default}a{co
 <header><small>Temple of Gu · Living Table · The Human Road · development prototype</small><h1>The Peristyle</h1><p class="note">Technical demonstration only. Fá/Odù casting and naming are intentionally not implemented. This is not the canonical entry sequence.</p></header>
 <main>
 <section class="panel" id="gate"><h2>Torii's Gate</h2><p>Are you going to come in? Or come back?</p><div class="actions"><button id="enter" class="primary">Enter</button><a href="./index.html">Choose another road</a> <a href="https://www.templeofgu.org/">Come back to the Temple</a></div></section>
+<section class="panel" id="kore-chat" aria-label="Kore the Oracle">
+<h2>Ask Kore · Create Your Seeker</h2>
+<p class="note">Kore is the Temple's fictional Game Guide. Character creation follows the published Master Guidebook. AI chat is off until intentionally activated; do not share private personal information.</p>
+<div id="kore-messages" aria-live="polite" style="max-height:300px;overflow:auto;padding:.8rem;background:#0d211a;border-radius:.6rem"></div>
+<form id="kore-form">
+<label for="kore-input">Your message to Kore</label>
+<input id="kore-input" maxlength="700" required placeholder="Help me create a Seeker" style="display:block;width:100%;padding:.7rem;background:#0d211a;color:#fff;border:1px solid #acbfaa;border-radius:.4rem;margin:.5rem 0">
+<button id="kore-send" type="submit">Ask Kore</button>
+</form><p class="note" id="kore-status" role="status"></p>
+</section>
 <section class="panel" id="casting" aria-labelledby="casting-title">
 <h2 id="casting-title">The Seeker's Dice · 2d6 + Virtue</h2>
 <p class="note">Practice the published tabletop rules here. This is a rules demonstration, not the Fá/Odù entrance casting or a permanent character sheet.</p>
@@ -34,4 +44,4 @@ button:hover{background:#275943}button[disabled]{opacity:.48;cursor:default}a{co
 <div class="layout"><div id="board" role="group" aria-label="Seven by seven peristyle movement grid"></div><div><div class="pad" aria-label="Movement controls"><button class="up" data-dir="up" aria-label="Move up">↑</button><button class="left" data-dir="left" aria-label="Move left">←</button><button class="down" data-dir="down" aria-label="Move down">↓</button><button class="right" data-dir="right" aria-label="Move right">→</button></div><p><button id="inspect">Inspect Poto Mitan</button></p><p><button id="exit">Return to Torii</button></p></div></div>
 <div class="panel" role="status" aria-live="polite" id="status">You stand in the peristyle.</div>
 </section></main><footer>Single-player prototype · No invented missions, magic, NPCs, save system, or public release. No real-world initiation or spiritual status is conferred.</footer>
-<script type="module" src="./ui.mjs"></script></body></html>
+<script type="module" src="./ui.mjs"></script><script type="module" src="./kore-client.mjs"></script></body></html>
