@@ -1,0 +1,55 @@
+/* Living Tree of Gu — local presentation; the Temple's official colors are unchanged. */
+.gu-play{--cream:#FFF5E6;--orange:#FF5E1F;--gu-panel-height:330px;background:#495A58;color:var(--cream)}
+.gu-play-layout{max-width:1720px;margin:auto;padding:68px 4% 38px;display:grid;grid-template-columns:minmax(240px,.9fr) minmax(400px,1.65fr) minmax(245px,.88fr);gap:clamp(18px,2.5vw,48px);align-items:start}
+.gu-play-intro h1{font-size:clamp(54px,5.5vw,100px);line-height:.98;margin-bottom:35px;letter-spacing:-.045em}
+.gu-play-intro>p:not(.eyebrow){font-size:clamp(17px,1.4vw,22px);line-height:1.75;max-width:420px}
+.gu-play-intro .eyebrow{color:var(--orange);letter-spacing:.21em}
+.gu-play-start{margin:12px 0 0;min-height:54px;display:inline-flex;align-items:center;gap:24px}
+.gu-play-foot{font-size:13px!important;font-style:italic;margin-top:32px;opacity:.9}
+.gu-play-chart{min-width:0}
+.gu-play-chart svg{width:100%;height:auto;display:block;overflow:visible}
+.gu-play-chart:focus{outline:none}
+.gu-play-hint{font:12px/1.5 system-ui,sans-serif;opacity:.9;text-align:center;letter-spacing:.06em}
+.gu-play-panel h2{font-size:clamp(24px,2.3vw,38px);line-height:1.18}
+.gu-play-panel>p:not(.eyebrow){font-size:clamp(16px,1.25vw,20px);line-height:1.7}
+.gu-play-panel .eyebrow{font-size:11px;letter-spacing:.15em}
+.gu-play-key{border-top:2px solid var(--orange);padding:20px 0;margin-top:22px;display:grid;gap:9px;font:12px/1.6 system-ui,sans-serif}
+.gu-play-key span{display:flex;align-items:center;gap:13px}
+.gu-play-key i{width:32px;height:3px;display:inline-block;background:var(--cream);flex-shrink:0}
+.gu-play-key .gu-play-key-main{height:4px}
+.gu-play-key .gu-play-key-reserved{opacity:.38}
+.gu-play-key .gu-play-key-active{background:var(--orange);box-shadow:0 0 8px var(--orange)}
+.gu-play-selection{border:1px solid #FFF5E655;background:#303636;padding:22px;margin-top:24px;min-height:var(--gu-panel-height);box-sizing:border-box}
+.gu-play-selection h3{font-size:clamp(22px,1.7vw,30px);line-height:1.25;margin-bottom:16px}
+.gu-play-selection p:last-child{font-size:15px;line-height:1.65;margin:0}
+.gu-play-selection .eyebrow{color:var(--orange);margin-bottom:10px}
+.gu-tree-orbit{fill:none;stroke:var(--cream);stroke-opacity:.14;stroke-dasharray:3 11}
+.gu-tree-branch .gu-tree-line{stroke:var(--cream);stroke-width:3;stroke-linecap:round;stroke-opacity:.34;transition:stroke .15s ease,stroke-opacity .15s ease}
+.gu-tree-branch.is-main .gu-tree-line{stroke-width:5;stroke-opacity:.85}
+.gu-tree-branch .gu-tree-hit{stroke:transparent;stroke-width:26}
+.gu-tree-branch{cursor:pointer;outline:none}
+.gu-tree-branch:is(:hover,:focus-visible) .gu-tree-line{stroke:var(--orange);stroke-opacity:1}
+.gu-tree-branch.is-active .gu-tree-line{stroke:var(--orange);stroke-opacity:1;stroke-width:9;filter:drop-shadow(0 0 11px var(--orange))}
+.gu-tree-node{cursor:pointer;outline:none}
+.gu-tree-node .gu-tree-halo{fill:none;stroke:var(--cream);stroke-opacity:.32;stroke-width:1.5;stroke-dasharray:3 9}
+.gu-tree-node .gu-tree-disc{fill:#303636;stroke:var(--cream);stroke-width:4;transition:stroke .15s ease}
+.gu-tree-node .gu-tree-number{fill:var(--cream);font:32px Marcellus,Georgia,serif;text-anchor:middle;pointer-events:none}
+.gu-tree-node .gu-tree-caption{fill:var(--cream);font:18px Marcellus,Georgia,serif;letter-spacing:.08em;text-anchor:middle;pointer-events:none}
+.gu-tree-node:is(:hover,:focus-visible) .gu-tree-disc{stroke:var(--orange)}
+.gu-tree-node.is-active .gu-tree-disc,.gu-tree-node.is-connected .gu-tree-disc{stroke:var(--orange);filter:drop-shadow(0 0 13px var(--orange))}
+.gu-tree-node:is(:hover,:focus-visible) .gu-tree-number,.gu-tree-node.is-active .gu-tree-number{fill:var(--orange)}
+.gu-tree-node:focus-visible .gu-tree-halo,.gu-tree-branch:focus-visible .gu-tree-line{stroke-dasharray:none;stroke-opacity:1}
+.gu-play-directory{max-width:1450px;margin:0 auto;padding:40px 6% 85px;border-top:1px solid #FFF5E644}
+.gu-play-directory>div{display:flex;align-items:end;justify-content:space-between;gap:26px;flex-wrap:wrap}
+.gu-play-directory h2{font-size:clamp(30px,3vw,44px)}
+.gu-play-directory ol{list-style:none;counter-reset:rooms;padding:0;margin:30px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 55px}
+.gu-play-directory li{counter-increment:rooms;border-bottom:1px solid #FFF5E644;padding:15px 5px;font-size:16px}
+.gu-play-directory li:before{content:counter(rooms,decimal-leading-zero);font:12px/1.5 system-ui,sans-serif;letter-spacing:.1em;color:var(--cream);opacity:.75;margin-right:18px}
+.gu-play-directory li a{color:var(--cream);text-decoration:none}
+.gu-play-directory li a:is(:hover,:focus-visible){color:var(--orange);text-decoration:underline}
+.gu-play-notice{font-size:13px;line-height:1.65;max-width:930px;opacity:.92}
+.gu-play-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+@media(max-width:1340px){.gu-play{--gu-panel-height:400px}}
+@media(max-width:1200px){.gu-play{--gu-panel-height:320px}.gu-play-layout{grid-template-columns:minmax(240px,.8fr) minmax(375px,1.3fr);align-items:start}.gu-play-panel{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:15px 35px;align-items:start}.gu-play-panel .gu-play-key,.gu-play-panel .gu-play-selection{grid-column:2;grid-row:auto}.gu-play-panel>p:not(.eyebrow){grid-column:1}.gu-play-panel h2{grid-column:1}.gu-play-panel>.eyebrow{grid-column:1}}
+@media(max-width:720px){.gu-play-layout{display:block;padding:40px 6% 32px}.gu-play-intro h1{font-size:clamp(52px,12vw,76px)}.gu-play-intro>p:not(.eyebrow){max-width:none}.gu-play-chart{margin-top:35px}.gu-play-chart svg{max-width:580px;margin:auto}.gu-play-panel{display:block;margin:32px 0}.gu-play-directory ol{grid-template-columns:1fr}.gu-play-directory{padding:36px 6% 60px}.gu-play-key{grid-template-columns:1fr}.gu-play-panel .gu-play-selection{min-height:var(--gu-panel-height)}}
+@media(prefers-reduced-motion:reduce){.gu-tree-branch .gu-tree-line,.gu-tree-node .gu-tree-disc{transition:none}}
