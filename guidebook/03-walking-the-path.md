@@ -697,6 +697,7 @@ In the Temple, you might:
 - Visit your personal shrine
 
 - Help in the Community Hearth
+
 - Offer data to the Heart Archive
 
 In the field, you might:
@@ -1397,6 +1398,7 @@ You continue to grow, but your focus shifts. You're less about personal advancem
 ### Working on Multiple Mysteries
 
 Can you work on more than one Mystery at once?
+
 **Yes, but it's complicated.**
 
 ### Single Mystery (Recommended)
@@ -2096,6 +2098,7 @@ You automatically succeed at any roll to **resist corruption or moral compromise
 **Effect:** Once per session, you can **hold someone to account** for breaking a promise, telling a lie, or acting without integrity.
 
 When you confront them directly (in person, publicly, or through formal channels), they must roll **Iwa**. On a failure, they gain **1 Imbalance (Ego)** and feel compelled to admit fault or make amends.
+
 ### 8. Living Example *(Passive)*
 
 **Prerequisites:** Iwa +2, must have achieved at least **5 Breakthroughs**
@@ -2270,3 +2273,4 @@ But that's for another day.
 **You can play this game right now.** You have everything you need for a complete campaign.
 
 **WE RETURN TO THE ROOT**
+

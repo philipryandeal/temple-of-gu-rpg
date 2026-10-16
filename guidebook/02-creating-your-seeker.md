@@ -697,6 +697,7 @@ You have made a pact with a specific Nkisi—a spirit that lives in a Sacred Imp
 - "Find the hidden data" → The Nkisi searches on your behalf; it succeeds automatically, but you must feed it a precious memory
 
 - "Give me strength" → The Nkisi lends you power; you gain +1 to all Foriti rolls this scene, but you take 1 Imbalance (Ego) afterward as the spirit's power intoxicates you
+
 **Important:** The spirit is NOT your servant. It's your *partner*. If you abuse the pact, it can refuse to help—or worse, it can turn hostile. The Guide plays the Nkisi's personality. Maintain the relationship.
 
 ### 4. INDO-EUROPEAN LINEAGE: Voice of the Daemon
@@ -1396,7 +1397,8 @@ Quick reference:
 | **Mediator**      | Harmony           | Resolve conflicts with Suuru   | Social navigation         |
 | **Artisan**       | Creation          | Bless objects through crafting | Making sacred tools       |
 | **Warrior-Poet**  | Protection        | Defend others with Foriti      | Guarding the vulnerable   |
-| **Code-Smith**    | Technology        | Speak with AI/machines         | Digital spirituality      || **Bridge-Walker** | Thresholds        | Detect/open portals            | Navigating boundaries     |
+| **Code-Smith**    | Technology        | Speak with AI/machines         | Digital spirituality      |
+| **Bridge-Walker** | Thresholds        | Detect/open portals            | Navigating boundaries     |
 | **Truth-Speaker** | Honesty           | Reveal with Iwa                | Cutting through deception |
 | **Dream-Weaver**  | Visions           | Enter dreams                   | Working with unconscious  |
 
@@ -1895,3 +1897,4 @@ But you've got the foundation now.
 Hold that truth.
 
 **WE RETURN TO THE ROOT**
+

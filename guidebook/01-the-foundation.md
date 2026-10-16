@@ -698,6 +698,7 @@ This is the capstone virtue. It's the measure of your honesty, your alignment wi
 - Make the hard choice that serves your integrity
 
 *Example Lesson:* A spirit offers you power—a shortcut on your path. It feels wrong. But it would solve your problem so easily. What do you choose?
+
 ### Assigning Your Scores
 
 When you create your Seeker, you will assign these four scores to your four Virtues:
@@ -941,3 +942,4 @@ You're creating a version of yourself to *practice* a path.
 **This is sacred work. Treat it accordingly.**
 
 **WE RETURN TO THE ROOT**
+
