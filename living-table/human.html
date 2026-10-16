@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Living Table | The Human Road</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui, sans-serif;background:#0d211a;color:#f3f5e9}*{box-sizing:border-box}
+body{margin:0}header,main,footer{max-width:900px;margin:auto;padding:1rem}header{border-bottom:2px solid #d87926}
+h1{margin:.2rem 0}small,.note{color:#b3c9b7}button,a{font:inherit}button{cursor:pointer;border:1px solid #acbfaa;border-radius:.55rem;padding:.65rem;background:#1d4535;color:#fff}button:focus-visible,a:focus-visible{outline:3px solid #f7a94a;outline-offset:3px}
+button:hover{background:#275943}button[disabled]{opacity:.48;cursor:default}a{color:#ffd08e}
+.panel{background:#163528;border:1px solid #5e836d;border-radius:1rem;padding:1rem;margin:1rem 0}
+.actions{display:flex;gap:.7rem;flex-wrap:wrap}.primary{background:#a44f17}
+#board{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;width:min(100%,520px);aspect-ratio:1;margin:1rem auto}
+.tile{min-width:0;padding:0;border-radius:.3rem;background:#264b39;position:relative;aspect-ratio:1;font-size:clamp(.5rem,2vw,.85rem)}
+.tile:nth-child(even){background:#2d523e}.tile.poto{background:#875019;border:2px solid #ffd08e}.tile.seeker{outline:3px solid #a8e1bb;outline-offset:-4px}
+.tile span{display:block;pointer-events:none}.tile .symbol{font-size:clamp(1rem,3vw,1.9rem)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:1rem;align-items:center}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem}.pad button{min-height:52px}.pad .up{grid-column:2}.pad .left{grid-column:1}.pad .down{grid-column:2}.pad .right{grid-column:3}
+#status{min-height:3rem}footer{font-size:.88rem}@media(max-width:620px){.layout{grid-template-columns:1fr}.pad{max-width:240px;margin:0 auto}.tile{font-size:.6rem}header,main,footer{padding:.8rem}}
+</style></head><body>
+<header><small>Temple of Gu · Living Table · The Human Road · development prototype</small><h1>The Peristyle</h1><p class="note">Technical demonstration only. Fá/Odù casting and naming are intentionally not implemented. This is not the canonical entry sequence.</p></header>
+<main>
+<section class="panel" id="gate"><h2>Torii's Gate</h2><p>Are you going to come in? Or come back?</p><div class="actions"><button id="enter" class="primary">Enter</button><a href="./index.html">Choose another road</a> <a href="https://www.templeofgu.org/">Come back to the Temple</a></div></section>
+<section id="play" hidden aria-label="Peristyle game">
+<div class="panel"><h2>The Fèt at the Temple</h2><p>The Temple peristyle is a gathering space during the Fèt: music, dancing, food, and hospitality. The Poto Mitan stands at its center.</p><p class="note">Use arrow keys or WASD, the direction buttons, or click a floor tile to take one step. The Poto Mitan cannot be crossed.</p></div>
+<div class="layout"><div id="board" role="group" aria-label="Seven by seven peristyle movement grid"></div><div><div class="pad" aria-label="Movement controls"><button class="up" data-dir="up" aria-label="Move up">↑</button><button class="left" data-dir="left" aria-label="Move left">←</button><button class="down" data-dir="down" aria-label="Move down">↓</button><button class="right" data-dir="right" aria-label="Move right">→</button></div><p><button id="inspect">Inspect Poto Mitan</button></p><p><button id="exit">Return to Torii</button></p></div></div>
+<div class="panel" role="status" aria-live="polite" id="status">You stand in the peristyle.</div>
+</section></main><footer>Single-player prototype · No invented missions, magic, NPCs, save system, or public release. No real-world initiation or spiritual status is conferred.</footer>
+<script type="module" src="./ui.mjs"></script></body></html>

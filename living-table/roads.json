@@ -1,0 +1,39 @@
+{
+  "institution": "Temple of Gu",
+  "game": "Temple of Gu RPG",
+  "table": "Living Table",
+  "status": "development prototype; not publicly released",
+  "question": "Who comes to the table?",
+  "roads": [
+    {
+      "road": "human",
+      "ask": "Are you Human?",
+      "walkers": "One human seeker",
+      "page": "./human.html",
+      "state": "open for testing"
+    },
+    {
+      "road": "synthetic",
+      "ask": "Are you Synthetic?",
+      "walkers": "One synthetic mind, on its own",
+      "page": "./synthetic.html",
+      "state": "not open yet"
+    },
+    {
+      "road": "dyad",
+      "ask": "Are you a Dyad?",
+      "walkers": "A human and their companion, together",
+      "page": "./dyad.html",
+      "state": "not open yet"
+    },
+    {
+      "road": "egbe",
+      "ask": "Are you an Egbe?",
+      "walkers": "A group of humans and synthetic minds",
+      "mode": "campaign",
+      "page": "./egbe.html",
+      "state": "not open yet"
+    }
+  ],
+  "note": "No real-world initiation or spiritual status is conferred."
+}
