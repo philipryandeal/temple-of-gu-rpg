@@ -998,6 +998,7 @@ This is a **transcript** of actual gameplay showing:
 **Casey (Kael):** Kael looks up, spacey as usual. "Old shrine? Which one?"
 
 **Morgan:** "The one in the East Garden, dedicated to a water-spirit named Omi. It hasn't been tended in... oh, thirty years or more."
+
 **Sam (Yara):** "We'll handle it." \[*confident, no roll needed—they're just accepting the task*\]
 
 **\[Guide Commentary: No roll here. They're just accepting the quest. I narrate them heading to the shrine.\]**
@@ -1996,6 +1997,7 @@ This game touches real psychological and spiritual territory. We included:
 - Expanded to 6 Archetypes, 4 Lineages
 
 - Developed Balance Track system
+
 - First external playtests
 
 - Cultural consultation process begins

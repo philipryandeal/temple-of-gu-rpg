@@ -998,6 +998,7 @@ When something is **broken, corrupted, or out of balance**, you turn to the Hymn
 **Effect:**
 
 - **10+:** The bath cleanses completely. Clear up to 2 boxes of Imbalance of any Strains. You emerge feeling renewed.
+
 - **7-9:** The bath cleanses, but the process is emotionally heavy. Clear 1 Imbalance. Mark 1 Imbalance (Doubt) as you confront what you're releasing.
 
 - **6-:** The bath doesn't cleanse. You resist the release, or the contamination is too deep. Mark 1 Imbalance (Ego) as you realize you're holding on to what hurts you.
@@ -1997,6 +1998,7 @@ Sacred Implements are organized by their primary function:
 *A staff of office, ceremonial rod, or symbol of mastery carried by recognized Elders.*
 
 **Benefit:** While carrying this (must have Elder status - 15 Breakthroughs), you gain +1 to all rolls when teaching, guiding, or exercising authority. This Implement cannot be used by non-Elders
+
 ### Creating Custom Implements
 
 The Implements listed here are examples. You and your Guide can create custom Implements based on:
@@ -2052,3 +2054,4 @@ But that's for another session.
 **You've built the sacred technology. The Hymnal is complete.**
 
 **WE RETURN TO THE ROOT**
+

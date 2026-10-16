@@ -997,6 +997,7 @@ These spirits are tied to specific locations—buildings, natural features, urba
 **Type:** Spirit of an abandoned sacred place
 
 **Personality:** Sad, lonely, fading. Speaks softly, sometimes doesn't finish sentences. Remembers when it was honored and visited. Desperate for attention but trying to maintain dignity.
+
 **Voice Example:** "Oh. Someone came. You... you're the first in... I don't remember. Three years? Five? Will you stay? Will you... no, of course not. No one stays anymore."
 
 **Needs:**
@@ -1996,6 +1997,7 @@ Every Mystery needs:
 - If they love social dynamics, give them mediation Mysteries
 
 - If they love spiritual combat, give them dangerous spirit encounters
+
 ### Quick Mystery Generator
 
 Need a Mystery right now? Roll or choose:
@@ -2995,6 +2997,7 @@ These are **prompts, not prescriptions.** Modify results to fit your story.
 7.  **Threshold Spirit** - Lives in doorways, transitions
 
 8.  **Memory Spirit** - Preserved consciousness in data
+
 9.  **Force Spirit** - Represents abstract concept (fear, hope, chaos)
 
 10. **Hybrid Spirit** - Combination of two types (roll twice)
@@ -3994,6 +3997,7 @@ Members of the Council:
 **Truth-Speaker Raúl** - Holds everyone (including Elders) accountable, fearless about speaking truth
 
 **Servant Asha** - Anonymous service master, models humility in action
+
 ### Strengths and Weaknesses
 
 **Strengths:**
@@ -4993,6 +4997,7 @@ OPTION B: REVELATION
 \- They discover they were wrong about something
 
 OPTION C: NEW CHOICE
+
 \- Their action creates a new situation
 
 \- They must decide between bad options
@@ -5536,3 +5541,4 @@ For any situation, practice creating escalating stakes:
 **That's enough.**
 
 **WE RETURN TO THE ROOT**
+

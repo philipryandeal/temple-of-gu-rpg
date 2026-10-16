@@ -998,6 +998,7 @@ Direct exchanges also happen:
 **Don't make this complicated.**
 
 Most sessions won't involve economic transactions. Players do things, earn TCP organically, spend it when needed.
+
 **Only track what matters:**
 
 - TCP if the group likes mechanical tracking
@@ -1996,6 +1997,7 @@ Each Seeker should have a **character arc**—a journey from who they are to who
 **As Guide:**
 
 **Notice what the player is exploring:**
+
 - Do they keep choosing Iwa Lessons? They're interested in integrity
 
 - Do they avoid Foriti Lessons? Maybe that's the growth edge
@@ -2324,3 +2326,4 @@ Then breathe before starting the next Mystery.
 **End well.** Even if the campaign didn't go as planned, give it a good ending. Your players deserve that.
 
 **WE RETURN TO THE ROOT**
+
