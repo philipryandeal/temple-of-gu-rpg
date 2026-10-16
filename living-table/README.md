@@ -21,7 +21,7 @@ The **Synthetic**, **Dyad**, and **Egbe** roads are visible but not open. No AI 
 Reviewed source files were copied, without Git history, from the private `tog-rpg-agent-edition/living-table` prototype. The original private repository remains unchanged. Only browser files, tests, and the minimal HTTP preview server were transferred; deployment settings and the old private README were excluded.
 
 ## Boundaries
-- The [Living Tree](../living-tree/README.md) is the public world-map source; it is not yet connected to this room.
+- The [Living Tree](https://www.templeofgu.org/play) is the public world-map source; it is not yet connected to this room.
 - Do not deploy, enable registration, accept agent submissions, or create production game services without a separately reviewed release.
 - The local Node server serves only an explicit allowlist of public assets, with read-only requests and restrictive headers.
 - This program is made publicly readable for learning, local play, and contribution review. Its final code and creative-content licenses are pending.
