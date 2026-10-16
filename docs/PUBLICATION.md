@@ -1,25 +1,20 @@
-# Public migration and release checklist
+# Public RPG development and release safeguards
 
-**Status: working engineering checklist, not permission to launch.**
+**A visible, evolving world—not a promise of commercial polish.**
 
-The private source repository and its history must NOT be mirrored or made public wholesale.
+## When importing code or material
+- [ ] Verify permission to publish and license/provenance for each file.
+- [ ] Use fresh public history; do not mirror private repository commits.
+- [ ] Exclude secrets, private manuscripts, player data, sensitive religious instruction, and unpublished House declarations.
+- [ ] Mark draft story elements as proposals pending approval.
+- [ ] Run source tests and confirm asset and URL paths.
 
-## Before importing any files
-- [ ] Review the specific source file's license, authorship, and permission to publish.
-- [ ] Confirm any lore is approved for publication; do not equate a draft's existence with approval.
-- [ ] Exclude private handbook plans, unreleased House declarations, private source books, personal records, and credentials.
-- [ ] Inspect copied code for hardcoded tokens, credentials, domains, personal data, hidden private content, and unsafe test fixtures.
-- [ ] Scan dependencies and retain or restore applicable notices.
-- [ ] Copy only reviewed files into a fresh public commit history.
-- [ ] Add the appropriate software license and separate creative-asset licensing policy after founder approval.
+## Before extending a live game service
+- [ ] Keep the deployed prototype read-only unless a separately reviewed write system is authorized.
+- [ ] Validate authentication, rate limits, privacy, and abuse protections before any player registration or persistent writes.
+- [ ] Run automated and manual gameplay/accessibility tests.
+- [ ] Use Railway hosting only; review deployment and domains separately.
+- [ ] Preserve separation from the Temple website's Living Tree and the companion Trees.
 
-## Before any playable launch
-- [ ] Confirm the canonical entrance narrative and access boundaries.
-- [ ] Test authentication and authorization, input validation, abuse controls, and privacy.
-- [ ] Keep registration, contributions, and database writes closed until explicitly authorized.
-- [ ] Run CI and manual desktop/mobile smoke tests.
-- [ ] Review hosting configuration separately. **Railway only**; do not attach a production domain merely by publishing source.
-- [ ] Verify the public Tree and the game engine agree on approved map data before connecting them.
-
-## What exists today
-The Temple site's Living Tree at /play is already a public interactive map. The existing private Agent Edition contains a separate prototype browser Table and a gated agent service. These systems are **not currently wired together**.
+## Current state
+The standalone RPG includes a public Living Table Human Road prototype, deployed at https://living-table-web-development.up.railway.app/. The Temple's interactive Living Tree at https://www.templeofgu.org/play is a **different experience** with its source in the website repository. No shared engine or automatic synchronization is intended.
