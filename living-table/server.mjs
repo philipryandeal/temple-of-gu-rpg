@@ -13,7 +13,8 @@ const MIME = Object.freeze({
   '.json': 'application/json; charset=utf-8',
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
-  '.webp': 'image/webp'
+  '.webp': 'image/webp',
+  '.ico': 'image/x-icon'
 });
 const quota = new Map();
 function allowed(ip) {
@@ -46,13 +47,15 @@ async function chatWithKore(req,res,headers) {
   }finally{clearTimeout(timeout);}
  }catch{if(!res.headersSent)reply(400,{error:'Unable to process this request.'});}
 }
-const ASSETS = new Set(['/','/index.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/casting.mjs','/ui.mjs','/kore-client.mjs']);
+const ASSETS = new Set(['/','/index.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/casting.mjs','/ui.mjs','/kore-client.mjs','/favicon.ico']);
 export function makeServer() {
   return http.createServer(async (req, res) => {
     const headers = {
       'X-Content-Type-Options': 'nosniff',
       'X-Frame-Options': 'DENY',
-      'Referrer-Policy': 'no-referrer',
+      'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+      'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
       'X-Robots-Tag': 'noindex, nofollow',
       'Cache-Control': 'no-store',
       'Content-Security-Policy': "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
