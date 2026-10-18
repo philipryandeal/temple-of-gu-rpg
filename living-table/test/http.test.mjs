@@ -10,9 +10,9 @@ const origin = 'http://127.0.0.1:' + server.address().port;
 test('simple entrance offers one-to-six Seeker selector and eight scene options', async () => {
  const response=await fetch(origin+'/');
  assert.equal(response.status,200);
- assert.match(response.headers.get('content-type'),/^text\\/html/);
+ assert.ok((response.headers.get('content-type')||'').startsWith('text/html'));
  const html=await response.text();
- assert.match(html,/<form action="\\.\\/courtyard\\.html" method="get">/);
+ assert.ok(html.includes('<form action="./courtyard.html" method="get">'));
  assert.match(html,/<select id="seekers" name="seekers"/);
  assert.match(html,/<select id="scene" name="scene"/);
  for(const n of [1,2,3,4,5,6])assert.match(html,new RegExp('<option value="'+n+'"'));
