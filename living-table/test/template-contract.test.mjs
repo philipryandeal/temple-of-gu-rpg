@@ -15,9 +15,9 @@ test('approved Scene 01 shell retains slim heading, exactly three actions and fo
   assert.equal((header.match(/<button\b/g) || []).length, 2, 'Reset and Export are buttons');
   for (const id of ['reset', 'export', 'import']) assert.ok(header.includes('id="' + id + '"'), id);
   assert.ok(header.includes('Import session'), 'Import stays a labeled control');
-  assert.ok(!header.includes('Four Roads'), 'return link belongs in footer');
+  assert.ok(!header.includes('Choose a scene'), 'return link belongs in footer');
   assert.ok(!header.includes('<p'), 'no tall kicker or subtitle in compact header');
-  assert.ok(footer.includes('href="./index.html"') && footer.includes('Four Roads'));
+  assert.ok(footer.includes('href="./index.html"') && footer.includes('Choose a scene'));
 });
 
 test('scene illustration, interactive layers and full-width Field Journal remain in approved order', async () => {
@@ -62,10 +62,10 @@ test('player-operated controls and local journal/portable save stay intact', asy
   assert.doesNotMatch(ui, /new\s+WebSocket\s*\(|RTCPeerConnection\s*\(/, 'current personal table is not an online sync client');
 });
 
-test('documented tabletop direction distinguishes future player-count control from current demo', async () => {
+test('documented personal-tabletop direction includes implemented Seeker-count control', async () => {
   const canon = await read('TEMPLATE-CANON.md');
   assert.match(canon, /independently operated boards/i);
   assert.match(canon, /1–6 player seats/);
-  assert.match(canon, /future requirement, not present in Scene 01/i);
+  assert.match(canon, /player-count control is implemented/i);
   assert.match(canon, /not a.*immutable lock/i);
 });
