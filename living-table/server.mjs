@@ -47,7 +47,7 @@ async function chatWithKore(req,res,headers) {
   }finally{clearTimeout(timeout);}
  }catch{if(!res.headersSent)reply(400,{error:'Unable to process this request.'});}
 }
-const ASSETS = new Set(['/','/index.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/casting.mjs','/ui.mjs','/kore-client.mjs','/favicon.ico','/courtyard.html','/courtyard.css','/courtyard-ui.mjs','/courtyard-data.mjs','/courtyard-state.mjs','/seeker.mjs','/courtyard.svg']);
+const ASSETS = new Set(['/','/index.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/casting.mjs','/ui.mjs','/kore-client.mjs','/favicon.ico','/courtyard.html','/courtyard.css','/courtyard-ui.mjs','/courtyard-data.mjs','/courtyard-state.mjs','/courtyard.svg']);
 export function makeServer() {
   return http.createServer(async (req, res) => {
     const headers = {
