@@ -55,5 +55,5 @@ test('scene masthead reserves room for the playfield and moves Four Roads to the
  for(const control of ['id="reset"','id="export"','id="import"']) assert.ok(header.includes(control),control);
  assert.ok(footer.includes('href="./index.html"'));
  assert.ok(footer.includes('Four Roads'));
- assert.match(css,/\.mast h1\s*\{[^}]*font-size:\s*clamp\(1\.8rem,\s*3vw,\s*2\.8rem\)/);
+ assert.match(css,/\.mast h1\s*\{[^}]*font-size:\s*clamp\(1\.45rem,\s*2\.4vw,\s*2\.2rem\)/);
 });
