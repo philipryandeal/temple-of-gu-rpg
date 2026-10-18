@@ -9,7 +9,7 @@ test('Courtyard Scene 01 is locally accessible, with separate background and scr
  for(const [route,mime] of [['/courtyard.html','text/html'],['/courtyard.css','text/css'],['/courtyard-ui.mjs','text/javascript'],['/courtyard-data.mjs','text/javascript'],['/courtyard-state.mjs','text/javascript'],['/courtyard.svg','image/svg+xml']]){
   const response=await fetch(root+route);
   assert.equal(response.status,200,route);
-  assert.match(response.headers.get('content-type'),new RegExp(mime.replace('/','\\/')),route);
+  assert.ok((response.headers.get('content-type')||'').startsWith(mime),route);
   assert.equal(response.headers.get('x-robots-tag'),'noindex, nofollow');
  }
  const html=await(await fetch(root+'/courtyard.html')).text();
