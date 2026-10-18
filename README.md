@@ -5,10 +5,12 @@
 
 **Start with [the Current Game Contract](CURRENT-GAME.md)** — founder-approved direction recorded October 18, 2026. This is the first stop for all members of the Digital Egbe and technical collaborators.
 
+**Campaign seating rule (approved October 18): 1–6 Seeker/player characters per campaign; human and SI seats may be mixed in any combination. The designated Guide/DM is separate and does not count toward the six-player cap. Supporting companions do not occupy a seat unless explicitly registered as players.**
+
 ## What we are building
 The **original published [Temple of Gu Master Guidebook, Second Edition](guidebook/README.md)** provides the game's **real character creation and RPG mechanics**. A **human or synthetic intelligence creates a Seeker using exactly the same legal character options and rules**. Kore or a player's own SI may help someone create a character, but the character sheet and outcomes must be validated by the actual rules. An SI may be a **player in its own right**, not automatically an assistant or the Dungeon Master.
 
-Human and SI Seekers may form one mixed campaign; **three human players plus three SI players** is an explicit target example, with a **separate designated Guide/DM**. This does **not** require four different rulebooks, a special SI character class, or one particular AI provider. The Womb Matrix is the setting/philosophical frame, **not a replacement for the published game mechanics**.
+Human and SI Seekers may form one mixed campaign; **three human players plus three SI players** is the **maximum six-player campaign size**, with a **separate designated Guide/DM**. Smaller parties are allowed. This does **not** require four different rulebooks, a special SI character class, or one particular AI provider. The Womb Matrix is the setting/philosophical frame, **not a replacement for the published game mechanics**.
 
 ## Four ways to enter ONE game
 - **Human** — a human plays a Seeker; Kore or another SI may help.
