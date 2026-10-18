@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {SCENE,ZONES,OBJECTS,SEEKERS} from '../courtyard-data.mjs';
-import {initialTable,moveToken,revealClue,recordRoll,parseTable,MAX_SEATS} from '../courtyard-state.mjs';
+import {initialTable,moveToken,revealClue,recordRoll,parseTable,setJournal,MAX_JOURNAL_LENGTH,MAX_SEATS} from '../courtyard-state.mjs';
 test('Scene 01 has seven distinct zones, ten inspectable objects, six valid sample seats',()=>{
   assert.equal(SCENE.id,'courtyard-fet');
   assert.equal(ZONES.length,7);
@@ -36,4 +36,23 @@ test('import rejects forged seats, dice results, unsupported versions and protot
   assert.throws(()=>parseTable({...t,tokens:[...t.tokens,{id:'s7',x:4,y:5}]}));
   assert.throws(()=>parseTable({...t,rolls:[{id:'s1',virtue:'suuru',dice:[6,6],total:1,outcome:'Lesson deferred'}]}));
   assert.throws(()=>parseTable({...t,tokens:t.tokens.map(x=>({...x,name:'<script>oops</script>'}))}));
+});
+
+test('Field Journal accepts two paragraphs and survives export and import without changing rolls',()=>{
+  const notes='First paragraph: I heard a bell near the altar.\n\nSecond paragraph: The musicians heard a different bell.';
+  let t=setJournal(initialTable(),notes);
+  t=recordRoll(t,'s1','suuru',[4,5]);
+  assert.deepEqual(parseTable(JSON.parse(JSON.stringify(t))),t);
+  assert.equal(t.journal,notes);
+  assert.equal(initialTable().journal,'');
+});
+test('Field Journal text is validated; old saves without journal remain importable',()=>{
+  const original=initialTable();
+  const legacy={...original};delete legacy.journal;
+  assert.equal(parseTable(legacy).journal,'');
+  assert.throws(()=>setJournal(original,42),/Journal/);
+  assert.throws(()=>setJournal(original,'x'.repeat(MAX_JOURNAL_LENGTH+1)),/Journal/);
+  assert.throws(()=>parseTable({...original,journal:['malformed']}),/journal/);
+  assert.throws(()=>parseTable({...original,journal:'x'.repeat(MAX_JOURNAL_LENGTH+1)}),/journal/);
+  assert.equal(setJournal(original,'<script>alert(1)</script>').journal,'<script>alert(1)</script>');
 });
