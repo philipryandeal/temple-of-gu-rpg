@@ -58,7 +58,7 @@ export function makeServer() {
       'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
       'X-Robots-Tag': 'noindex, nofollow',
       'Cache-Control': 'no-store',
-      'Content-Security-Policy': "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+      'Content-Security-Policy': "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
     };
     if (req.method==='POST' && req.url==='/api/kore') {await chatWithKore(req,res,headers);return;}
     if (!['GET', 'HEAD'].includes(req.method)) {

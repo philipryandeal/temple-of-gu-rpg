@@ -1,6 +1,8 @@
 import {SCENE,ZONES,OBJECTS,SOLO_CHOICES} from './courtyard-data.mjs';
-import {initialTable,moveToken,revealClue,recordRoll,parseTable,setJournal} from './courtyard-state.mjs';
-let table=initialTable(),selected='s1',activeZone=null;
+import {initialTable,resizeTable,moveToken,revealClue,recordRoll,parseTable,setJournal} from './courtyard-state.mjs';
+const requestedSeats=new URLSearchParams(location.search).get('seekers');
+const startingSeats=/^[1-6]$/.test(requestedSeats??'')?Number(requestedSeats):1;
+let table=initialTable(startingSeats),selected='s1',activeZone=null;
 const $=s=>document.querySelector(s);
 const zones=$('#zones'),tokens=$('#tokens'),select=$('#seeker-select'),sheet=$('#sheet');
 const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
@@ -42,8 +44,9 @@ for(const zone of ZONES){
  b.setAttribute('aria-label','Inspect '+zone.title);b.title=zone.title;
  b.addEventListener('click',()=>showZone(zone));zones.append(b);
 }
-for(const t of table.tokens){
- const o=document.createElement('option');o.value=t.id;o.textContent=t.name;select.append(o);
+function renderSeekerOptions(){
+ select.replaceChildren();
+ for(const t of table.tokens){const o=document.createElement('option');o.value=t.id;o.textContent=t.name;select.append(o);}
 }
 function showZone(zone){
  activeZone=zone.id;escText($('#info-title'),zone.title);escText($('#info-body'),zone.description);
@@ -98,8 +101,13 @@ function renderHistory(){
   p.textContent=t.name+': '+r.dice.join(' + ')+' + '+t.virtues[r.virtue]+' ('+r.virtue+') = '+r.total+' · '+r.outcome;box.append(p);
  }
 }
-function render(){renderTokens();showSheet();renderHistory();$('#reveal').checked=table.revealed;$('#clue').hidden=!table.revealed;escText($('#clue'),SCENE.proposedMystery);journalInput.value=table.journal;}
+function render(){renderSeekerOptions();$('#seat-count').value=String(table.tokens.length);renderTokens();showSheet();renderHistory();$('#reveal').checked=table.revealed;$('#clue').hidden=!table.revealed;escText($('#clue'),SCENE.proposedMystery);journalInput.value=table.journal;}
 select.addEventListener('change',()=>{selected=select.value;renderTokens();showSheet()});
+$('#seat-count').addEventListener('change',e=>{
+ table=resizeTable(table,Number(e.target.value));
+ if(!table.tokens.some(t=>t.id===selected)) selected='s1';
+ render();
+});
 document.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>{
  const direction=b.dataset.move,delta={left:[-2,0],right:[2,0],up:[0,-2],down:[0,2]}[direction];
  const t=table.tokens.find(t=>t.id===selected);
@@ -114,7 +122,7 @@ $('#roll').addEventListener('click',()=>{
  renderHistory();
 });
 $('#reveal').addEventListener('change',e=>{table=revealClue(table,e.target.checked);render()});
-$('#reset').addEventListener('click',()=>{if(!confirm('Reset the table AND clear your Field Journal? Export session first if you want to keep your notes, tokens and rolls.'))return;table=initialTable();selected='s1';clearSavedJournal();render()});
+$('#reset').addEventListener('click',()=>{if(!confirm('Reset the table AND clear your Field Journal? Export session first if you want to keep your notes, tokens and rolls.'))return;table=initialTable(table.tokens.length);selected='s1';clearSavedJournal();render()});
 $('#export').addEventListener('click',()=>{
  const data=new Blob([JSON.stringify(table,null,2)],{type:'application/json'});
  const url=URL.createObjectURL(data);const link=document.createElement('a');link.href=url;link.download='gu-scene01-session.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
