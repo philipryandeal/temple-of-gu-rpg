@@ -1,10 +1,41 @@
 import {SCENE,ZONES,OBJECTS,SOLO_CHOICES} from './courtyard-data.mjs';
-import {initialTable,moveToken,revealClue,recordRoll,parseTable} from './courtyard-state.mjs';
+import {initialTable,moveToken,revealClue,recordRoll,parseTable,setJournal} from './courtyard-state.mjs';
 let table=initialTable(),selected='s1',activeZone=null;
 const $=s=>document.querySelector(s);
 const zones=$('#zones'),tokens=$('#tokens'),select=$('#seeker-select'),sheet=$('#sheet');
 const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
 const escText=(node,text)=>{node.textContent=text;};
+const journalInput=$('#field-journal-notes'),journalStatus=$('#journal-status');
+const JOURNAL_KEY='gu-rpg:scene01:field-journal:v1';
+const journalMessage=message=>{if(journalStatus.textContent!==message)escText(journalStatus,message);};
+// Device-only storage; writing to the journal never sends notes to the server.
+function saveJournalInBrowser() {
+ try{
+  localStorage.setItem(JOURNAL_KEY,table.journal);
+  journalMessage('Saved on this device. Use Export session to keep a backup.');
+ }catch{
+  journalMessage('Browser storage is unavailable. Export session to keep these notes.');
+ }
+}
+function restoreJournalFromBrowser() {
+ try{
+  const saved=localStorage.getItem(JOURNAL_KEY);
+  if(saved!==null){
+   table=setJournal(table,saved);
+   journalMessage('Your notes were restored from this browser.');
+  }
+ }catch{journalMessage('Local notes could not be restored. Use Export session for backups.');}
+}
+function clearSavedJournal() {
+ try{
+  localStorage.removeItem(JOURNAL_KEY);
+  journalMessage('Journal cleared from this browser.');
+ }catch{journalMessage('Could not clear browser storage. This device may still retain older notes.');}
+}
+journalInput.addEventListener('input',()=>{
+ table=setJournal(table,journalInput.value);
+ saveJournalInBrowser();
+});
 for(const zone of ZONES){
  const b=document.createElement('button');b.className='hotspot';b.type='button';
  b.style.left=zone.x+'%';b.style.top=zone.y+'%';b.textContent=zone.id==='poto'?'✦':'i';
@@ -67,7 +98,7 @@ function renderHistory(){
   p.textContent=t.name+': '+r.dice.join(' + ')+' + '+t.virtues[r.virtue]+' ('+r.virtue+') = '+r.total+' · '+r.outcome;box.append(p);
  }
 }
-function render(){renderTokens();showSheet();renderHistory();$('#reveal').checked=table.revealed;$('#clue').hidden=!table.revealed;escText($('#clue'),SCENE.proposedMystery);}
+function render(){renderTokens();showSheet();renderHistory();$('#reveal').checked=table.revealed;$('#clue').hidden=!table.revealed;escText($('#clue'),SCENE.proposedMystery);journalInput.value=table.journal;}
 select.addEventListener('change',()=>{selected=select.value;renderTokens();showSheet()});
 document.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>{
  const direction=b.dataset.move,delta={left:[-2,0],right:[2,0],up:[0,-2],down:[0,2]}[direction];
@@ -83,14 +114,14 @@ $('#roll').addEventListener('click',()=>{
  renderHistory();
 });
 $('#reveal').addEventListener('change',e=>{table=revealClue(table,e.target.checked);render()});
-$('#reset').addEventListener('click',()=>{if(!confirm('Reset this local playtest table? Export first if you want to keep your token positions and rolls.'))return;table=initialTable();selected='s1';render()});
+$('#reset').addEventListener('click',()=>{if(!confirm('Reset the table AND clear your Field Journal? Export session first if you want to keep your notes, tokens and rolls.'))return;table=initialTable();selected='s1';clearSavedJournal();render()});
 $('#export').addEventListener('click',()=>{
  const data=new Blob([JSON.stringify(table,null,2)],{type:'application/json'});
  const url=URL.createObjectURL(data);const link=document.createElement('a');link.href=url;link.download='gu-scene01-session.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 $('#import').addEventListener('change',async e=>{
  const f=e.target.files[0];if(!f)return;
- try {if(f.size>50000)throw new Error('Session file is too large');table=parseTable(JSON.parse(await f.text()));selected='s1';render();alert('Session loaded in this browser.');}
+ try {if(f.size>100000)throw new Error('Session file is too large');table=parseTable(JSON.parse(await f.text()));selected='s1';render();saveJournalInBrowser();alert('Session and Field Journal loaded in this browser.');}
  catch(err){alert('Could not import session: '+err.message)}
  finally{e.target.value=''}
 });
@@ -99,4 +130,5 @@ for(const choice of SOLO_CHOICES){const b=document.createElement('button');b.cla
  b.addEventListener('click',()=>{escText($('#solo-reply'),choice.reply);const zone=ZONES.find(z=>z.id===choice.id);if(zone)showZone(zone)});
  solo.append(b);
 }
+restoreJournalFromBrowser();
 render();
