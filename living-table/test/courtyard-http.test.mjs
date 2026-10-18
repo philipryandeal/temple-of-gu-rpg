@@ -39,3 +39,21 @@ test('Field Journal sits below the board, has a generous writing area and is not
  assert.match(ui,/saveJournalInBrowser\(\)/);
  assert.ok(!html.includes('action="/api/'));
 });
+
+test('scene masthead reserves room for the playfield and moves Four Roads to the footer',async()=>{
+ const html=await(await fetch(root+'/courtyard.html')).text();
+ const css=await(await fetch(root+'/courtyard.css')).text();
+ const header=html.split('<header class="mast">')[1]?.split('</header>')[0];
+ const footer=html.split('<footer>')[1]?.split('</footer>')[0];
+ assert.ok(header);
+ assert.ok(footer);
+ assert.match(header,/<h1>Scene 01: The Courtyard Fèt<\/h1>/);
+ assert.ok(!header.includes('Four Roads'));
+ assert.ok(!header.includes('GU UNIVERSE'));
+ assert.ok(!header.includes('One board'));
+ assert.ok(!header.includes('<p'));
+ for(const control of ['id="reset"','id="export"','id="import"']) assert.ok(header.includes(control),control);
+ assert.ok(footer.includes('href="./index.html"'));
+ assert.ok(footer.includes('Four Roads'));
+ assert.match(css,/\.mast h1\s*\{[^}]*font-size:\s*clamp\(1\.8rem,\s*3vw,\s*2\.8rem\)/);
+});
