@@ -56,3 +56,30 @@ test('Field Journal text is validated; old saves without journal remain importab
   assert.throws(()=>parseTable({...original,journal:'x'.repeat(MAX_JOURNAL_LENGTH+1)}),/journal/);
   assert.equal(setJournal(original,'<script>alert(1)</script>').journal,'<script>alert(1)</script>');
 });
+
+test('personal tabletop starts with 1, 3 or 6 demo pieces and rejects unsupported counts',async()=>{
+ for(const count of [1,3,6]){
+  const t=initialTable(count);
+  assert.equal(t.tokens.length,count);
+  assert.deepEqual(parseTable(JSON.parse(JSON.stringify(t))),t);
+ }
+ for(const count of [0,7,2.5,NaN,'3']) assert.throws(()=>initialTable(count));
+ const solo=initialTable(1);
+ assert.throws(()=>moveToken(solo,'s2',40,40),'non-participating marker cannot move');
+ assert.throws(()=>recordRoll(solo,'s2','suuru',[2,3]));
+ assert.throws(()=>parseTable({...solo,tokens:[SEEKERS[1]]}),/token/i);
+});
+test('resizing local tabletop keeps notes and active token locations; removed players cannot roll',async()=>{
+ let t=setJournal(initialTable(3),'Our adventure begins.');
+ t=moveToken(t,'s2',40,45);
+ t=recordRoll(t,'s2','oye',[4,3]);
+ t=resizeTable(t,1);
+ assert.equal(t.tokens.length,1);
+ assert.equal(t.journal,'Our adventure begins.');
+ assert.equal(t.rolls.length,0);
+ t=resizeTable(t,3);
+ assert.equal(t.tokens.length,3);
+ assert.equal(t.journal,'Our adventure begins.');
+ assert.equal(t.tokens[0].id,'s1');
+ assert.throws(()=>resizeTable(t,8));
+});
