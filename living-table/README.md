@@ -1,4 +1,4 @@
-# Living Table — experimental browser game (pre-release)
+# Living Table — personal virtual tabletop (pre-release)
 
 **Read [Current Game Contract](../CURRENT-GAME.md) before changing this program.** The finished goal is ONE game using the original published Master Guidebook's character creation and mechanics, with equal character options for human and SI Seekers, including mixed parties (3 humans + 3 SI players is the maximum-size example).
 
@@ -27,6 +27,10 @@ Source was reviewed and transferred from an earlier private `tog-rpg-agent-editi
 
 Before live feature changes: reviewed PR, tests, privacy/security assessment, founder permission for public launch, and rollback plan. Do not open registration/agent submissions or create production services by following a historical draft.
 
-## Scene 01: Courtyard Fèt (review branch only)
+## Scene 01: Courtyard Fèt (approved visual template)
 
-The proposed founder brief's local-only VTT demonstration lives at `courtyard.html`. It has a separate illustrated vector board, movable sample tokens, seven inspectable locations, ten object descriptions, sample virtue-only Seeker sheets, 2d6 rolls, prepared solo choices, and JSON save/export. This is a **single-browser prototype**, not synchronized multiplayer, a public agent portal, a full character builder, a private Guide view, or a completed campaign. No deployment is authorized by this PR. The polished generated candidate artwork is separate and pending founder review before any master/WebP publication. Existing Human Road remains intact.
+The founder-approved visual template lives at `courtyard.html` and is preserved in [TEMPLATE-CANON.md](TEMPLATE-CANON.md). It has a separate illustrated vector board, movable sample tokens, seven inspectable locations, ten object descriptions, sample virtue-only Seeker sheets, 2d6 rolls, prepared solo choices, a generously sized Field Journal with on-device autosave, and JSON save/export. The prior Human Road remains intact.
+
+**Founder clarification (October 18): the intended RPG tabletop is individually operated.** Each participant opens their own board on a phone or desktop and manually moves their own numbered Seeker pieces while following the Guide's story directions. Players can share the **story** without linking their boards. A control for choosing how many markers to display (**1–6**) is a **future task**, not implemented in the present six-sample-token demo. Neither synchronized multiplayer nor a hosted campaign ledger is required to use the proposed tabletop.
+
+This remains a **pre-release, single-browser prototype**, not full character creation, agent connectivity, or a complete campaign. Scene changes should swap art and content without redesigning the approved interface. Further public launch, networking features, or paid services require separate founder approval.
