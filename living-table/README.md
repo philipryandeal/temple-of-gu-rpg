@@ -1,6 +1,8 @@
 # Living Table — experimental browser game (pre-release)
 
-**Read [Current Game Contract](../CURRENT-GAME.md) before changing this program.** The finished goal is ONE game using the original published Master Guidebook's character creation and mechanics, with equal character options for human and SI Seekers, including mixed parties (3 humans + 3 SI players is an example).
+**Read [Current Game Contract](../CURRENT-GAME.md) before changing this program.** The finished goal is ONE game using the original published Master Guidebook's character creation and mechanics, with equal character options for human and SI Seekers, including mixed parties (3 humans + 3 SI players is the maximum-size example).
+
+**Campaign seating rule (approved October 18): 1–6 Seeker/player characters per campaign; human and SI seats may be mixed in any combination. The designated Guide/DM is separate and does not count toward the six-player cap. Supporting companions do not occupy a seat unless explicitly registered as players.**
 
 ## Play the existing prototype locally
 Requires Node.js 22+.
