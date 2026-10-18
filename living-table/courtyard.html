@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Courtyard Fèt | Temple of Gu Living Table</title>
+<link rel="stylesheet" href="./courtyard.css"></head>
+<body>
+<header class="mast"><div><a href="./index.html">← Four Roads</a><p class="eyebrow">GU UNIVERSE · SCENE 01 · LOCAL PLAYTEST</p><h1>The Courtyard Fèt</h1><p>One board · Six sample Seekers · One Guide · Infinite stories</p></div><div class="head-actions"><button id="reset">Reset table</button><button id="export">Export session</button><label class="file-action">Import session<input id="import" type="file" accept="application/json,.json"></label></div></header>
+<main class="layout">
+<section class="table-section" aria-label="Courtyard game board">
+ <div class="banner"><strong>THE FÈT IS GATHERING</strong><span>Original Temple of Gu Second Edition rules · No grid required</span></div>
+ <div class="board-frame" id="frame">
+  <div class="board" id="board" role="group" aria-label="Illustrated Courtyard Fèt tabletop, with draggable Seeker tokens and inspectable zones">
+   <img src="./courtyard.webp" alt="An elevated view of a candlelit Puerto Rican Caribbean courtyard at dusk, with an open gate, central Poto Mitan, devotional altar, supply table, drums and chairs." draggable="false">
+   <div id="zones"></div><div id="tokens"></div>
+  </div>
+ </div>
+ <p class="under">Drag or select a Seeker token, then use the arrow controls to move it. Select a glowing marker to inspect a courtyard area. Artwork is proposed for founder review.</p>
+ <div class="movement"><span>Selected Seeker movement</span><button data-move="left" aria-label="Move selected token left">←</button><button data-move="up" aria-label="Move selected token up">↑</button><button data-move="down" aria-label="Move selected token down">↓</button><button data-move="right" aria-label="Move selected token right">→</button><button id="inspect-selected">Character sheet</button></div>
+</section>
+<aside class="sidebar">
+ <section class="panel"><p class="eyebrow">SCENE JOURNAL</p><h2 id="info-title">Welcome to the courtyard</h2><p id="info-body">Music fills the courtyard. Candles burn. Guests exchange greetings and offerings. Where will you begin?</p><div id="items"></div></section>
+ <section class="panel"><p class="eyebrow">SIX SAMPLE SEEKERS</p><label for="seeker-select">Active Seeker</label><select id="seeker-select"></select><div id="sheet"></div></section>
+ <section class="panel"><p class="eyebrow">THE SEEKER'S DICE</p><label for="virtue">Virtue</label><select id="virtue"><option value="suuru">Suuru · Patience</option><option value="oye">Oye · Understanding</option><option value="foriti">Foriti · Perseverance</option><option value="iwa">Iwa · Integrity</option></select><button id="roll" class="primary">Roll 2d6 + Virtue</button><p id="roll-result" role="status" aria-live="polite">Select a Seeker and a Virtue to roll.</p><div id="roll-history"></div></section>
+ <section class="panel"><p class="eyebrow">GUIDE CONTROLS · LOCAL ONLY</p><label class="check"><input type="checkbox" id="reveal"> Reveal proposed opening hook on this screen</label><p id="clue" hidden></p><p class="fine">No private Guide view or multiplayer synchronization exists in this prototype. Do not use this control to store confidential clues.</p></section>
+ <section class="panel"><p class="eyebrow">SOLO PATH · PREPARED PROMPTS</p><p>The fête continues. Which thread do you follow?</p><div id="solo"></div><p id="solo-reply" role="status" aria-live="polite"></p></section>
+</aside>
+</main>
+<footer>Local browser tabletop proof of concept. Not a live campaign room, religious initiation, or autonomous AI Guide. Scene details remain proposed pending founder approval. <a href="https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/guidebook/README.md">Read the original rules</a>.</footer>
+<script type="module" src="./courtyard-ui.mjs"></script></body></html>
