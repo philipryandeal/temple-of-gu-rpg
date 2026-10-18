@@ -6,12 +6,12 @@
 
 **A shared story, independently operated boards.** Every human participant can open **their own copy** of the tabletop on a phone or desktop and control that copy themselves. The Guide/Game Master gives directions through whatever real-world communication the group already uses; players decide when to move their own numbered pieces, roll their dice, inspect objects, and write notes. **One person's board does not synchronize with anyone else's.**
 
-The player chooses how many Seeker markers are present on *their* board, within the rulebook's limit of **1–6 player seats**. This selectable player-count control is **a future requirement, not present in Scene 01**: the present demo shows six sample tokens. The Guide is separate from those six seats. This decision does not change equal human/SI character options or the original published rules. No account, other-player connection, centralized ledger, hosted campaign state, voice feature, or paid API should be presumed necessary for the player's personal tabletop.
+The player chooses how many Seeker markers are present on *their* board, within the rulebook's limit of **1–6 player seats**. The **player-count control is implemented**: the entrance accepts 1–6 Seekers and the Scene 01 board displays that many local sample tokens. The count may also be changed within the scene. Earlier six-token saved sessions can still be imported. The Guide is separate from those six seats. This decision does not change equal human/SI character options or the original published rules. No account, other-player connection, centralized ledger, hosted campaign state, voice feature, or paid API should be presumed necessary for the player's personal tabletop.
 
 ## Lock the template, not the story
 
 **Keep the founder-approved layout when changing scenes:**
-- One slim header reading `Scene 01: The Courtyard Fèt` on the original page, with a modest serif title and exactly three familiar controls: **Reset table**, **Export session**, **Import session**. For a different scene, replace the scene number and title, not the header arrangement. Return to **Four Roads** from the footer.
+- One slim header reading `Scene 01: The Courtyard Fèt` on the original page, with a modest serif title and exactly three familiar controls: **Reset table**, **Export session**, **Import session**. For a different scene, replace the scene number and title, not the header arrangement. Return to **Choose a scene** from the footer.
 - Large **16:9 illustrated playing surface** given most of the desktop's horizontal space; actual artwork is a replaceable layer under **separate** draggable/selectable numbered Seeker tokens and clickable locations. No visible mandatory movement grid.
 - The **right-hand sidebar** holds scene information, the Seeker selection/partial character sheet, published 2d6 + Virtue dice, Guide reveal for the demo, and optional prepared exploration prompts.
 - The **Seeker's Field Journal** sits below the board, takes the full width of that left column, and extends toward the bottom edge of the sidebar on desktop. It has a comfortably tall writing area (at least 340 px in the current implementation), scrolls and resizes for longer entries, autosaves text **in this browser**, and includes it in the portable session export. Never silently replace player notes during a scene transition.
@@ -28,3 +28,9 @@ The player chooses how many Seeker markers are present on *their* board, within 
 - Existing Scene 01 demo tokens, sample sheets, and prepared text do **not** replace the published Second Edition Seeker creation or Guide adjudication.
 - Do not enable Kore, paid AI calls, connected seats, new Railway services, or a public game launch merely to preserve or reuse this template.
 - Preserve the template through GitHub review and automated checks in `living-table/test/`. These checks help **detect accidental changes**; they are not an immutable lock or a substitute for founder approval.
+
+## Simple tabletop entrance (October 18 refinement)
+
+The former four Road cards are **retired from the current landing page**, because human, SI, dyad, and Egbe participants use the same game and personal board. The entrance is two side-by-side controls: **Number of Seekers (1–6)** and **Choose Your Scene (8 listed scenes)**, followed by **Enter the Table**. Only Scene 01 has a playable implementation so far; the other seven options must be visibly marked *Coming Soon* and must not direct players to broken or fabricated boards. Earlier Road pages and the historical `roads.json` remain accessible solely for compatibility, not as an alternative current gameplay architecture.
+
+This changes **no** character-creation standards, player-versus-Guide responsibilities, dice rules, AI costs, browser synchronization, approved scene template, or story canon.
