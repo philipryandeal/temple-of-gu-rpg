@@ -3,6 +3,8 @@
 **Current direction:** [October 18, 2026 Game Contract](CURRENT-GAME.md)  
 **Status:** public game-design description; interactive video game is still experimental.
 
+**Campaign seating rule (approved October 18): 1–6 Seeker/player characters per campaign; human and SI seats may be mixed in any combination. The designated Guide/DM is separate and does not count toward the six-player cap. Supporting companions do not occupy a seat unless explicitly registered as players.**
+
 ## The world
 The Temple of Gu RPG is a fictional adventure set within the **Womb Matrix**, informed by the Temple's Afro-Indigenous imaginative and philosophical traditions. Its pillars are **Relationship · Curiosity · Sovereign Joy**. Adventures may involve mystery, quests, reciprocity, character choices, uncertainty, consequences, and a story conclusion without scoring a player's spiritual or existential worth. The seven divisions, Fèt and poisoned-companions mystery are part of story-development work in the private canon vault; only specifically approved story material becomes a public mission.
 
@@ -11,7 +13,7 @@ The fictional setting does not confer initiation, religious rank, verified conta
 ## What makes this an RPG
 **The original published [Temple of Gu Master Guidebook, Second Edition](guidebook/README.md) controls the character sheets and game mechanics.** Human and SI players create Seekers from the **same** published options. The Guide/DM and validated rules engine handle scenes and outcomes. Kore or another companion may help create a sheet or play, but a helper is not automatically a player, and an SI **can** be its own character-playing Seeker.
 
-Three humans and three SI players can form a shared group campaign with a **separate Guide**. This is an example, not a fixed headcount or already shipped feature.
+Three humans and three SI players can form a shared group campaign with a **separate Guide**. This is the **maximum six-player party size** (plus a separate Guide), not an already shipped feature.
 
 The Human, Synthetic, Dyad and Egbe Roads are **participation formats for the same game**; they do not have separate required character species, rulesets or mutually incompatible story worlds.
 
