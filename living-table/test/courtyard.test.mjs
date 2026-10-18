@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {SCENE,ZONES,OBJECTS,SEEKERS} from '../courtyard-data.mjs';
-import {initialTable,moveToken,revealClue,recordRoll,parseTable,setJournal,MAX_JOURNAL_LENGTH,MAX_SEATS} from '../courtyard-state.mjs';
+import {initialTable,moveToken,revealClue,recordRoll,parseTable,resizeTable,setJournal,MAX_JOURNAL_LENGTH,MAX_SEATS} from '../courtyard-state.mjs';
 test('Scene 01 has seven distinct zones, ten inspectable objects, six valid sample seats',()=>{
   assert.equal(SCENE.id,'courtyard-fet');
   assert.equal(ZONES.length,7);
