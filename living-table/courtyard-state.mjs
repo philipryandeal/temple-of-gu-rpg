@@ -1,6 +1,5 @@
 import {SEEKERS} from './courtyard-data.mjs';
 import {evaluateLesson} from './casting.mjs';
-import {validateSeeker} from './seeker.mjs';
 export const SCENE_ID = 'courtyard-fet';
 export const SAVE_VERSION = 1;
 export const MAX_SEATS = 6;
@@ -40,7 +39,7 @@ export function parseTable(raw) {
     seen.add(t.id);
     const source=SEEKERS.find(s=>s.id===t.id);
     if(t.name!==source.name||t.lineage!==source.lineage||t.tone!==source.tone||
-       !t.virtues||!validateSeeker({name:t.name,lineage:t.lineage,virtues:t.virtues}).ok||
+       !t.virtues||typeof t.virtues!=='object'||Array.isArray(t.virtues)||
        Object.keys(t.virtues).length!==4||
        !Object.keys(source.virtues).every(k=>source.virtues[k]===t.virtues[k])) throw new Error('Unrecognized demo character');
     return {...copyToken(source),x:t.x,y:t.y};
