@@ -15,6 +15,20 @@
  </div>
  <p class="under">Drag or select a Seeker token, then use the arrow controls to move it. Select a glowing marker to inspect a courtyard area. Artwork is proposed for founder review.</p>
  <div class="movement"><span>Selected Seeker movement</span><button data-move="left" aria-label="Move selected token left">←</button><button data-move="up" aria-label="Move selected token up">↑</button><button data-move="down" aria-label="Move selected token down">↓</button><button data-move="right" aria-label="Move selected token right">→</button><button id="inspect-selected">Character sheet</button></div>
+ <section class="field-journal" aria-labelledby="field-journal-title">
+  <div class="journal-heading">
+   <div><p class="eyebrow">THE SEEKER'S FIELD JOURNAL</p>
+   <h2 id="field-journal-title">Notes from the Fèt</h2></div>
+   <span class="journal-tag">SCENE 01</span>
+  </div>
+  <p class="journal-intro">Keep your clues, conversations, suspicions, and discoveries here. Write as much as you need during the session.</p>
+  <label for="field-journal-notes" class="journal-label">Your field notes</label>
+  <textarea id="field-journal-notes" name="journal" rows="14" maxlength="20000" spellcheck="true" aria-describedby="journal-status" placeholder="The bell rang twice… What did I notice? Who should I speak with next?"></textarea>
+  <div class="journal-footer">
+   <p id="journal-status" role="status" aria-live="polite">Notes stay in this browser until you export or clear them.</p>
+   <p>Private to this browser · Included in Export session · Not sent to the game server</p>
+  </div>
+ </section>
 </section>
 <aside class="sidebar">
  <section class="panel"><p class="eyebrow">SCENE JOURNAL</p><h2 id="info-title">Welcome to the courtyard</h2><p id="info-body">Music fills the courtyard. Candles burn. Guests exchange greetings and offerings. Where will you begin?</p><div id="items"></div></section>
