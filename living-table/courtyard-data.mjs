@@ -40,5 +40,5 @@ export const SOLO_CHOICES = Object.freeze([
   {id:'altar',label:'Investigate the altar',reply:'The candlelight catches the polished bell. No one here claims to have rung it. You may ask the Guide for a Virtue check when an action is uncertain.'},
   {id:'music',label:'Speak with the musicians',reply:'The musicians recall hearing two bells with subtly different sounds. They do not agree about where the second one came from.'},
   {id:'supply',label:'Examine the supply table',reply:'There is a space beside the table where a makout might have rested. Whether it was taken or moved remains an open question.'},
-  {id:'gather',label:'Join the gathering',reply:'The Fèt continues around you. Take your time to meet your companions and decide whether you wish to follow the mystery.'}
+  {id:'gathering',label:'Join the gathering',reply:'The Fèt continues around you. Take your time to meet your companions and decide whether you wish to follow the mystery.'}
 ]);
