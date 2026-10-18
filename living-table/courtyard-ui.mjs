@@ -5,7 +5,6 @@ const $=s=>document.querySelector(s);
 const zones=$('#zones'),tokens=$('#tokens'),select=$('#seeker-select'),sheet=$('#sheet');
 const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
 const escText=(node,text)=>{node.textContent=text;};
-const named={coral:'#db7764',aqua:'#68c5c7',gold:'#e8c06c',lilac:'#bf9de5',pink:'#e9a8b9',mint:'#a0d9b1'};
 for(const zone of ZONES){
  const b=document.createElement('button');b.className='hotspot';b.type='button';
  b.style.left=zone.x+'%';b.style.top=zone.y+'%';b.textContent=zone.id==='poto'?'✦':'i';
@@ -39,7 +38,7 @@ function renderTokens(){
  tokens.replaceChildren();
  for(const t of table.tokens){
   const b=document.createElement('button');b.className='token'+(t.id===selected?' selected':'');
-  b.style.left=t.x+'%';b.style.top=t.y+'%';b.style.setProperty('--tone',named[t.tone]||named.coral);
+  b.style.left=t.x+'%';b.style.top=t.y+'%';
   b.textContent=t.id.slice(1);b.title=t.name;b.setAttribute('aria-label',t.name+'; position '+Math.round(t.x)+', '+Math.round(t.y));
   b.addEventListener('click',()=>{selected=t.id;renderTokens();showSheet()});
   b.addEventListener('pointerdown',e=>{
