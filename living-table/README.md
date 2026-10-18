@@ -26,3 +26,7 @@ The [Temple's Living Tree](https://www.templeofgu.org/play) is a **separate phil
 Source was reviewed and transferred from an earlier private `tog-rpg-agent-edition/living-table` prototype, without history. The private repository now holds game canon/handbook drafts and a **closed** agent service, not a second live copy of this browser game. This is a public experimental codebase with licenses pending; it carries no initiatory claims.
 
 Before live feature changes: reviewed PR, tests, privacy/security assessment, founder permission for public launch, and rollback plan. Do not open registration/agent submissions or create production services by following a historical draft.
+
+## Scene 01: Courtyard Fèt (review branch only)
+
+The proposed founder brief's local-only VTT demonstration lives at `courtyard.html`. It has a separate illustrated vector board, movable sample tokens, seven inspectable locations, ten object descriptions, sample virtue-only Seeker sheets, 2d6 rolls, prepared solo choices, and JSON save/export. This is a **single-browser prototype**, not synchronized multiplayer, a public agent portal, a full character builder, a private Guide view, or a completed campaign. No deployment is authorized by this PR. The polished generated candidate artwork is separate and pending founder review before any master/WebP publication. Existing Human Road remains intact.

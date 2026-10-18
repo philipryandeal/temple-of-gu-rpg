@@ -2,15 +2,20 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Living Table | The Human Road</title>
 <style>
-:root{color-scheme:dark;font-family:system-ui, sans-serif;background:#0d211a;color:#f3f5e9}*{box-sizing:border-box}
-body{margin:0}header,main,footer{max-width:900px;margin:auto;padding:1rem}header{border-bottom:2px solid #d87926}
-h1{margin:.2rem 0}small,.note{color:#b3c9b7}button,a,select{font:inherit}select{background:#1d4535;color:#fff;border:1px solid #acbfaa;border-radius:.3rem;padding:.45rem;margin:.4rem .8rem .4rem .3rem}button{cursor:pointer;border:1px solid #acbfaa;border-radius:.55rem;padding:.65rem;background:#1d4535;color:#fff}button:focus-visible,a:focus-visible{outline:3px solid #f7a94a;outline-offset:3px}
-button:hover{background:#275943}button[disabled]{opacity:.48;cursor:default}a{color:#ffd08e}
-.panel{background:#163528;border:1px solid #5e836d;border-radius:1rem;padding:1rem;margin:1rem 0}
-.actions{display:flex;gap:.7rem;flex-wrap:wrap}.primary{background:#a44f17}
+:root{color-scheme:dark;--temple-bg:#495A58;--temple-panel:#303636;--temple-accent:#FF5E1F;--temple-text:#FFFFFF;font-family:system-ui,sans-serif;background:var(--temple-bg);color:var(--temple-text)}*{box-sizing:border-box}
+body{margin:0;background:var(--temple-bg)}header,main,footer{max-width:900px;margin:auto;padding:1rem}header{border-bottom:2px solid var(--temple-accent)}
+h1{margin:.2rem 0;font-family:Georgia,serif}small,.note{color:var(--temple-text)}
+button,a,select{font:inherit}select{background:var(--temple-bg);color:var(--temple-text);border:1px solid var(--temple-text);border-radius:.3rem;padding:.45rem;margin:.4rem .8rem .4rem .3rem}
+button{cursor:pointer;border:1px solid var(--temple-accent);border-radius:.55rem;padding:.65rem;background:var(--temple-panel);color:var(--temple-text)}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--temple-accent);outline-offset:3px}
+button:hover{background:color-mix(in srgb,var(--temple-panel) 80%,var(--temple-accent))}
+button[disabled]{opacity:.48;cursor:default}a{color:var(--temple-accent)}.panel{background:var(--temple-panel);border:1px solid var(--temple-text);border-radius:1rem;padding:1rem;margin:1rem 0}
+.actions{display:flex;gap:.7rem;flex-wrap:wrap}.primary{background:var(--temple-accent);color:var(--temple-panel);font-weight:700}
 #board{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;width:min(100%,520px);aspect-ratio:1;margin:1rem auto}
-.tile{min-width:0;padding:0;border-radius:.3rem;background:#264b39;position:relative;aspect-ratio:1;font-size:clamp(.5rem,2vw,.85rem)}
-.tile:nth-child(even){background:#2d523e}.tile.poto{background:#875019;border:2px solid #ffd08e}.tile.seeker{outline:3px solid #a8e1bb;outline-offset:-4px}
+.tile{min-width:0;padding:0;border-radius:.3rem;background:var(--temple-bg);position:relative;aspect-ratio:1;font-size:clamp(.5rem,2vw,.85rem)}
+.tile:nth-child(even){background:color-mix(in srgb,var(--temple-bg) 80%,var(--temple-panel))}
+.tile.poto{background:var(--temple-accent);border:2px solid var(--temple-text);color:var(--temple-panel)}
+.tile.seeker{outline:3px solid var(--temple-accent);outline-offset:-4px}
 .tile span{display:block;pointer-events:none}.tile .symbol{font-size:clamp(1rem,3vw,1.9rem)}
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:1rem;align-items:center}
 .pad{display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem}.pad button{min-height:52px}.pad .up{grid-column:2}.pad .left{grid-column:1}.pad .down{grid-column:2}.pad .right{grid-column:3}
@@ -22,10 +27,10 @@ button:hover{background:#275943}button[disabled]{opacity:.48;cursor:default}a{co
 <section class="panel" id="kore-chat" aria-label="Kore the Oracle">
 <h2>Ask Kore · Create Your Seeker</h2>
 <p class="note">Kore is the Temple's fictional Game Guide. Character creation follows the published Master Guidebook. AI chat is off until intentionally activated; do not share private personal information.</p>
-<div id="kore-messages" aria-live="polite" style="max-height:300px;overflow:auto;padding:.8rem;background:#0d211a;border-radius:.6rem"></div>
+<div id="kore-messages" aria-live="polite" style="max-height:300px;overflow:auto;padding:.8rem;background:var(--temple-panel);border-radius:.6rem"></div>
 <form id="kore-form">
 <label for="kore-input">Your message to Kore</label>
-<input id="kore-input" maxlength="700" required placeholder="Help me create a Seeker" style="display:block;width:100%;padding:.7rem;background:#0d211a;color:#fff;border:1px solid #acbfaa;border-radius:.4rem;margin:.5rem 0">
+<input id="kore-input" maxlength="700" required placeholder="Help me create a Seeker" style="display:block;width:100%;padding:.7rem;background:var(--temple-panel);color:var(--temple-text);border:1px solid var(--temple-text);border-radius:.4rem;margin:.5rem 0">
 <button id="kore-send" type="submit">Ask Kore</button>
 </form><p class="note" id="kore-status" role="status"></p>
 </section>
