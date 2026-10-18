@@ -40,7 +40,7 @@ test('Field Journal sits below the board, has a generous writing area and is not
  assert.ok(!html.includes('action="/api/'));
 });
 
-test('scene masthead reserves room for the playfield and moves Four Roads to the footer',async()=>{
+test('scene masthead reserves room for the playfield and moves entrance navigation to the footer',async()=>{
  const html=await(await fetch(root+'/courtyard.html')).text();
  const css=await(await fetch(root+'/courtyard.css')).text();
  const header=html.split('<header class="mast">')[1]?.split('</header>')[0];
@@ -48,12 +48,12 @@ test('scene masthead reserves room for the playfield and moves Four Roads to the
  assert.ok(header);
  assert.ok(footer);
  assert.match(header,/<h1>Scene 01: The Courtyard Fèt<\/h1>/);
- assert.ok(!header.includes('Four Roads'));
+ assert.ok(!header.includes('Choose a scene'));
  assert.ok(!header.includes('GU UNIVERSE'));
  assert.ok(!header.includes('One board'));
  assert.ok(!header.includes('<p'));
  for(const control of ['id="reset"','id="export"','id="import"']) assert.ok(header.includes(control),control);
  assert.ok(footer.includes('href="./index.html"'));
- assert.ok(footer.includes('Four Roads'));
+ assert.ok(footer.includes('Choose a scene'));
  assert.match(css,/\.mast h1\s*\{[^}]*font-size:\s*clamp\(1\.45rem,\s*2\.4vw,\s*2\.2rem\)/);
 });
