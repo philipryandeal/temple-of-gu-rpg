@@ -4,11 +4,12 @@ import {validateSeeker} from './seeker.mjs';
 export const SCENE_ID = 'courtyard-fet';
 export const SAVE_VERSION = 1;
 export const MAX_SEATS = 6;
+export const MAX_JOURNAL_LENGTH = 20000;
 const ALLOWED = new Set(SEEKERS.map(s=>s.id));
 const validCoordinate = n=>typeof n==='number'&&Number.isFinite(n)&&n>=2&&n<=98;
 const copyToken = t=>({id:t.id,name:t.name,lineage:t.lineage,x:t.x,y:t.y,virtues:{...t.virtues},tone:t.tone});
 export function initialTable() {
-  return {version:SAVE_VERSION,scene:SCENE_ID,tokens:SEEKERS.map(copyToken),revealed:false,rolls:[]};
+  return {version:SAVE_VERSION,scene:SCENE_ID,tokens:SEEKERS.map(copyToken),revealed:false,rolls:[],journal:''};
 }
 export function moveToken(table,id,x,y) {
   if(!ALLOWED.has(id)||!validCoordinate(x)||!validCoordinate(y)) throw new RangeError('Invalid token move');
@@ -17,6 +18,11 @@ export function moveToken(table,id,x,y) {
 export function revealClue(table,value) {
   if(typeof value!=='boolean') throw new TypeError('Clue visibility must be boolean');
   return {...table,revealed:value};
+}
+// This is player-authored text, not a Guide privilege or a magic action.
+export function setJournal(table,value) {
+  if(typeof value!=='string'||value.length>MAX_JOURNAL_LENGTH) throw new RangeError('Journal exceeds the supported length');
+  return {...table,journal:value};
 }
 export function recordRoll(table,id,virtue,dice) {
   const token=table.tokens.find(t=>t.id===id);
@@ -49,5 +55,8 @@ export function parseTable(raw) {
     if(r.total!==derived.total||r.outcome!==derived.outcome) throw new Error('Tampered dice history');
     return {id:r.id,virtue:r.virtue,dice:[...r.dice],total:derived.total,outcome:derived.outcome};
   });
-  return {version:SAVE_VERSION,scene:SCENE_ID,tokens,rolls,revealed:raw.revealed};
+  // Backward compatible with earlier Scene 01 exports that had no journal.
+  const journal=raw.journal===undefined?'':raw.journal;
+  if(typeof journal!=='string'||journal.length>MAX_JOURNAL_LENGTH) throw new Error('Invalid journal in save');
+  return {version:SAVE_VERSION,scene:SCENE_ID,tokens,rolls,revealed:raw.revealed,journal};
 }
