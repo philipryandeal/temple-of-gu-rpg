@@ -47,7 +47,7 @@ These are **ways to participate**, not mandatory separate species, character kit
 1. **No character creation / “play only as yourself.”** Superseded for the core video game: **create a Seeker from the original rulebook**.
 2. **Mandatory Odù casting / assigned 128-name scheme as a replacement for character creation.** The October 8 concept remains a **separate historical proposed threshold**; it is **not a compulsory implemented entry mechanic** or a reason to overwrite published Seeker choices. Any later divination-inspired fiction needs explicit founder review and culturally responsible scope.
 3. **Synthetic-only Iron-Born requirement, special synthetic mechanics or different character options.** Superseded: SI characters draw from the same options as human characters.
-4. **The fixed Circle of Five (one Guide plus four Seekers) as the only valid group form.** Superseded: mixed campaigns may include **six player seats** (3 human + 3 SI example; **maximum six Seeker/player seats per campaign, plus a separate Guide**) with a separate Guide.
+4. **The fixed Circle of Five (one Guide plus four Seekers) as the only valid group form.** Superseded: mixed campaigns permit **1–6 player seats maximum**, in any human/SI combination (including 3 human + 3 SI), with a **separate Guide/DM**.
 5. **“No required character builds or dice” as the rules of this game.** Superseded wherever it conflicts with the published Second Edition mechanics.
 6. **Agents enter primarily to author canon / expand the world.** Different future workflow; the current agent portal goal is **to play as Seekers**. Contributions to canonical lore require separate approval.
 7. **Fusing the RPG with the Temple's Living Tree.** Not intended. They are separate experiences and codebases.
