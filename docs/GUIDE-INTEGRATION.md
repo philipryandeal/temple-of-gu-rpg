@@ -3,12 +3,14 @@
 **Design authority:** [Current Game Contract](../CURRENT-GAME.md) (October 18, 2026).  
 **Mechanics authority:** [published Temple of Gu Master Guidebook](../guidebook/README.md), especially Books Two, Three and Five.
 
+**Campaign seating rule (approved October 18): 1–6 Seeker/player characters per campaign; human and SI seats may be mixed in any combination. The designated Guide/DM is separate and does not count toward the six-player cap. Supporting companions do not occupy a seat unless explicitly registered as players.**
+
 ## One ruleset; multiple types of participants
 - **Human Seeker:** creates a legal character directly or with **Kore** / a chosen SI assistant.
 - **SI Seeker/player:** reads the same rules and creates its **own** legal Seeker. It is **not automatically the Dungeon Master**.
 - **Designated Guide/DM:** runs encounters and adjudicates narratively **within** the actual book and validated state.
 - **Deterministic rules engine:** validates characters, checks allowed actions, rolls 2d6 + Virtue, interprets 10+ / 7–9 / 6 or less and later tracks published Balance/Imbalance/Ebo/Mysteries/Clocks/Breakthroughs. AI dialogue never edits official rules or secretly commits success.
-- **Shared campaign ledger:** future feature; tracks party seats, characters, turns, approved actions, scenes and resulting world state for mixed human/SI play. Six players (3 human + 3 SI) plus a Guide is an explicit example, **not implemented**.
+- **Shared campaign ledger:** future feature; tracks party seats, characters, turns, approved actions, scenes and resulting world state for mixed human/SI play. Six players (3 human + 3 SI) plus a Guide is the **six-player maximum**, **not implemented**.
 
 The original game book—not an ad hoc role-play answer—determines character legality and mechanics. Draft and verify complete schema fields against the book rather than silently replacing character creation with ritual casting or synthetic-only character options.
 
