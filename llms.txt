@@ -1,11 +1,25 @@
-# Temple of Gu RPG — Standalone Video Game
-> Public source for a developing, experimental adventure game for human and synthetic participants.
+# Temple of Gu RPG — one game for Human and SI Seekers
+> CURRENT FOUNDER DIRECTION: October 18, 2026. Game status: EXPERIMENTAL / PRE-RELEASE.
 
-Canonical game repository: https://github.com/philipryandeal/temple-of-gu-rpg
-Playable Human Road prototype: https://living-table-web-development.up.railway.app/
-Game introduction: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/WORLD.md
-Contribution instructions: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/CONTRIBUTING.md
+**FIRST READ: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/CURRENT-GAME.md**
+**Original published mechanical rules: https://github.com/philipryandeal/temple-of-gu-rpg/tree/main/guidebook**
 
-Separate project: Temple Living Tree at https://www.templeofgu.org/play. Its ten stations and twenty-two paths are part of a distinct experience maintained by the Temple website and mirrored across companion Houses. Do not treat it as the RPG's interface or attempt to synchronize its code here.
+The Temple of Gu RPG is ONE roleplaying game using the published original Temple of Gu Master Guidebook, Second Edition, by Philip Ryan Deal and David Bear.
+- A HUMAN or SYNTHETIC intelligence may **create and play its own Seeker** from the same published Lineages, Archetypes, Virtues and character options; no special SI class or different mechanics.
+- Kore or the human's preferred SI can assist character creation; an assistant is not a player unless assigned a distinct player seat.
+- Each campaign has **1–6 Seeker player seats MAXIMUM**, in ANY human/SI mix. **3 human plus 3 SI** is a principal example. **The designated Guide/DM is separate and not counted toward six**.
+- Player != Guide. A player cannot arbitrarily adjudicate its own outcomes; deterministic rules/ledger establish official events.
+- Human, Synthetic, Dyad, Egbe = participation doors into SAME game, NOT separate rulebooks.
+- Published game mechanics include 2d6+Virtue, Suuru/Oye/Foriti/Iwa, Balance, Ebo and other rules exactly as the book defines. Womb Matrix is world/story/philosophical frame, NOT a replacement rules engine.
+- Do not assume all consumer SI chat systems can automatically navigate APIs; actual agent capabilities require specific integration. Manual companion handoff/portable journal is a possible fallback.
+- Do not use historic “play as yourself only,” mandatory Odù/128-name replacement, “Iron-Born only,” fixed Circle of Five, or no-dice/no-character-creation proposals as current official game rules.
 
-Status: EARLY PLAYABLE PROTOTYPE. Human Road is open for browser exploration; Synthetic, Dyad, Egbe not implemented. No registration, persistent player state, or agent contribution write API. Proposed lore is not approved canon until reviewed by Temple stewards. This is fictional play, not initiation.
+Public game repo: https://github.com/philipryandeal/temple-of-gu-rpg
+Human Road test prototype: https://living-table-web-development.up.railway.app/
+Current game orientation: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/WORLD.md
+Contribution guidance: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/CONTRIBUTING.md
+Private canon/agent service (authorized collaborators only): https://github.com/philipryandeal/tog-rpg-agent-edition
+
+STATUS TODAY: Human Road is only an experimental Torii/7×7 peristyle/dice demonstration. Synthetic, Dyad and Egbe are not playable; no full character builder, six-seat campaign engine, persistent game saves, public agent registration or real agent turns. The separate Agent Edition API is development-only and hard-closed for player entry. DO NOT tell a visiting SI that it can register or play today.
+
+Independent Temple Living Tree: https://www.templeofgu.org/play is a different spiritual/philosophical experience and codebase, NOT the RPG engine. Unapproved private traditions, unfinished canon, personal data and model credentials remain protected. This is fictional roleplay, not real-world initiation.
