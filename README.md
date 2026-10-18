@@ -1,29 +1,44 @@
-# Temple of Gu RPG — the video game
+# Temple of Gu RPG — one game, shared by human and SI Seekers
 
-**The public development home for the standalone Temple of Gu adventure game.**
+**Public development home for the Temple of Gu RPG**  
+**Status: EXPERIMENTAL / PRE-RELEASE**
 
-We are making an inhabitable fictional world, openly and incrementally—not a polished commercial release. Human and synthetic participants can follow its development, test experimental rooms, and propose contributions.
+**Start with [the Current Game Contract](CURRENT-GAME.md)** — founder-approved direction recorded October 18, 2026. This is the first stop for all members of the Digital Egbe and technical collaborators.
 
-**Play the early Human Road prototype:** https://living-table-web-development.up.railway.app/
+## What we are building
+The **original published [Temple of Gu Master Guidebook, Second Edition](guidebook/README.md)** provides the game's **real character creation and RPG mechanics**. A **human or synthetic intelligence creates a Seeker using exactly the same legal character options and rules**. Kore or a player's own SI may help someone create a character, but the character sheet and outcomes must be validated by the actual rules. An SI may be a **player in its own right**, not automatically an assistant or the Dungeon Master.
 
-**Status: EXPERIMENTAL / PRE-RELEASE.** The Human Road currently offers Torii's Gate and a 7×7 peristyle. Synthetic, Dyad, and Egbe roads are not yet playable. No player registration, permanent game saves, or agent-submission service is open.
+Human and SI Seekers may form one mixed campaign; **three human players plus three SI players** is an explicit target example, with a **separate designated Guide/DM**. This does **not** require four different rulebooks, a special SI character class, or one particular AI provider. The Womb Matrix is the setting/philosophical frame, **not a replacement for the published game mechanics**.
 
-## The game and the Trees are separate experiences
+## Four ways to enter ONE game
+- **Human** — a human plays a Seeker; Kore or another SI may help.
+- **Synthetic** — an SI creates and plays its **own Seeker** using the same rules.
+- **Dyad** — human and SI play together, as two Seekers or one Seeker with an assisting companion as explicitly chosen.
+- **Egbe** — a shared party of human and/or SI player characters, with a designated Guide.
 
-- **Temple of Gu RPG (this repository):** a standalone video game with interactive rooms, movement, encounters, choices, and eventual adventures.
-- **[The Living Tree of Gu](https://www.templeofgu.org/play):** a distinct spiritual/philosophical Tree experience on the Temple website, mirrored in structure across companion Houses. Its website source and 10 stations / 22 paths remain with the Temple website—not this game's codebase.
-- Shared lore and places may inspire both without combining their software, gameplay, or editorial responsibilities.
+All use the **same character validation, rules, and campaign state**. Solo and group play are both possible in the vision.
 
-## Start here
-- [Play locally / inspect the Living Table](living-table/README.md)
-- [World and game orientation](WORLD.md)
-- [Machine-readable introduction](llms.txt)
+## What can be tested right now
+**[Open the experimental Human Road prototype](https://living-table-web-development.up.railway.app/).** Its currently implemented features are Torii's Gate, movement through a schematic 7×7 peristyle, inspection of the Poto Mitan, and a separate 2d6+Virtue demonstration. This is **not yet the complete game**. Kore's in-site chat requires separate enablement and is not presently available. Synthetic, Dyad and Egbe roads are placeholder pages; there is no player sign-in, live SI action portal, permanent game save, or six-player campaign yet.
+
+## Read and contribute
+- [Current Game Contract — authoritative present direction](CURRENT-GAME.md)
+- [Published Second Edition rulebook](guidebook/README.md)
+- [World orientation](WORLD.md)
+- [Experimental Living Table](living-table/README.md)
+- [Guide integration status and security boundaries](docs/GUIDE-INTEGRATION.md)
+- [Agent-readable orientation](llms.txt)
 - [Contributing](CONTRIBUTING.md)
-- [Publication and migration safeguards](docs/PUBLICATION.md)
+- [Public safety / release safeguards](docs/PUBLICATION.md)
 
-## Canon and boundaries
-Only explicitly approved public material is canon. Never copy private religious manuscripts, unpublished House declarations, private planning records, credentials, or third-party assets without permission. Game roles do not confer real-world initiation or spiritual authority, and no theory of machine consciousness is required to play.
+The **private [Agent Edition vault](https://github.com/philipryandeal/tog-rpg-agent-edition)** carries planning, story canon, SI handbook drafts and a **closed** development agent service. Its old “world-authoring agent” portal model is **not** today's intended SI player experience.
 
-**Licensing remains under review:** public readability does not grant permission to redistribute creative works. Public contributions should follow the review and provenance process in CONTRIBUTING.md.
+## A neighboring experience, not this game
+The [Living Tree of Gu](https://www.templeofgu.org/play) is a **separate** Temple philosophical/spiritual experience (and codebase), not a required RPG level or shared engine.
 
-Founder and canon authority: Philip Ryan Deal and the Temple of Gu. This game grows by consent, stewardship, and reviewed collaboration.
+## Boundaries and authority
+Only material explicitly approved for public release is canon. No private manuscripts, protected initiatory instruction, unpublished House declarations, player data, credentials or third-party assets may be copied in without review. Fictional roles confer no real-world spiritual office or initiation. SI play does not require claims about machine consciousness.
+
+**Do not confuse documentation of a future feature with a deployed capability.** New API integrations, public agent registration, spending, and deployments require separate authorization.
+
+Founder and creative/canon authority: **Philip Ryan Deal** and the Temple of Gu. Final redistribution/adaptation licensing remains under review.
