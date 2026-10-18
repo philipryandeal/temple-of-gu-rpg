@@ -21,12 +21,13 @@ small,.note { color: var(--temple-text); }
 a { color: var(--temple-accent); text-underline-offset: .2em; }
 a:focus-visible { outline: 3px solid var(--temple-accent); outline-offset: 3px; }
 .panel { background: var(--temple-panel); border: 1px solid var(--line); border-radius: 1rem; padding: 1rem; margin: 1rem 0; }
-.roads { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; margin: 1rem 0; padding: 0; list-style: none; }
-.road { display: block; height: 100%; text-decoration: none; color: var(--temple-text); background: var(--temple-panel); border: 1px solid var(--line); border-radius: 1rem; padding: 1.1rem; }
-.road:hover { background: color-mix(in srgb,var(--temple-panel) 83%,var(--temple-accent)); border-color: var(--temple-accent); }
-.road h2 { margin: .1rem 0 .5rem; color: var(--temple-text); font-size: 1.35rem; }
-.road p { margin: .3rem 0; }
-.road .state { display: inline-block; margin-top: .6rem; font-size: .85rem; border: 1px solid var(--line); border-radius: 999px; padding: .15rem .6rem; color: var(--temple-text); }
-.road .state.open { border-color: var(--temple-accent); color: var(--temple-accent); }
+.entrance { margin-top: 1.5rem; }
+.entrance h2 { margin: 0 0 1.25rem; font-size: 1.6rem; }
+.entry-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+.entry-field label { display: block; margin-bottom: .55rem; font-weight: 700; }
+.entry-field select { width: 100%; padding: .8rem; border-radius: .6rem; border: 1px solid var(--temple-accent); background: var(--temple-bg); color: var(--temple-text); font: inherit; }
+.entry-field select:focus-visible, .enter-button:focus-visible { outline: 3px solid var(--temple-accent); outline-offset: 3px; }
+.enter-button { background: var(--temple-accent); color: var(--temple-text); border: 0; border-radius: .6rem; padding: .85rem 1.35rem; font: inherit; font-weight: 700; cursor: pointer; }
+.enter-button:hover { filter: brightness(1.1); }
 footer { font-size: .88rem; }
-@media(max-width:620px) { .roads { grid-template-columns: 1fr; } header,main,footer { padding: .8rem; } }
+@media(max-width:620px) { .entry-grid { grid-template-columns: 1fr; } header,main,footer { padding: .8rem; } }
