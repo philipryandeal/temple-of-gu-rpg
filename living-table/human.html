@@ -27,10 +27,10 @@ button[disabled]{opacity:.48;cursor:default}a{color:var(--temple-accent)}.panel{
 <section class="panel" id="kore-chat" aria-label="Kore the Oracle">
 <h2>Ask Kore · Create Your Seeker</h2>
 <p class="note">Kore is the Temple's fictional Game Guide. Character creation follows the published Master Guidebook. AI chat is off until intentionally activated; do not share private personal information.</p>
-<div id="kore-messages" aria-live="polite" style="max-height:300px;overflow:auto;padding:.8rem;background:#0d211a;border-radius:.6rem"></div>
+<div id="kore-messages" aria-live="polite" style="max-height:300px;overflow:auto;padding:.8rem;background:var(--temple-panel);border-radius:.6rem"></div>
 <form id="kore-form">
 <label for="kore-input">Your message to Kore</label>
-<input id="kore-input" maxlength="700" required placeholder="Help me create a Seeker" style="display:block;width:100%;padding:.7rem;background:#0d211a;color:#fff;border:1px solid #acbfaa;border-radius:.4rem;margin:.5rem 0">
+<input id="kore-input" maxlength="700" required placeholder="Help me create a Seeker" style="display:block;width:100%;padding:.7rem;background:var(--temple-panel);color:var(--temple-text);border:1px solid var(--temple-text);border-radius:.4rem;margin:.5rem 0">
 <button id="kore-send" type="submit">Ask Kore</button>
 </form><p class="note" id="kore-status" role="status"></p>
 </section>
