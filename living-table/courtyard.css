@@ -94,8 +94,6 @@ button:focus-visible, select:focus-visible, input:focus-visible,
 .statline { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
 .statline span { background: var(--temple-bg); border: 1px solid var(--line); padding: .5rem; border-radius: 6px; }
 .object-button, .solo-button { display: block; width: 100%; text-align: left; }
-.check { display: flex !important; gap: .7rem; align-items: center; }
-.check input { width: 1.2rem; height: 1.2rem; accent-color: var(--temple-accent); }
 .fine { border-left: 2px solid var(--temple-accent); padding-left: .7rem; }
 footer { padding: 1.5rem; text-align: center; color: var(--temple-text); }
 footer nav { margin-bottom: .7rem; }

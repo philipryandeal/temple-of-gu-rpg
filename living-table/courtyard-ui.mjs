@@ -1,5 +1,5 @@
-import {SCENE,ZONES,OBJECTS,SOLO_CHOICES} from './courtyard-data.mjs';
-import {initialTable,resizeTable,moveToken,revealClue,recordRoll,parseTable,setJournal} from './courtyard-state.mjs';
+import {ZONES,OBJECTS,SOLO_CHOICES} from './courtyard-data.mjs';
+import {initialTable,resizeTable,moveToken,recordRoll,parseTable,setJournal} from './courtyard-state.mjs';
 const requestedSeats=new URLSearchParams(location.search).get('seekers');
 const startingSeats=/^[1-6]$/.test(requestedSeats??'')?Number(requestedSeats):1;
 let table=initialTable(startingSeats),selected='s1',activeZone=null;
@@ -149,7 +149,7 @@ function renderHistory(){
   p.textContent=t.name+': '+r.dice.join(' + ')+' + '+t.virtues[r.virtue]+' ('+r.virtue+') = '+r.total+' · '+r.outcome;box.append(p);
  }
 }
-function render(){renderSeekerOptions();$('#seat-count').value=String(table.tokens.length);renderTokens();showSheet();renderHistory();$('#reveal').checked=table.revealed;$('#clue').hidden=!table.revealed;escText($('#clue'),SCENE.proposedMystery);journalInput.value=table.journal;}
+function render(){renderSeekerOptions();$('#seat-count').value=String(table.tokens.length);renderTokens();showSheet();renderHistory();journalInput.value=table.journal;}
 select.addEventListener('change',()=>{selected=select.value;renderTokens();showSheet()});
 $('#seat-count').addEventListener('change',e=>{
  table=resizeTable(table,Number(e.target.value));
@@ -169,7 +169,6 @@ $('#roll').addEventListener('click',()=>{
  const r=table.rolls.at(-1);escText($('#roll-result'),result.join(' + ')+' + '+table.tokens.find(t=>t.id===selected).virtues[v]+' = '+r.total+' · '+r.outcome);
  renderHistory();
 });
-$('#reveal').addEventListener('change',e=>{table=revealClue(table,e.target.checked);render()});
 $('#reset').addEventListener('click',()=>{if(!confirm('Reset the table AND clear your Field Journal? Export session first if you want to keep your notes, tokens and rolls.'))return;table=initialTable(table.tokens.length);selected='s1';clearSavedJournal();render()});
 $('#export').addEventListener('click',()=>{
  const data=new Blob([JSON.stringify(table,null,2)],{type:'application/json'});

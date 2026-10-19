@@ -11,7 +11,7 @@ const validCoordinate = n=>typeof n==='number'&&Number.isFinite(n)&&n>=2&&n<=98;
 const copyToken = t=>({id:t.id,name:t.name,lineage:t.lineage,x:t.x,y:t.y,virtues:{...t.virtues},tone:t.tone});
 export function initialTable(count=MAX_SEATS) {
   if(!validSeatCount(count)) throw new RangeError('Choose between one and six Seekers');
-  return {version:SAVE_VERSION,scene:SCENE_ID,tokens:SEEKERS.slice(0,count).map(copyToken),revealed:false,rolls:[],journal:''};
+  return {version:SAVE_VERSION,scene:SCENE_ID,tokens:SEEKERS.slice(0,count).map(copyToken),rolls:[],journal:''};
 }
 // Change the number of locally visible demo pieces without discarding the journal.
 export function resizeTable(table,count) {
@@ -23,10 +23,6 @@ export function resizeTable(table,count) {
 export function moveToken(table,id,x,y) {
   if(!ALLOWED.has(id)||!table.tokens.some(t=>t.id===id)||!validCoordinate(x)||!validCoordinate(y)) throw new RangeError('Invalid token move');
   return {...table,tokens:table.tokens.map(t=>t.id===id?{...t,x,y}:t)};
-}
-export function revealClue(table,value) {
-  if(typeof value!=='boolean') throw new TypeError('Clue visibility must be boolean');
-  return {...table,revealed:value};
 }
 // This is player-authored text, not a Guide privilege or a magic action.
 export function setJournal(table,value) {
@@ -54,7 +50,8 @@ export function parseTable(raw) {
        !Object.keys(source.virtues).every(k=>source.virtues[k]===t.virtues[k])) throw new Error('Unrecognized demo character');
     return {...copyToken(source),x:t.x,y:t.y};
   });
-  if(typeof raw.revealed!=='boolean') throw new Error('Invalid clue flag');
+  // Accept but discard the old local-only Guide reveal flag in legacy exports.
+  if(raw.revealed!==undefined && typeof raw.revealed!=='boolean') throw new Error('Invalid legacy clue flag');
   if(!Array.isArray(raw.rolls)||raw.rolls.length>30) throw new Error('Invalid dice history');
   const rolls=raw.rolls.map(r=>{
     if(!r||!ALLOWED.has(r.id)||typeof r.virtue!=='string'||!Array.isArray(r.dice)) throw new Error('Invalid roll');
@@ -67,5 +64,5 @@ export function parseTable(raw) {
   // Backward compatible with earlier Scene 01 exports that had no journal.
   const journal=raw.journal===undefined?'':raw.journal;
   if(typeof journal!=='string'||journal.length>MAX_JOURNAL_LENGTH) throw new Error('Invalid journal in save');
-  return {version:SAVE_VERSION,scene:SCENE_ID,tokens,rolls,revealed:raw.revealed,journal};
+  return {version:SAVE_VERSION,scene:SCENE_ID,tokens,rolls,journal};
 }

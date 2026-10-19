@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {SCENE,ZONES,OBJECTS,SEEKERS} from '../courtyard-data.mjs';
-import {initialTable,moveToken,revealClue,recordRoll,parseTable,resizeTable,setJournal,MAX_JOURNAL_LENGTH,MAX_SEATS} from '../courtyard-state.mjs';
+import {initialTable,moveToken,recordRoll,parseTable,resizeTable,setJournal,MAX_JOURNAL_LENGTH,MAX_SEATS} from '../courtyard-state.mjs';
 test('Scene 01 has seven distinct zones, ten inspectable objects, six valid sample seats',()=>{
   assert.equal(SCENE.id,'courtyard-fet');
   assert.equal(ZONES.length,7);
@@ -24,11 +24,21 @@ test('original 2d6 + Virtue result cannot be hand-set',()=>{
   assert.equal(table.rolls[0].outcome,'Full success');
   assert.throws(()=>recordRoll(initialTable(),'s1','wrong',[2,3]));
 });
-test('save round-trip maintains positions, rolls and Guide reveal for local-only table',()=>{
+test('save round-trip maintains positions and rolls without the retired Guide reveal',()=>{
   let t=moveToken(initialTable(),'s3',70,61);
-  t=revealClue(t,true);
   t=recordRoll(t,'s3','foriti',[4,2]);
   assert.deepEqual(parseTable(JSON.parse(JSON.stringify(t))),t);
+  assert.ok(!Object.hasOwn(t,'revealed'));
+});
+test('old sessions with a Guide reveal flag import without restoring retired UI state',()=>{
+  const t=recordRoll(setJournal(initialTable(2),'Clues from the Fèt'),'s1','suuru',[3,5]);
+  for (const revealed of [true,false]) {
+    const restored=parseTable({...t,revealed});
+    assert.deepEqual(restored,t);
+    assert.equal(restored.journal,'Clues from the Fèt');
+    assert.equal(restored.rolls.length,1);
+  }
+  assert.throws(()=>parseTable({...t,revealed:'yes'}),/clue flag/);
 });
 test('import rejects forged seats, dice results, unsupported versions and prototype pollution',()=>{
   const t=initialTable();
