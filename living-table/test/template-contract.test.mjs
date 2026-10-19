@@ -96,5 +96,8 @@ test('Scene Journal, Seeker dice, and sample Seekers appear in founder-requested
   assert.ok(locations.every(position => position >= 0), 'all three panels are still present');
   assert.ok(locations[0] < locations[1] && locations[1] < locations[2],
     'dice follow the scene journal, before sample Seekers');
-  assert.ok(sidebar.includes('GUIDE CONTROLS · LOCAL ONLY'), 'no unapproved removal of Guide controls');
+  assert.ok(!sidebar.includes('GUIDE CONTROLS · LOCAL ONLY'), 'founder-retired Guide Controls box is absent');
+  assert.ok(!html.includes('id="reveal"') && !html.includes('id="clue"'), 'former reveal controls are absent');
+  const ui = await read('courtyard-ui.mjs');
+  assert.ok(!ui.includes("$('#reveal')") && !ui.includes("$('#clue')"), 'script has no missing-element listeners');
 });
