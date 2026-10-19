@@ -8,6 +8,54 @@ const zones=$('#zones'),tokens=$('#tokens'),select=$('#seeker-select'),sheet=$('
 const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
 const escText=(node,text)=>{node.textContent=text;};
 const journalInput=$('#field-journal-notes'),journalStatus=$('#journal-status');
+
+// Fullscreen changes only the board's presentation. The map, hotspot buttons,
+// movable tokens and journal state stay mounted in their original DOM nodes.
+const board = $('#board');
+const boardFrame = $('#frame');
+const isBareBoard = target => target === board || target === zones || target === tokens || target === board.querySelector('img');
+function toggleBoardFullscreen() {
+  try {
+    const action = document.fullscreenElement === boardFrame
+      ? document.exitFullscreen()
+      : boardFrame.requestFullscreen();
+    Promise.resolve(action).catch(() => window.alert('Fullscreen is unavailable in this browser.'));
+  } catch {
+    window.alert('Fullscreen is unavailable in this browser.');
+  }
+}
+// On desktops a normal double-click toggles; individual Seeker/area buttons
+// retain their own click interactions rather than swallowing a double-click.
+let lastTouchToggle = 0;
+board.addEventListener('dblclick', event => {
+  if (!isBareBoard(event.target) || Date.now() - lastTouchToggle < 700) return;
+  event.preventDefault();
+  toggleBoardFullscreen();
+});
+// Some touch browsers do not synthesize dblclick. Detect a deliberate double
+// tap on bare scenery, but not drags or taps on interactive game pieces.
+let touchDown = null;
+let previousTap = null;
+board.addEventListener('pointerdown', event => {
+  if (event.pointerType !== 'touch' || !isBareBoard(event.target)) return;
+  touchDown = {x:event.clientX, y:event.clientY, id:event.pointerId};
+});
+board.addEventListener('pointerup', event => {
+  if (event.pointerType !== 'touch' || !touchDown || touchDown.id !== event.pointerId) return;
+  const moved = Math.hypot(event.clientX-touchDown.x, event.clientY-touchDown.y);
+  touchDown = null;
+  if (!isBareBoard(event.target) || moved > 18) { previousTap = null; return; }
+  const now = Date.now();
+  if (previousTap && now-previousTap.at < 400
+      && Math.hypot(event.clientX-previousTap.x, event.clientY-previousTap.y) < 32) {
+    previousTap = null;
+    lastTouchToggle = now;
+    toggleBoardFullscreen();
+  } else {
+    previousTap = {at:now, x:event.clientX, y:event.clientY};
+  }
+});
+board.addEventListener('pointercancel', () => { touchDown = null; previousTap = null; });
 const JOURNAL_KEY='gu-rpg:scene01:field-journal:v1';
 const journalMessage=message=>{if(journalStatus.textContent!==message)escText(journalStatus,message);};
 // Device-only storage; writing to the journal never sends notes to the server.
