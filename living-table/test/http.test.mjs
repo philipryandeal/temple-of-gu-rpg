@@ -80,3 +80,13 @@ test('writes are rejected; response stays noindex', async () => {
   assert.equal(response.headers.get('x-robots-tag'),'noindex, nofollow');
   assert.equal(response.headers.get('x-content-type-options'),'nosniff');
 });
+
+test('Kore character-creation threshold sits below table setup and cannot call an unconfigured API',async()=>{
+ const r=await fetch(origin+'/');const html=await r.text();
+ assert.ok(html.indexOf('id="entrance-title"')<html.indexOf('class="panel kore-threshold"'));
+ assert.ok(html.indexOf('class="panel kore-threshold"')<html.indexOf('independent browser table'));
+ assert.match(html,/id="kore-title">Create your Seeker with Kore/);
+ assert.match(html,/button type="button" disabled aria-describedby="kore-status"/);
+ assert.ok(!html.includes('iframe src='),'no eagerly loaded or premature third-party iframe');
+ assert.ok(!html.includes('OPENAI_API_KEY'),'no leaked provider credentials');
+});
