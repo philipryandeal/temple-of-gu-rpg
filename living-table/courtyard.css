@@ -148,35 +148,31 @@ footer nav { margin-bottom: .7rem; }
   #field-journal-notes { height: 340px; padding: .75rem; font-size: 1rem; }
 }
 
-/* Immersive map: letterbox rather than crop the 16:9 artwork, keeping every
-   draggable piece and clickable location aligned with its original position. */
-.board-frame:fullscreen {
-  width: 100vw;
-  height: 100vh;
-  border: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--temple-panel);
-}
-.board-frame:fullscreen .board {
-  flex: 0 0 auto;
-  width: min(100vw, 177.77778vh);
-  height: auto;
-  aspect-ratio: 16 / 9;
-}
-.board-frame:fullscreen .board img { object-fit: contain; }
-
-/* Keyboard-reachable fullscreen control, kept inside the frame so it can also exit. */
+/* Immersive map. The board is letterboxed at 16:9 and the control bar (the
+   Fullscreen button and, while immersive, the Scene Journal) sits BESIDE it
+   (landscape) or BELOW it (portrait), never over the map, so no hotspot or
+   token is ever covered. */
 .board-frame { position: relative; }
-.fullscreen-toggle { position: absolute; top: .6rem; right: .6rem; z-index: 5; background: var(--temple-panel); color: var(--temple-text); border: 1px solid var(--temple-accent); border-radius: .5rem; padding: .4rem .8rem; font: inherit; font-weight: 700; cursor: pointer; }
+.frame-bar { display: flex; justify-content: flex-end; gap: .6rem; padding: .45rem .6rem; background: var(--temple-panel); border-top: 1px solid var(--line); }
+.fullscreen-toggle { background: var(--temple-panel); color: var(--temple-text); border: 1px solid var(--temple-accent); border-radius: .5rem; padding: .4rem .8rem; font: inherit; font-weight: 700; cursor: pointer; }
 .fullscreen-toggle:focus-visible { outline: 3px solid var(--temple-accent); outline-offset: 2px; }
-
-/* CSS fallback where the Fullscreen API is missing (e.g. iPhone Safari). */
-.board-frame.is-pseudo-fullscreen { position: fixed; inset: 0; z-index: 1000; width: 100vw; height: 100vh; height: 100dvh; border: 0; display: flex; justify-content: center; align-items: center; background: var(--temple-panel); }
-.board-frame.is-pseudo-fullscreen .board { flex: 0 0 auto; width: min(100vw, 177.77778vh); width: min(100vw, 177.77778dvh); height: auto; aspect-ratio: 16 / 9; }
-.board-frame.is-pseudo-fullscreen .board img { object-fit: contain; }
+.board-frame:fullscreen, .board-frame.is-pseudo-fullscreen {
+  width: 100vw; height: 100vh; height: 100dvh; border: 0; margin: 0;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(15rem, 22rem); grid-template-rows: 100%;
+  background: var(--temple-panel); overflow: hidden;
+}
+.board-frame.is-pseudo-fullscreen { position: fixed; inset: 0; z-index: 1000; }
+.board-frame:fullscreen .board, .board-frame.is-pseudo-fullscreen .board {
+  align-self: center; justify-self: center; width: 100%; max-width: 177.77778vh; max-width: 177.77778dvh; height: auto; aspect-ratio: 16 / 9;
+}
+.board-frame:fullscreen .board img, .board-frame.is-pseudo-fullscreen .board img { object-fit: contain; }
+.board-frame:fullscreen .frame-bar, .board-frame.is-pseudo-fullscreen .frame-bar {
+  flex-direction: column; justify-content: flex-start; align-items: stretch; border-top: 0; border-left: 1px solid var(--line); overflow: auto; min-height: 0;
+}
+.board-frame:fullscreen #scene-panel, .board-frame.is-pseudo-fullscreen #scene-panel { margin: 0; }
+@media (orientation: portrait) {
+  .board-frame:fullscreen, .board-frame.is-pseudo-fullscreen { grid-template-columns: 100%; grid-template-rows: auto minmax(0, 1fr); }
+  .board-frame:fullscreen .board, .board-frame.is-pseudo-fullscreen .board { align-self: start; }
+  .board-frame:fullscreen .frame-bar, .board-frame.is-pseudo-fullscreen .frame-bar { border-left: 0; border-top: 1px solid var(--line); }
+}
 body.has-pseudo-fullscreen { overflow: hidden; }
-
-/* While immersive, the Scene Journal panel rides inside the frame so inspection results stay visible. */
-.board-frame:fullscreen #scene-panel, .board-frame.is-pseudo-fullscreen #scene-panel { position: absolute; left: .6rem; bottom: .6rem; z-index: 4; width: min(24rem, calc(100% - 1.2rem)); max-height: 45%; overflow: auto; margin: 0; }
