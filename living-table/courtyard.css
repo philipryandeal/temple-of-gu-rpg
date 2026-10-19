@@ -166,3 +166,17 @@ footer nav { margin-bottom: .7rem; }
   aspect-ratio: 16 / 9;
 }
 .board-frame:fullscreen .board img { object-fit: contain; }
+
+/* Keyboard-reachable fullscreen control, kept inside the frame so it can also exit. */
+.board-frame { position: relative; }
+.fullscreen-toggle { position: absolute; top: .6rem; right: .6rem; z-index: 5; background: var(--temple-panel); color: var(--temple-text); border: 1px solid var(--temple-accent); border-radius: .5rem; padding: .4rem .8rem; font: inherit; font-weight: 700; cursor: pointer; }
+.fullscreen-toggle:focus-visible { outline: 3px solid var(--temple-accent); outline-offset: 2px; }
+
+/* CSS fallback where the Fullscreen API is missing (e.g. iPhone Safari). */
+.board-frame.is-pseudo-fullscreen { position: fixed; inset: 0; z-index: 1000; width: 100vw; height: 100vh; height: 100dvh; border: 0; display: flex; justify-content: center; align-items: center; background: var(--temple-panel); }
+.board-frame.is-pseudo-fullscreen .board { flex: 0 0 auto; width: min(100vw, 177.77778vh); width: min(100vw, 177.77778dvh); height: auto; aspect-ratio: 16 / 9; }
+.board-frame.is-pseudo-fullscreen .board img { object-fit: contain; }
+body.has-pseudo-fullscreen { overflow: hidden; }
+
+/* While immersive, the Scene Journal panel rides inside the frame so inspection results stay visible. */
+.board-frame:fullscreen #scene-panel, .board-frame.is-pseudo-fullscreen #scene-panel { position: absolute; left: .6rem; bottom: .6rem; z-index: 4; width: min(24rem, calc(100% - 1.2rem)); max-height: 45%; overflow: auto; margin: 0; }

@@ -14,16 +14,40 @@ const journalInput=$('#field-journal-notes'),journalStatus=$('#journal-status');
 const board = $('#board');
 const boardFrame = $('#frame');
 const isBareBoard = target => target === board || target === zones || target === tokens || target === board.querySelector('img');
+const fullscreenButton = $('#fullscreen-toggle');
+const scenePanel = $('#scene-panel');
+const panelHome = {parent: scenePanel.parentNode, next: scenePanel.nextSibling};
+let pseudoFullscreen = false;
+const nativeFullscreen = () => document.fullscreenElement === boardFrame;
+const isImmersive = () => nativeFullscreen() || pseudoFullscreen;
+// Keep the Scene Journal (inspection results) visible by moving it into the frame while immersive.
+function syncImmersive() {
+  const immersive = isImmersive();
+  if (immersive && scenePanel.parentNode !== boardFrame) boardFrame.append(scenePanel);
+  if (!immersive && scenePanel.parentNode === boardFrame) panelHome.parent.insertBefore(scenePanel, panelHome.next);
+  fullscreenButton.setAttribute('aria-pressed', String(immersive));
+  fullscreenButton.textContent = immersive ? 'Exit fullscreen' : 'Fullscreen';
+}
+function setPseudoFullscreen(on) {
+  pseudoFullscreen = on;
+  boardFrame.classList.toggle('is-pseudo-fullscreen', on);
+  document.body.classList.toggle('has-pseudo-fullscreen', on);
+  syncImmersive();
+}
 function toggleBoardFullscreen() {
+  if (pseudoFullscreen) { setPseudoFullscreen(false); return; }
+  if (nativeFullscreen()) { Promise.resolve(document.exitFullscreen()).catch(() => {}); return; }
+  // Fall back to a CSS full-page view where the Fullscreen API is unavailable (e.g. iPhone Safari).
+  if (typeof boardFrame.requestFullscreen !== 'function' || document.fullscreenEnabled === false) { setPseudoFullscreen(true); return; }
   try {
-    const action = document.fullscreenElement === boardFrame
-      ? document.exitFullscreen()
-      : boardFrame.requestFullscreen();
-    Promise.resolve(action).catch(() => window.alert('Fullscreen is unavailable in this browser.'));
+    Promise.resolve(boardFrame.requestFullscreen()).catch(() => setPseudoFullscreen(true));
   } catch {
-    window.alert('Fullscreen is unavailable in this browser.');
+    setPseudoFullscreen(true);
   }
 }
+document.addEventListener('fullscreenchange', syncImmersive);
+document.addEventListener('keydown', event => { if (event.key === 'Escape' && pseudoFullscreen) setPseudoFullscreen(false); });
+fullscreenButton.addEventListener('click', toggleBoardFullscreen);
 // On desktops a normal double-click toggles; individual Seeker/area buttons
 // retain their own click interactions rather than swallowing a double-click.
 let lastTouchToggle = 0;

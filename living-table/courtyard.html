@@ -12,6 +12,7 @@
    <img src="./courtyard.svg" alt="An elevated view of a candlelit Puerto Rican Caribbean courtyard at dusk, with an open gate, central Poto Mitan, devotional altar, supply table, drums and chairs." draggable="false">
    <div id="zones"></div><div id="tokens"></div>
   </div>
+  <button type="button" id="fullscreen-toggle" class="fullscreen-toggle" aria-pressed="false">Fullscreen</button>
  </div>
  <p class="under">Double-click the map (double-tap on touchscreens) to fill your screen; press Escape to return. Drag or select Seeker tokens and inspect glowing markers as before. Artwork is proposed for founder review.</p>
  <div class="movement"><span>Selected Seeker movement</span><button data-move="left" aria-label="Move selected token left">←</button><button data-move="up" aria-label="Move selected token up">↑</button><button data-move="down" aria-label="Move selected token down">↓</button><button data-move="right" aria-label="Move selected token right">→</button><button id="inspect-selected">Character sheet</button></div>
@@ -31,7 +32,7 @@
  </section>
 </section>
 <aside class="sidebar">
- <section class="panel"><p class="eyebrow">SCENE JOURNAL</p><h2 id="info-title">Welcome to the courtyard</h2><p id="info-body">Music fills the courtyard. Candles burn. Guests exchange greetings and offerings. Where will you begin?</p><div id="items"></div></section>
+ <section class="panel" id="scene-panel"><p class="eyebrow">SCENE JOURNAL</p><h2 id="info-title">Welcome to the courtyard</h2><p id="info-body">Music fills the courtyard. Candles burn. Guests exchange greetings and offerings. Where will you begin?</p><div id="items"></div></section>
  <section class="panel"><p class="eyebrow">THE SEEKER'S DICE</p><label for="virtue">Virtue</label><select id="virtue"><option value="suuru">Suuru · Patience</option><option value="oye">Oye · Understanding</option><option value="foriti">Foriti · Perseverance</option><option value="iwa">Iwa · Integrity</option></select><button id="roll" class="primary">Roll 2d6 + Virtue</button><p id="roll-result" role="status" aria-live="polite">Select a Seeker and a Virtue to roll.</p><div id="roll-history"></div></section>
  <section class="panel"><p class="eyebrow">YOUR SAMPLE SEEKERS</p><label for="seat-count">Seeker pieces on this board</label><select id="seat-count"><option value="1">1 Seeker</option><option value="2">2 Seekers</option><option value="3">3 Seekers</option><option value="4">4 Seekers</option><option value="5">5 Seekers</option><option value="6">6 Seekers</option></select><label for="seeker-select">Active Seeker</label><select id="seeker-select"></select><div id="sheet"></div></section>
  <section class="panel"><p class="eyebrow">SOLO PATH · PREPARED PROMPTS</p><p>The fête continues. Which thread do you follow?</p><div id="solo"></div><p id="solo-reply" role="status" aria-live="polite"></p></section>
