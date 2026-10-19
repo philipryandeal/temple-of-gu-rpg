@@ -69,3 +69,20 @@ test('documented personal-tabletop direction includes implemented Seeker-count c
   assert.match(canon, /player-count control is implemented/i);
   assert.match(canon, /not a.*immutable lock/i);
 });
+
+test('double-click fullscreen keeps the approved 16:9 map and interactive board together', async () => {
+  const html = await read('courtyard.html');
+  const ui = await read('courtyard-ui.mjs');
+  const css = await read('courtyard.css');
+  assert.match(html, /Double-click the map \(double-tap on touchscreens\)/);
+  assert.match(ui, /board\.addEventListener\('dblclick'/);
+  assert.match(ui, /board\.addEventListener\('pointerup'/, 'touch double-tap fallback remains');
+  assert.match(ui, /isBareBoard\(event\.target\)/, 'game piece and zone button clicks are not fullscreen gestures');
+  assert.match(ui, /document\.fullscreenElement === boardFrame/);
+  assert.match(ui, /document\.exitFullscreen\(\)/);
+  assert.match(ui, /boardFrame\.requestFullscreen\(\)/);
+  assert.match(css, /\.board-frame:fullscreen\s*\{[^}]*display:\s*flex/);
+  assert.match(css, /\.board-frame:fullscreen \.board\s*\{[^}]*width:\s*min\(100vw,\s*177\.77778vh\)/);
+  assert.match(css, /\.board-frame:fullscreen \.board img\s*\{[^}]*object-fit:\s*contain/);
+  assert.match(html, /<div id="zones"><\/div><div id="tokens"><\/div>/, 'both interactions remain on the live board');
+});
