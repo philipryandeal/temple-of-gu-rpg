@@ -16,6 +16,7 @@ const boardFrame = $('#frame');
 const isBareBoard = target => target === board || target === zones || target === tokens || target === board.querySelector('img');
 const fullscreenButton = $('#fullscreen-toggle');
 const scenePanel = $('#scene-panel');
+const frameBar = $('#frame-bar');
 const panelHome = {parent: scenePanel.parentNode, next: scenePanel.nextSibling};
 let pseudoFullscreen = false;
 const nativeFullscreen = () => document.fullscreenElement === boardFrame;
@@ -23,10 +24,25 @@ const isImmersive = () => nativeFullscreen() || pseudoFullscreen;
 // Keep the Scene Journal (inspection results) visible by moving it into the frame while immersive.
 function syncImmersive() {
   const immersive = isImmersive();
-  if (immersive && scenePanel.parentNode !== boardFrame) boardFrame.append(scenePanel);
-  if (!immersive && scenePanel.parentNode === boardFrame) panelHome.parent.insertBefore(scenePanel, panelHome.next);
+  if (immersive && scenePanel.parentNode !== frameBar) frameBar.append(scenePanel);
+  if (!immersive && scenePanel.parentNode === frameBar) panelHome.parent.insertBefore(scenePanel, panelHome.next);
+  setBackgroundInert(immersive);
   fullscreenButton.setAttribute('aria-pressed', String(immersive));
   fullscreenButton.textContent = immersive ? 'Exit fullscreen' : 'Fullscreen';
+}
+// While immersive, everything outside the frame is inert, so keyboard focus cannot
+// land on hidden controls behind the map. Only elements this code marked are restored.
+const inertMarked = [];
+function setBackgroundInert(on) {
+  if (on && inertMarked.length === 0) {
+    for (let node = boardFrame; node && node !== document.body; node = node.parentElement) {
+      for (const sibling of node.parentElement.children) {
+        if (sibling !== node && !sibling.inert && sibling.tagName !== 'SCRIPT') { sibling.inert = true; inertMarked.push(sibling); }
+      }
+    }
+  } else if (!on) {
+    while (inertMarked.length) inertMarked.pop().inert = false;
+  }
 }
 function setPseudoFullscreen(on) {
   pseudoFullscreen = on;

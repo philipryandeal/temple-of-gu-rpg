@@ -81,9 +81,10 @@ test('double-click fullscreen keeps the approved 16:9 map and interactive board 
   assert.match(ui, /document\.fullscreenElement === boardFrame/);
   assert.match(ui, /document\.exitFullscreen\(\)/);
   assert.match(ui, /boardFrame\.requestFullscreen\(\)/);
-  assert.match(css, /\.board-frame:fullscreen\s*\{[^}]*display:\s*flex/);
-  assert.match(css, /\.board-frame:fullscreen \.board\s*\{[^}]*width:\s*min\(100vw,\s*177\.77778vh\)/);
-  assert.match(css, /\.board-frame:fullscreen \.board img\s*\{[^}]*object-fit:\s*contain/);
+  // The map is letterboxed at 16:9 in a grid cell beside (or above) the control bar, never under it.
+  assert.match(css, /\.board-frame:fullscreen, \.board-frame\.is-pseudo-fullscreen \{[^}]*display:\s*grid/);
+  assert.match(css, /\.board-frame:fullscreen \.board, \.board-frame\.is-pseudo-fullscreen \.board \{[^}]*max-width:\s*177\.77778vh;[^}]*aspect-ratio:\s*16 \/ 9/);
+  assert.match(css, /\.board-frame:fullscreen \.board img, \.board-frame\.is-pseudo-fullscreen \.board img \{[^}]*object-fit:\s*contain/);
   assert.match(html, /<div id="zones"><\/div><div id="tokens"><\/div>/, 'both interactions remain on the live board');
 });
 
