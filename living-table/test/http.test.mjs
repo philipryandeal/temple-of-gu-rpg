@@ -84,9 +84,23 @@ test('writes are rejected; response stays noindex', async () => {
 test('Kore character-creation threshold sits below table setup and cannot call an unconfigured API',async()=>{
  const r=await fetch(origin+'/');const html=await r.text();
  assert.ok(html.indexOf('id="entrance-title"')<html.indexOf('class="panel kore-threshold"'));
- assert.ok(html.indexOf('class="panel kore-threshold"')<html.indexOf('independent browser table'));
  assert.match(html,/id="kore-title">Create your Seeker with Kore/);
  assert.match(html,/button type="button" disabled aria-describedby="kore-status"/);
  assert.ok(!html.includes('iframe src='),'no eagerly loaded or premature third-party iframe');
  assert.ok(!html.includes('OPENAI_API_KEY'),'no leaked provider credentials');
+});
+
+test('welcome keeps the full tabletop introduction together above both panels, and footer stays intact',async()=>{
+ const r=await fetch(origin+'/');
+ const html=await r.text();
+ const header=html.split('<header>')[1]?.split('</header>')[0];
+ const main=html.split('<main>')[1]?.split('</main>')[0];
+ const footer=html.split('<footer>')[1]?.split('</footer>')[0];
+ const first='Your own virtual tabletop. Follow your Game Guide, or explore a scene on your own. No account or shared session required.';
+ const second='This is your independent browser table: move your pieces, roll your dice, and keep your own journal. Other players follow the Guide from their own boards or in person. No synchronization is needed.';
+ assert.ok(header && main && footer);
+ assert.ok(header.includes('Welcome to the Temple of Gu'));
+ assert.ok(header.includes(first+' '+second),'both introduction sentences remain one paragraph in header');
+ assert.ok(!main.includes(first) && !main.includes(second),'neither introductory sentence is stranded below the boxes');
+ assert.ok(footer.includes('Development playtest') && footer.includes('href="https://www.templeofgu.org/"'),'footer text and Temple link preserved');
 });
