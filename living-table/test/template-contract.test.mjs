@@ -86,3 +86,15 @@ test('double-click fullscreen keeps the approved 16:9 map and interactive board 
   assert.match(css, /\.board-frame:fullscreen \.board img\s*\{[^}]*object-fit:\s*contain/);
   assert.match(html, /<div id="zones"><\/div><div id="tokens"><\/div>/, 'both interactions remain on the live board');
 });
+
+test('Scene Journal, Seeker dice, and sample Seekers appear in founder-requested order', async () => {
+  const html = await read('courtyard.html');
+  const sidebar = html.split('<aside class="sidebar">')[1]?.split('</aside>')[0];
+  assert.ok(sidebar, 'scene sidebar exists');
+  const titles = ['SCENE JOURNAL', "THE SEEKER'S DICE", 'YOUR SAMPLE SEEKERS'];
+  const locations = titles.map(title => sidebar.indexOf('>' + title + '<'));
+  assert.ok(locations.every(position => position >= 0), 'all three panels are still present');
+  assert.ok(locations[0] < locations[1] && locations[1] < locations[2],
+    'dice follow the scene journal, before sample Seekers');
+  assert.ok(sidebar.includes('GUIDE CONTROLS · LOCAL ONLY'), 'no unapproved removal of Guide controls');
+});
