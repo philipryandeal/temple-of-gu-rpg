@@ -31,3 +31,12 @@ a:focus-visible { outline: 3px solid var(--temple-accent); outline-offset: 3px; 
 .enter-button:hover { filter: brightness(1.1); }
 footer { font-size: .88rem; }
 @media(max-width:620px) { .entry-grid { grid-template-columns: 1fr; } header,main,footer { padding: .8rem; } }
+
+/* Dormant Kore threshold. Enable the embed only after independent service review. */
+.kore-threshold{text-align:center;margin-top:1.5rem}
+.kore-threshold h2{font-size:clamp(1.55rem,3vw,2rem);margin:.5rem 0}
+.kore-kicker{color:var(--temple-accent);letter-spacing:.15em;font-size:.75rem;font-weight:800}
+.kore-gate{padding:1rem;margin-top:1.25rem;background:var(--temple-bg);border:1px solid var(--line);border-radius:.7rem}
+.kore-gate button{background:var(--temple-accent);border:0;border-radius:.6rem;padding:.75rem 1rem;font:inherit;font-weight:700;color:var(--temple-panel)}
+.kore-gate button:disabled{opacity:.7;cursor:not-allowed}
+#kore-status{font-size:.85rem;line-height:1.5}
