@@ -149,3 +149,22 @@ footer nav { margin-bottom: .7rem; }
   .journal-heading h2 { font-size: 1.5rem; }
   #field-journal-notes { height: 340px; padding: .75rem; font-size: 1rem; }
 }
+
+/* Immersive map: letterbox rather than crop the 16:9 artwork, keeping every
+   draggable piece and clickable location aligned with its original position. */
+.board-frame:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--temple-panel);
+}
+.board-frame:fullscreen .board {
+  flex: 0 0 auto;
+  width: min(100vw, 177.77778vh);
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+.board-frame:fullscreen .board img { object-fit: contain; }
