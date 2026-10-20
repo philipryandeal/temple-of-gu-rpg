@@ -147,16 +147,21 @@ function renderBonus(){
  bonusInput.value=String(getBonus(table,selected,$('#virtue').value));
 }
 let drag=null;
+// Put focus back on the (redrawn) selected Seeker so arrow keys keep working after a click, tap or drag.
+function focusSelected(){
+ const name=table.tokens.find(t=>t.id===selected)?.name;
+ [...tokens.children].find(b=>b.title===name)?.focus({preventScroll:true});
+}
 function renderTokens(){
  tokens.replaceChildren();
  for(const t of table.tokens){
   const b=document.createElement('button');b.className='token'+(t.id===selected?' selected':'');
   b.style.left=t.x+'%';b.style.top=t.y+'%';
   b.textContent=t.id.slice(1);b.title=t.name;b.setAttribute('aria-label',t.name+'; position '+Math.round(t.x)+', '+Math.round(t.y));
-  b.addEventListener('click',()=>{selected=t.id;renderTokens();renderBonus()});
+  b.addEventListener('click',()=>{selected=t.id;renderTokens();renderBonus();focusSelected()});
   b.addEventListener('pointerdown',e=>{
    if(e.button!==0)return;e.preventDefault();selected=t.id;drag={id:t.id,pointer:e.pointerId,moved:false};b.setPointerCapture(e.pointerId);
-   renderSelection();
+   renderSelection();b.focus({preventScroll:true});
   });
   b.addEventListener('pointermove',e=>{
    if(!drag||drag.id!==t.id||drag.pointer!==e.pointerId)return;
@@ -166,7 +171,7 @@ function renderTokens(){
   });
   const end=e=>{
    if(!drag||drag.id!==t.id||drag.pointer!==e.pointerId)return;
-   drag=null;renderTokens();renderBonus();
+   drag=null;renderTokens();renderBonus();focusSelected();
   };
   b.addEventListener('pointerup',end);b.addEventListener('pointercancel',end);
   tokens.append(b);
@@ -213,8 +218,7 @@ board.addEventListener('keydown',e=>{
  if(target!==board&&!target?.closest?.('.token'))return;
  e.preventDefault();
  if(!stepSelected(direction))return;
- const name=table.tokens.find(t=>t.id===selected)?.name;
- [...tokens.children].find(b=>b.title===name)?.focus({preventScroll:true});
+ focusSelected();
 });
 $('#inspect-selected').addEventListener('click',()=>{select.focus()});
 $('#roll').addEventListener('click',()=>{
