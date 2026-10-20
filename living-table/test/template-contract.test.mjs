@@ -39,6 +39,16 @@ test('scene illustration, interactive layers and full-width Field Journal remain
   const sidebar = html.indexOf('class="sidebar"');
   assert.ok(board >= 0 && board < zones && zones < tokens && tokens < journal && journal < textarea && textarea < sidebar,
     'board artwork and interactive layers precede writing desk, then sidebar');
+  const journalSection = html.split('<section class="field-journal"')[1]?.split('</section>')[0];
+  assert.ok(journalSection, 'Field Journal remains present');
+  assert.match(journalSection, /THE SEEKER'S FIELD JOURNAL/);
+  assert.match(journalSection, /<h2 id="field-journal-title">Notes from the Fèt<\/h2>/);
+  assert.match(journalSection, /<span class="journal-tag">SCENE 01<\/span>/);
+  assert.doesNotMatch(journalSection, /Keep your clues|Write as much as you need|Your field notes|journal-intro|journal-label/,
+    'unnecessary visible journal instructions and label remain removed');
+  assert.match(journalSection, /<textarea[^>]*aria-labelledby="field-journal-title"[^>]*aria-describedby="journal-status"/,
+    'writing area remains accessible without a visible label');
+  assert.match(journalSection, /id="journal-status"/, 'on-device save status remains visible');
   assert.match(html, /<section class="table-section"[^>]*>\s*<div class="board-frame" id="frame">/,
     'orange-framed board follows the main heading with no banner in between');
   assert.doesNotMatch(html, /THE FÈT IS GATHERING|Original Temple of Gu Second Edition rules · No grid required|class="banner"/,
