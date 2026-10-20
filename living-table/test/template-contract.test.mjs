@@ -18,6 +18,15 @@ test('approved Scene 01 shell retains slim heading, exactly three actions and fo
   assert.ok(!header.includes('Choose a scene'), 'return link belongs in footer');
   assert.ok(!header.includes('<p'), 'no tall kicker or subtitle in compact header');
   assert.ok(footer.includes('href="./index.html"') && footer.includes('Choose a scene'));
+  const css = await read('courtyard.css');
+  assert.match(footer, /<nav class="footer-links"[^>]*><a href="\.\/index\.html">← Choose a scene<\/a><span>or<\/span><a href="[^"]+">Read the rules<\/a><\/nav>/,
+    'the two footer links and connecting word share one navigation row');
+  assert.ok(footer.includes('https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/guidebook/README.md'),
+    'original rules remain reachable');
+  assert.doesNotMatch(footer, /Local browser tabletop proof of concept|Not a live campaign room|Scene details remain proposed/,
+    'retired prototype disclaimer is not displayed');
+  assert.match(css, /\.footer-links\s*\{[^}]*display:\s*flex;[^}]*white-space:\s*nowrap;/,
+    'footer links stay horizontally aligned');
 });
 
 test('scene illustration, interactive layers and full-width Field Journal remain in approved order', async () => {
