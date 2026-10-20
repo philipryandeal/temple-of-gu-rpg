@@ -6,7 +6,7 @@ const lum=h=>{const [r,g,b]=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(
 const ratio=(a,b)=>{const [x,y]=[lum(a),lum(b)].sort((p,q)=>q-p);return (x+0.05)/(y+0.05);};
 test('fullscreen has a focusable button inside the frame, a CSS fallback and an in-frame Scene Journal',async()=>{
   const html=await read('courtyard.html'),ui=await read('courtyard-ui.mjs'),css=await read('courtyard.css');
-  const frame=html.slice(html.indexOf('id="frame"'),html.indexOf('<p class="under">'));
+  const frame=html.slice(html.indexOf('id="frame"'),html.indexOf('<div class="movement">'));
   assert.match(frame,/<div class="frame-bar" id="frame-bar"><button type="button" id="fullscreen-toggle"[^>]*aria-pressed="false">Fullscreen<\/button><\/div>/);
   assert.match(html,/<section class="panel" id="scene-panel">/);
   assert.match(ui,/setPseudoFullscreen\(true\)/);
