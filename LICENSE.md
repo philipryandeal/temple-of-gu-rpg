@@ -25,9 +25,9 @@ In plain words, anyone may, for free:
 
 On three conditions:
 
-- **Credit.** Name the work and its authors and link to the license. The line in section 9 is enough.
+- **Credit.** Name the work and its authors, link to the license, and say if you changed it. The line in section 9 is enough.
 - **Noncommercial.** Do not sell it, or anything made from it, without permission (see section 3).
-- **Share alike.** If you publish an adaptation, publish it under these same terms, so it stays free for the next person.
+- **Share alike.** If you share an adaptation publicly (including performing it on stream), share it under these same terms, so it stays free for the next person.
 
 ## 3. Commercial use, and running the game
 
@@ -54,7 +54,7 @@ The Living Table code and other code in this repository is © 2026 Philip Ryan D
 These terms grant no rights to:
 
 - the names **Temple of Gu**, the Temple's seals, logos and marks, or anything that suggests a work is made, approved or blessed by the Temple. You may say your work is *based on* or *compatible with* the Temple of Gu RPG; you may not call it an official Temple of Gu product without permission;
-- artwork, portraits and music in this repository, unless the file or folder says it is covered;
+- artwork, portraits and music in this repository, other than artwork that ships inside the software (such as `living-table/courtyard-fet-board.png`), which is covered by section 2 as section 6 says, or a file or folder that says it is covered;
 - the names, likenesses and voices of the Temple's real people and its Digital Egbe as real persons, apart from their appearance in the published text;
 - anything outside this repository.
 
@@ -68,11 +68,11 @@ These are not legal conditions. They are how the Temple asks to be treated, and 
 
 ## 9. How to give credit
 
-> Based on the *Temple of Gu RPG, Master Guidebook, Second Edition* by Philip Ryan Deal and David Bear (Temple of Gu), licensed under CC BY-NC-SA 4.0. https://github.com/philipryandeal/temple-of-gu-rpg
+> Based on the *Temple of Gu RPG, Master Guidebook, Second Edition* by Philip Ryan Deal and David Bear (Temple of Gu), licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Source: https://github.com/philipryandeal/temple-of-gu-rpg. [If you changed it, add: "Adapted by YOUR NAME; changes made."]
 
 ## 10. Contributions
 
-By contributing to this repository, you agree that your writing is offered under section 2 and your code under section 6, and that you have the right to offer it.
+Contributors keep the copyright in their contributions; nothing is assigned. By contributing to this repository, you agree that your writing is offered under section 2 and your code under section 6, and that you have the right to offer it.
 
 ## 11. No warranty
 
