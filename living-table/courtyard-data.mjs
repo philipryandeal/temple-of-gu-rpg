@@ -8,13 +8,13 @@ export const SCENE = Object.freeze({
   proposedMystery: 'A bell sounds from the altar, although nobody seems to be standing beside it. A second bell rings elsewhere. Later, someone notices that a makout is missing. Are the events connected?'
 });
 export const ZONES = Object.freeze([
-  {id:'gate',title:'Courtyard Gate',x:13,y:48,description:'An open gate connects the courtyard to the road. It is the starting point for arriving Seekers.',objects:[]},
-  {id:'poto',title:'Poto Mitan',x:50,y:52,description:'The symbolic center of the Temple courtyard. There is space around it for Seekers to gather and converse.',objects:[]},
-  {id:'altar',title:'Devotional Altar',x:50,y:17,description:'Candles, vessels and devotional objects decorate a raised table. Interactions with offerings and sacred objects are subject to the Guide’s permission.',objects:['bell','candles','offering']},
-  {id:'supply',title:'Supply Table',x:86,y:42,description:'Supplies are arranged on a working table. A makout and other fictional game items may be examined here.',objects:['cup','belt','mouchwas','portable-altar','makout','bath','colognes']},
-  {id:'music',title:'Music Corner',x:16,y:76,description:'Drums and chairs gather the musicians. Guests may listen, speak with NPCs, or gather information.',objects:[]},
-  {id:'gathering',title:'Gathering Area',x:76,y:77,description:'Seats offer room for conversation, introductions, negotiation and planning.',objects:[]},
-  {id:'door',title:'Inner Doorway',x:92,y:18,description:'An adjoining room awaits future scenes. Whether this door opens is determined by the Guide and the story.',objects:[]}
+  {id:'gate',title:'Courtyard Gate',x:9,y:44,description:'An open gate connects the courtyard to the road. It is the starting point for arriving Seekers.',objects:[]},
+  {id:'poto',title:'Poto Mitan',x:49,y:48,description:'The symbolic center of the Temple courtyard. There is space around it for Seekers to gather and converse.',objects:[]},
+  {id:'altar',title:'Devotional Altar',x:50,y:16,description:'Candles, vessels and devotional objects decorate a raised table. Interactions with offerings and sacred objects are subject to the Guide’s permission.',objects:['bell','candles','offering']},
+  {id:'supply',title:'Supply Table',x:85,y:43,description:'Supplies are arranged on a working table. A makout and other fictional game items may be examined here.',objects:['cup','belt','mouchwas','portable-altar','makout','bath','colognes']},
+  {id:'music',title:'Music Corner',x:22,y:78,description:'Drums and chairs gather the musicians. Guests may listen, speak with NPCs, or gather information.',objects:[]},
+  {id:'gathering',title:'Gathering Area',x:79,y:71,description:'Seats offer room for conversation, introductions, negotiation and planning.',objects:[]},
+  {id:'door',title:'Inner Doorway',x:91,y:13,description:'An adjoining room awaits future scenes. Whether this door opens is determined by the Guide and the story.',objects:[]}
 ]);
 export const OBJECTS = Object.freeze([
   {id:'bell',title:'Bell',description:'A bell used for signals, announcements and attention. The proposed opening mystery begins with a bell sounding unexpectedly.'},
