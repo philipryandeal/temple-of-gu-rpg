@@ -192,11 +192,27 @@ $('#seat-count').addEventListener('change',e=>{
  if(!table.tokens.some(t=>t.id===selected)) selected='s1';
  render();
 });
-document.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>{
- const direction=b.dataset.move,delta={left:[-2,0],right:[2,0],up:[0,-2],down:[0,2]}[direction];
- const t=table.tokens.find(t=>t.id===selected);
- table=moveToken(table,selected,clamp(t.x+delta[0],2,98),clamp(t.y+delta[1],2,98));renderTokens();
-}));
+// A deliberate tap moves a Seeker noticeably; dragging remains pixel-precise.
+const MOVE_STEP=6;
+const MOVES={left:[-MOVE_STEP,0],right:[MOVE_STEP,0],up:[0,-MOVE_STEP],down:[0,MOVE_STEP]};
+function stepSelected(direction){
+ const delta=MOVES[direction],t=table.tokens.find(t=>t.id===selected);
+ if(!delta||!t)return;
+ table=moveToken(table,selected,clamp(t.x+delta[0],2,98),clamp(t.y+delta[1],2,98));
+ renderTokens();
+}
+document.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>stepSelected(b.dataset.move)));
+// Keyboard movement works after choosing a token, but never hijacks typing,
+// native form control navigation, or modified browser shortcuts.
+document.addEventListener('keydown',e=>{
+ const direction={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'}[e.key];
+ if(!direction||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;
+ const target=e.target;
+ if(target?.closest?.('input, textarea, select, [contenteditable], [role="textbox"], [role="slider"], [role="spinbutton"], [role="combobox"], [role="listbox"], [role="menu"]'))return;
+ if(target?.closest?.('button')&&!target.closest('.token'))return;
+ e.preventDefault();
+ stepSelected(direction);
+});
 $('#inspect-selected').addEventListener('click',()=>{select.focus()});
 $('#roll').addEventListener('click',()=>{
  if(!/^[012]$/.test(bonusInput.value)){
