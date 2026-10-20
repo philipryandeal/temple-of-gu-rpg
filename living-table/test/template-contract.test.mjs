@@ -30,6 +30,10 @@ test('scene illustration, interactive layers and full-width Field Journal remain
   const sidebar = html.indexOf('class="sidebar"');
   assert.ok(board >= 0 && board < zones && zones < tokens && tokens < journal && journal < textarea && textarea < sidebar,
     'board artwork and interactive layers precede writing desk, then sidebar');
+  assert.match(html, /<section class="table-section"[^>]*>\s*<div class="board-frame" id="frame">/,
+    'orange-framed board follows the main heading with no banner in between');
+  assert.doesNotMatch(html, /THE FÈT IS GATHERING|Original Temple of Gu Second Edition rules · No grid required|class="banner"/,
+    'retired Courtyard lip and its explanatory copy stay removed');
   assert.ok(html.includes('<img src="./courtyard.svg"'), 'Scene 01 has its own illustration');
   assert.ok(html.includes('id="roll"') && html.includes('id="seeker-select"'), 'dice and Seeker selection remain available');
   assert.ok(html.includes('id="info-title"') && html.includes('id="solo"'), 'Guide and exploration prompts remain available');
@@ -40,6 +44,7 @@ test('layout geometry and journal sizing are protected across desktop and phone'
   assert.match(css, /\.mast h1\s*\{[^}]*font-size:\s*clamp\(1\.45rem,\s*2\.4vw,\s*2\.2rem\)/);
   assert.match(css, /\.layout\s*\{[^}]*grid-template-columns:\s*minmax\(0,1fr\)\s+minmax\(270px,330px\)/);
   assert.match(css, /\.board\s*\{[^}]*aspect-ratio:\s*4\/3/);
+  assert.doesNotMatch(css, /\.banner\s*\{/, 'removed lip styling is not reintroduced');
   assert.match(css, /\.board img\s*\{[^}]*pointer-events:\s*none/);
   assert.match(css, /\.hotspot,\s*\.token\s*\{[^}]*position:\s*absolute/);
   assert.match(css, /@media\(max-width:1100px\)/);
