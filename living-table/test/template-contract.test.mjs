@@ -39,7 +39,7 @@ test('layout geometry and journal sizing are protected across desktop and phone'
   const css = await read('courtyard.css');
   assert.match(css, /\.mast h1\s*\{[^}]*font-size:\s*clamp\(1\.45rem,\s*2\.4vw,\s*2\.2rem\)/);
   assert.match(css, /\.layout\s*\{[^}]*grid-template-columns:\s*minmax\(0,1fr\)\s+minmax\(270px,330px\)/);
-  assert.match(css, /\.board\s*\{[^}]*aspect-ratio:\s*16\/9/);
+  assert.match(css, /\.board\s*\{[^}]*aspect-ratio:\s*4\/3/);
   assert.match(css, /\.board img\s*\{[^}]*pointer-events:\s*none/);
   assert.match(css, /\.hotspot,\s*\.token\s*\{[^}]*position:\s*absolute/);
   assert.match(css, /@media\(max-width:1100px\)/);
@@ -70,21 +70,22 @@ test('documented personal-tabletop direction includes implemented Seeker-count c
   assert.match(canon, /not a.*immutable lock/i);
 });
 
-test('double-click fullscreen keeps the approved 16:9 map and interactive board together', async () => {
+test('double-click fullscreen keeps the approved 4:3 map and interactive board together', async () => {
   const html = await read('courtyard.html');
   const ui = await read('courtyard-ui.mjs');
   const css = await read('courtyard.css');
-  assert.match(html, /Double-click the map \(double-tap on touchscreens\)/);
+  assert.doesNotMatch(html, /Double-click the map|Artwork is proposed for founder review|class="under"/, 'retired instructions stay removed');
+  assert.match(css, /\\.board-frame\\s*\\{[^}]*border:\\s*3px solid var\\(--temple-accent\\)/, 'orange board frame remains');
   assert.match(ui, /board\.addEventListener\('dblclick'/);
   assert.match(ui, /board\.addEventListener\('pointerup'/, 'touch double-tap fallback remains');
   assert.match(ui, /isBareBoard\(event\.target\)/, 'game piece and zone button clicks are not fullscreen gestures');
   assert.match(ui, /document\.fullscreenElement === boardFrame/);
   assert.match(ui, /document\.exitFullscreen\(\)/);
   assert.match(ui, /boardFrame\.requestFullscreen\(\)/);
-  // The map is letterboxed at 16:9 in a grid cell beside (or above) the control bar, never under it.
+  // The 4:3 board fills the available play space beside (or above) the control bar.
   assert.match(css, /\.board-frame:fullscreen, \.board-frame\.is-pseudo-fullscreen \{[^}]*display:\s*grid/);
-  assert.match(css, /\.board-frame:fullscreen \.board, \.board-frame\.is-pseudo-fullscreen \.board \{[^}]*max-width:\s*177\.77778vh;[^}]*aspect-ratio:\s*16 \/ 9/);
-  assert.match(css, /\.board-frame:fullscreen \.board img, \.board-frame\.is-pseudo-fullscreen \.board img \{[^}]*object-fit:\s*contain/);
+  assert.match(css, /\.board-frame:fullscreen \.board, \.board-frame\.is-pseudo-fullscreen \.board \{[^}]*max-width:\s*133\.33333vh;[^}]*aspect-ratio:\s*4 \/ 3/);
+  assert.match(css, /\.board-frame:fullscreen \.board img, \.board-frame\.is-pseudo-fullscreen \.board img \{[^}]*object-fit:\s*fill/);
   assert.match(html, /<div id="zones"><\/div><div id="tokens"><\/div>/, 'both interactions remain on the live board');
 });
 
