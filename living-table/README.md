@@ -23,7 +23,7 @@ The game will use **the same** character choices and validated mechanics for eac
 The [Temple's Living Tree](https://www.templeofgu.org/play) is a **separate philosophical/spiritual site experience**, not this game's map, engine or dependency.
 
 ## Provenance and boundaries
-Source was reviewed and transferred from an earlier private `tog-rpg-agent-edition/living-table` prototype, without history. The private repository now holds game canon/handbook drafts and a **closed** agent service, not a second live copy of this browser game. This is a public experimental codebase with licenses pending; it carries no initiatory claims.
+Source was reviewed and transferred from an earlier private `tog-rpg-agent-edition/living-table` prototype, without history. The private repository now holds game canon/handbook drafts and a **closed** agent service, not a second live copy of this browser game. This is a public experimental codebase: its code is MIT ([LICENSE-CODE](../LICENSE-CODE)) and its story text and scene descriptions follow [LICENSE.md](../LICENSE.md). It carries no initiatory claims.
 
 Before live feature changes: reviewed PR, tests, privacy/security assessment, founder permission for public launch, and rollback plan. Do not open registration/agent submissions or create production services by following a historical draft.
 
