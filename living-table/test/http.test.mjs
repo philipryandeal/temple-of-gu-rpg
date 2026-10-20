@@ -104,3 +104,22 @@ test('welcome keeps the full tabletop introduction together above both panels, a
  assert.ok(!main.includes(first) && !main.includes(second),'neither introductory sentence is stranded below the boxes');
  assert.ok(footer.includes('Development playtest') && footer.includes('href="https://www.templeofgu.org/"'),'footer text and Temple link preserved');
 });
+
+test('creative workshop links resolve to four safe public reference pages',async()=>{
+ const landing=await(await fetch(origin+'/')).text();
+ assert.match(landing,/<h1>Welcome to the Temple of Gu&#39;s Virtual Tabletop<\/h1>/);
+ assert.doesNotMatch(landing,/Living Table · playtest/);
+ for(const [slug,title] of [
+  ['magical-tools-and-weapons','Magical Tools and Weapons'],
+  ['the-technomancers-grimoire',"The Technomancer's Grimoire"],
+  ['rootwork-and-remedies','Rootwork and Remedies'],
+  ['spells-and-invocations','Spells and Invocations']
+ ]){
+  assert.ok(landing.includes('href="./'+slug+'.html"'),slug+' linked from landing');
+  const response=await fetch(origin+'/'+slug+'.html');
+  assert.equal(response.status,200,slug+' accessible');
+  const html=await response.text();
+  assert.ok(html.includes(title),slug+' title present');
+  assert.match(html,/<ol class="workshop-list">/);
+ }
+});
