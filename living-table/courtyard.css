@@ -84,6 +84,13 @@ button:focus-visible, select:focus-visible, input:focus-visible,
   display: block; width: 100%; padding: .6rem; background: var(--temple-bg);
   color: var(--temple-text); border: 1px solid var(--line); border-radius: 6px; margin: .4rem 0 .8rem;
 }
+.panel input[type="number"] {
+  display: block; width: 100%; padding: .6rem; margin: .4rem 0 .8rem;
+  background: var(--temple-bg); color: var(--temple-text);
+  border: 1px solid var(--line); border-radius: 6px; font: inherit;
+}
+.control-group + .control-group { border-top: 1px solid var(--line); margin-top: 1.25rem; padding-top: 1.25rem; }
+.control-group > .eyebrow { margin: .3rem 0 .85rem; }
 .panel button { margin: .2rem; }
 .statline { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
 .statline span { background: var(--temple-bg); border: 1px solid var(--line); padding: .5rem; border-radius: 6px; }

@@ -71,7 +71,7 @@ test('player-operated controls and local journal/portable save stay intact', asy
   assert.ok(ui.includes("restoreJournalFromBrowser()"), 'notes restore from this browser');
   assert.ok(ui.includes("JSON.stringify(table,null,2)"), 'session export remains portable');
   assert.ok(ui.includes("parseTable(JSON.parse(await f.text()))"), 'session import remains validated');
-  assert.ok(ui.includes("recordRoll(table,selected,v,result)"), 'rules-based dice rolls remain');
+  assert.ok(ui.includes("recordRoll(table,selected,v,result,bonus)"), 'dice use manual modifiers and preserve rules-based rolls');
   assert.ok(state.includes('export const MAX_SEATS = 6;'), 'six-player published maximum is preserved');
   assert.doesNotMatch(ui, /new\s+WebSocket\s*\(|RTCPeerConnection\s*\(/, 'current personal table is not an online sync client');
 });
@@ -103,17 +103,28 @@ test('double-click fullscreen keeps the approved 4:3 map and interactive board t
   assert.match(html, /<div id="zones"><\/div><div id="tokens"><\/div>/, 'both interactions remain on the live board');
 });
 
-test('Scene Journal, Seeker dice, and sample Seekers appear in founder-requested order', async () => {
+test('Scene Journal precedes one combined Seeker and dice panel without sample sheets', async () => {
   const html = await read('courtyard.html');
   const sidebar = html.split('<aside class="sidebar">')[1]?.split('</aside>')[0];
   assert.ok(sidebar, 'scene sidebar exists');
-  const titles = ['SCENE JOURNAL', "THE SEEKER'S DICE", 'YOUR SAMPLE SEEKERS'];
-  const locations = titles.map(title => sidebar.indexOf('>' + title + '<'));
-  assert.ok(locations.every(position => position >= 0), 'all three panels are still present');
-  assert.ok(locations[0] < locations[1] && locations[1] < locations[2],
-    'dice follow the scene journal, before sample Seekers');
-  assert.ok(!sidebar.includes('GUIDE CONTROLS · LOCAL ONLY'), 'founder-retired Guide Controls box is absent');
-  assert.ok(!html.includes('id="reveal"') && !html.includes('id="clue"'), 'former reveal controls are absent');
-  const ui = await read('courtyard-ui.mjs');
-  assert.ok(!ui.includes("$('#reveal')") && !ui.includes("$('#clue')"), 'script has no missing-element listeners');
+  const scene=sidebar.indexOf('>SCENE JOURNAL<');
+  const tools=sidebar.indexOf('id="seeker-tools"');
+  const seekers=sidebar.indexOf('>1. YOUR SEEKERS<');
+  const dice=sidebar.indexOf(">2. THE SEEKER'S DICE<");
+  const solo=sidebar.indexOf('>SOLO PATH');
+  assert.ok(scene>=0 && scene<tools && tools<seekers && seekers<dice && dice<solo,
+    'scene inspection comes first, followed by both tools in one card, then solo prompts');
+  assert.equal((sidebar.match(/id="seeker-tools"/g)||[]).length,1,'one tools box');
+  for(const id of ['seat-count','seeker-select','virtue','virtue-bonus','roll','roll-result','roll-history']){
+    assert.ok(sidebar.includes('id="'+id+'"'),id+' remains usable in the combined panel');
+  }
+  assert.match(sidebar, /<input id="virtue-bonus" type="number"[^>]*min="0" max="2" step="1"/);
+  assert.doesNotMatch(sidebar, /YOUR SAMPLE SEEKERS|sample character|Partial example sheet|id="sheet"/);
+  assert.ok(!sidebar.includes('GUIDE CONTROLS · LOCAL ONLY'));
+  const ui=await read('courtyard-ui.mjs');
+  assert.ok(!ui.includes("$('#sheet')") && !ui.includes('function showSheet()'),
+    'obsolete sample character rendering is gone');
+  assert.match(ui, /setBonus\(table,selected,v,bonus\)/,'manual bonuses are recorded');
+  assert.match(ui, /getBonus\(table,selected,/,'Seeker and Virtue selection restores its bonus');
+  assert.ok(!ui.includes("$('#reveal')") && !ui.includes("$('#clue')"));
 });

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {SCENE,ZONES,OBJECTS,SEEKERS} from '../courtyard-data.mjs';
-import {initialTable,moveToken,recordRoll,parseTable,resizeTable,setJournal,MAX_JOURNAL_LENGTH,MAX_SEATS} from '../courtyard-state.mjs';
+import {initialTable,moveToken,recordRoll,parseTable,resizeTable,setJournal,getBonus,setBonus,MAX_JOURNAL_LENGTH,MAX_SEATS} from '../courtyard-state.mjs';
 test('Scene 01 has seven distinct zones, ten inspectable objects, six valid sample seats',()=>{
   assert.equal(SCENE.id,'courtyard-fet');
   assert.equal(ZONES.length,7);
@@ -19,19 +19,19 @@ test('free movement permits positions within the illustrated board',()=>{
   assert.throws(()=>moveToken(table,'s1',500,45));
 });
 test('original 2d6 + Virtue result cannot be hand-set',()=>{
-  const table=recordRoll(initialTable(),'s1','suuru',[3,5]);
+  const table=recordRoll(initialTable(),'s1','suuru',[3,5],2);
   assert.equal(table.rolls[0].total,10);
   assert.equal(table.rolls[0].outcome,'Full success');
-  assert.throws(()=>recordRoll(initialTable(),'s1','wrong',[2,3]));
+  assert.throws(()=>recordRoll(initialTable(),'s1','wrong',[2,3],1));
 });
 test('save round-trip maintains positions and rolls without the retired Guide reveal',()=>{
   let t=moveToken(initialTable(),'s3',70,61);
-  t=recordRoll(t,'s3','foriti',[4,2]);
+  t=recordRoll(t,'s3','foriti',[4,2],2);
   assert.deepEqual(parseTable(JSON.parse(JSON.stringify(t))),t);
   assert.ok(!Object.hasOwn(t,'revealed'));
 });
 test('old sessions with a Guide reveal flag import without restoring retired UI state',()=>{
-  const t=recordRoll(setJournal(initialTable(2),'Clues from the Fèt'),'s1','suuru',[3,5]);
+  const t=recordRoll(setJournal(initialTable(2),'Clues from the Fèt'),'s1','suuru',[3,5],2);
   for (const revealed of [true,false]) {
     const restored=parseTable({...t,revealed});
     assert.deepEqual(restored,t);
@@ -51,7 +51,7 @@ test('import rejects forged seats, dice results, unsupported versions and protot
 test('Field Journal accepts two paragraphs and survives export and import without changing rolls',()=>{
   const notes='First paragraph: I heard a bell near the altar.\n\nSecond paragraph: The musicians heard a different bell.';
   let t=setJournal(initialTable(),notes);
-  t=recordRoll(t,'s1','suuru',[4,5]);
+  t=recordRoll(t,'s1','suuru',[4,5],2);
   assert.deepEqual(parseTable(JSON.parse(JSON.stringify(t))),t);
   assert.equal(t.journal,notes);
   assert.equal(initialTable().journal,'');
@@ -76,13 +76,13 @@ test('personal tabletop starts with 1, 3 or 6 demo pieces and rejects unsupporte
  for(const count of [0,7,2.5,NaN,'3']) assert.throws(()=>initialTable(count));
  const solo=initialTable(1);
  assert.throws(()=>moveToken(solo,'s2',40,40),'non-participating marker cannot move');
- assert.throws(()=>recordRoll(solo,'s2','suuru',[2,3]));
+ assert.throws(()=>recordRoll(solo,'s2','suuru',[2,3],2));
  assert.throws(()=>parseTable({...solo,tokens:[SEEKERS[1]]}),/token/i);
 });
 test('resizing local tabletop keeps notes and active token locations; removed players cannot roll',async()=>{
  let t=setJournal(initialTable(3),'Our adventure begins.');
  t=moveToken(t,'s2',40,45);
- t=recordRoll(t,'s2','oye',[4,3]);
+ t=recordRoll(t,'s2','oye',[4,3],2);
  t=resizeTable(t,1);
  assert.equal(t.tokens.length,1);
  assert.equal(t.journal,'Our adventure begins.');
@@ -92,4 +92,43 @@ test('resizing local tabletop keeps notes and active token locations; removed pl
  assert.equal(t.journal,'Our adventure begins.');
  assert.equal(t.tokens[0].id,'s1');
  assert.throws(()=>resizeTable(t,8));
+});
+
+
+test('manual bonuses are per piece and Virtue and survive local session export/import',()=>{
+ let table=initialTable(2);
+ assert.equal(getBonus(table,'s1','suuru'),0,'new players start without guessed character stats');
+ table=setBonus(table,'s1','suuru',1);
+ table=setBonus(table,'s2','suuru',2);
+ table=setBonus(table,'s1','oye',0);
+ assert.equal(getBonus(table,'s1','suuru'),1);
+ assert.equal(getBonus(table,'s2','suuru'),2);
+ table=recordRoll(table,'s1','suuru',[4,5],1);
+ table=recordRoll(table,'s2','suuru',[4,5],2);
+ assert.deepEqual(table.rolls.map(r=>r.total),[10,11]);
+ assert.deepEqual(table.rolls.map(r=>r.bonus),[1,2]);
+ assert.deepEqual(parseTable(JSON.parse(JSON.stringify(table))),table);
+ assert.equal(getBonus(parseTable(JSON.parse(JSON.stringify(table))),'s2','suuru'),2);
+ assert.throws(()=>setBonus(table,'s1','suuru',3));
+ assert.throws(()=>setBonus(table,'s1','suuru',-1));
+ assert.throws(()=>setBonus(table,'s1','suuru','1'));
+ assert.throws(()=>recordRoll(table,'s1','suuru',[4,5]),/bonus/i);
+});
+
+test('manual dice totals cannot be forged and historical sample rolls still import',()=>{
+ const original=initialTable(1);
+ const newRoll=recordRoll(original,'s1','iwa',[3,4],0);
+ assert.throws(()=>parseTable({...newRoll,rolls:[{...newRoll.rolls[0],bonus:2}]}),/Tampered dice history/);
+ assert.throws(()=>parseTable({...newRoll,rolls:[{...newRoll.rolls[0],total:99}]}),/Tampered dice history/);
+ assert.throws(()=>parseTable({...newRoll,bonuses:{s1:{iwa:10}}}),/bonus/i);
+ assert.throws(()=>parseTable({...newRoll,bonuses:{s7:{iwa:1}}}),/bonus/i);
+ assert.throws(()=>parseTable({...newRoll,bonuses:{s1:{unknown:1}}}),/bonus/i);
+ const old=recordRoll(original,'s1','suuru',[3,5],2);
+ const oldFormat={...old,rolls:old.rolls.map(({bonus,...r})=>r)};
+ delete oldFormat.bonuses;
+ const restored=parseTable(oldFormat);
+ assert.equal(restored.rolls[0].total,10);
+ assert.equal(restored.rolls[0].bonus,undefined);
+ assert.deepEqual(restored.bonuses,{});
+ assert.equal(getBonus(restored,'s1','suuru'),0,'legacy sample modifier does not pre-fill a new roll');
 });

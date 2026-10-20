@@ -1,10 +1,10 @@
 import {ZONES,OBJECTS,SOLO_CHOICES} from './courtyard-data.mjs';
-import {initialTable,resizeTable,moveToken,recordRoll,parseTable,setJournal} from './courtyard-state.mjs';
+import {initialTable,resizeTable,moveToken,recordRoll,parseTable,setJournal,getBonus,setBonus} from './courtyard-state.mjs';
 const requestedSeats=new URLSearchParams(location.search).get('seekers');
 const startingSeats=/^[1-6]$/.test(requestedSeats??'')?Number(requestedSeats):1;
 let table=initialTable(startingSeats),selected='s1',activeZone=null;
 const $=s=>document.querySelector(s);
-const zones=$('#zones'),tokens=$('#tokens'),select=$('#seeker-select'),sheet=$('#sheet');
+const zones=$('#zones'),tokens=$('#tokens'),select=$('#seeker-select'),bonusInput=$('#virtue-bonus');
 const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
 const escText=(node,text)=>{node.textContent=text;};
 const journalInput=$('#field-journal-notes'),journalStatus=$('#journal-status');
@@ -146,14 +146,9 @@ function showZone(zone){
   list.append(b);
  }
 }
-function showSheet(){
- const t=table.tokens.find(t=>t.id===selected);select.value=selected;
- sheet.replaceChildren();
- const p=document.createElement('p');p.textContent=t.name+' · '+t.lineage+' (sample character, playtest only)';sheet.append(p);
- const stats=document.createElement('div');stats.className='statline';
- for(const [k,v] of Object.entries(t.virtues)){const s=document.createElement('span');s.textContent=k[0].toUpperCase()+k.slice(1)+' +'+v;stats.append(s)}
- sheet.append(stats);
- const info=document.createElement('p');info.className='fine';info.textContent='Partial example sheet: published Archetypes, Balance, Ebo, Mysteries and inventory require the full rulebook-based character builder.';sheet.append(info);
+function renderBonus(){
+ select.value=selected;
+ bonusInput.value=String(getBonus(table,selected,$('#virtue').value));
 }
 let drag=null;
 function renderTokens(){
@@ -162,7 +157,7 @@ function renderTokens(){
   const b=document.createElement('button');b.className='token'+(t.id===selected?' selected':'');
   b.style.left=t.x+'%';b.style.top=t.y+'%';
   b.textContent=t.id.slice(1);b.title=t.name;b.setAttribute('aria-label',t.name+'; position '+Math.round(t.x)+', '+Math.round(t.y));
-  b.addEventListener('click',()=>{selected=t.id;renderTokens();showSheet()});
+  b.addEventListener('click',()=>{selected=t.id;renderTokens();renderBonus()});
   b.addEventListener('pointerdown',e=>{
    if(e.button!==0)return;e.preventDefault();selected=t.id;drag={id:t.id,pointer:e.pointerId,moved:false};b.setPointerCapture(e.pointerId);
    renderSelection();
@@ -175,22 +170,27 @@ function renderTokens(){
   });
   const end=e=>{
    if(!drag||drag.id!==t.id||drag.pointer!==e.pointerId)return;
-   drag=null;renderTokens();showSheet();
+   drag=null;renderTokens();renderBonus();
   };
   b.addEventListener('pointerup',end);b.addEventListener('pointercancel',end);
   tokens.append(b);
  }
 }
-function renderSelection(){select.value=selected;showSheet();for(const b of tokens.children)b.classList.toggle('selected',b.title===table.tokens.find(t=>t.id===selected).name);}
+function renderSelection(){renderBonus();for(const b of tokens.children)b.classList.toggle('selected',b.title===table.tokens.find(t=>t.id===selected).name);}
 function renderHistory(){
  const box=$('#roll-history');box.replaceChildren();
  for(const r of table.rolls.slice(-4).reverse()){
   const p=document.createElement('p');const t=table.tokens.find(t=>t.id===r.id);
-  p.textContent=t.name+': '+r.dice.join(' + ')+' + '+t.virtues[r.virtue]+' ('+r.virtue+') = '+r.total+' · '+r.outcome;box.append(p);
+  p.textContent=t.name+': '+r.dice.join(' + ')+' + '+(r.bonus??t.virtues[r.virtue])+' ('+r.virtue+') = '+r.total+' · '+r.outcome;box.append(p);
  }
 }
-function render(){renderSeekerOptions();$('#seat-count').value=String(table.tokens.length);renderTokens();showSheet();renderHistory();journalInput.value=table.journal;}
-select.addEventListener('change',()=>{selected=select.value;renderTokens();showSheet()});
+function render(){renderSeekerOptions();$('#seat-count').value=String(table.tokens.length);renderTokens();renderBonus();renderHistory();journalInput.value=table.journal;}
+select.addEventListener('change',()=>{selected=select.value;renderTokens();renderBonus()});
+$('#virtue').addEventListener('change',renderBonus);
+// Remember each selected piece's entered bonus in the exported local session.
+bonusInput.addEventListener('input',()=>{
+ if(/^[012]$/.test(bonusInput.value)) table=setBonus(table,selected,$('#virtue').value,Number(bonusInput.value));
+});
 $('#seat-count').addEventListener('change',e=>{
  table=resizeTable(table,Number(e.target.value));
  if(!table.tokens.some(t=>t.id===selected)) selected='s1';
@@ -201,12 +201,20 @@ document.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',(
  const t=table.tokens.find(t=>t.id===selected);
  table=moveToken(table,selected,clamp(t.x+delta[0],2,98),clamp(t.y+delta[1],2,98));renderTokens();
 }));
-$('#inspect-selected').addEventListener('click',()=>{showSheet();select.focus()});
+$('#inspect-selected').addEventListener('click',()=>{select.focus()});
 $('#roll').addEventListener('click',()=>{
- const v=$('#virtue').value;const dice=new Uint32Array(2);crypto.getRandomValues(dice);
+ if(!/^[012]$/.test(bonusInput.value)){
+  escText($('#roll-result'),'Enter a whole-number Virtue bonus: 0, 1, or 2.');
+  bonusInput.focus();
+  return;
+ }
+ const v=$('#virtue').value,bonus=Number(bonusInput.value);
+ table=setBonus(table,selected,v,bonus);
+ const dice=new Uint32Array(2);crypto.getRandomValues(dice);
  const result=Array.from(dice,n=>(n%6)+1);
- table=recordRoll(table,selected,v,result);
- const r=table.rolls.at(-1);escText($('#roll-result'),result.join(' + ')+' + '+table.tokens.find(t=>t.id===selected).virtues[v]+' = '+r.total+' · '+r.outcome);
+ table=recordRoll(table,selected,v,result,bonus);
+ const r=table.rolls.at(-1);
+ escText($('#roll-result'),result.join(' + ')+' + '+bonus+' = '+r.total+' · '+r.outcome);
  renderHistory();
 });
 $('#reset').addEventListener('click',()=>{if(!confirm('Reset the table AND clear your Field Journal? Export session first if you want to keep your notes, tokens and rolls.'))return;table=initialTable(table.tokens.length);selected='s1';clearSavedJournal();render()});
