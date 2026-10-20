@@ -53,10 +53,11 @@ button:focus-visible, select:focus-visible, input:focus-visible,
   border-bottom: none; padding: .75rem 1rem; border-radius: 10px 10px 0 0;
 }
 .banner strong { color: var(--temple-accent); letter-spacing: .12em; }
-.banner span, .under, .fine { font-size: .82rem; color: var(--dim); }
+.banner span, .fine { font-size: .82rem; color: var(--dim); }
 .board-frame { border: 3px solid var(--temple-accent); overflow: hidden; background: var(--temple-panel); }
-.board { position: relative; width: 100%; aspect-ratio: 16/9; touch-action: none; }
-.board img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; }
+.board { position: relative; width: 100%; aspect-ratio: 4/3; touch-action: none; }
+/* Existing 16:9 scene art temporarily fills the 4:3 playfield without cropping its interactive locations. Future scene art will be authored at 4:3. */
+.board img { display: block; width: 100%; height: 100%; object-fit: fill; pointer-events: none; user-select: none; }
 .hotspot, .token { position: absolute; transform: translate(-50%,-50%); z-index: 2; }
 .hotspot {
   border: 2px solid var(--temple-accent); background: var(--temple-panel);
@@ -80,7 +81,6 @@ button:focus-visible, select:focus-visible, input:focus-visible,
   display: flex; gap: .45rem; align-items: center; flex-wrap: wrap;
   padding: .75rem; background: var(--temple-panel); border-radius: 0 0 12px 12px;
 }
-.under { line-height: 1.4; }
 .sidebar { display: grid; gap: .8rem; align-content: start; }
 .panel { border: 1px solid var(--line); background: var(--temple-panel); border-radius: 12px; padding: 1rem; }
 .panel h2 { font-family: Georgia, serif; margin: .3rem 0; color: var(--temple-text); }
@@ -148,7 +148,7 @@ footer nav { margin-bottom: .7rem; }
   #field-journal-notes { height: 340px; padding: .75rem; font-size: 1rem; }
 }
 
-/* Immersive map. The board is letterboxed at 16:9 and the control bar (the
+/* Immersive map. The board is sized at 4:3 and the control bar (the
    Fullscreen button and, while immersive, the Scene Journal) sits BESIDE it
    (landscape) or BELOW it (portrait), never over the map, so no hotspot or
    token is ever covered. */
@@ -163,9 +163,9 @@ footer nav { margin-bottom: .7rem; }
 }
 .board-frame.is-pseudo-fullscreen { position: fixed; inset: 0; z-index: 1000; }
 .board-frame:fullscreen .board, .board-frame.is-pseudo-fullscreen .board {
-  align-self: center; justify-self: center; width: 100%; max-width: 177.77778vh; max-width: 177.77778dvh; height: auto; aspect-ratio: 16 / 9;
+  align-self: center; justify-self: center; width: 100%; max-width: 133.33333vh; max-width: 133.33333dvh; height: auto; aspect-ratio: 4 / 3;
 }
-.board-frame:fullscreen .board img, .board-frame.is-pseudo-fullscreen .board img { object-fit: contain; }
+.board-frame:fullscreen .board img, .board-frame.is-pseudo-fullscreen .board img { object-fit: fill; }
 .board-frame:fullscreen .frame-bar, .board-frame.is-pseudo-fullscreen .frame-bar {
   flex-direction: column; justify-content: flex-start; align-items: stretch; border-top: 0; border-left: 1px solid var(--line); overflow: auto; min-height: 0;
 }
