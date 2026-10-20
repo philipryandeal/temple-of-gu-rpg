@@ -47,13 +47,7 @@ button:focus-visible, select:focus-visible, input:focus-visible,
 .file-action input { display: none; }
 .layout { display: grid; grid-template-columns: minmax(0,1fr) minmax(270px,330px); gap: 1rem; padding: 1rem; max-width: 1900px; margin: auto; }
 .table-section { min-width: 0; }
-.banner {
-  display: flex; justify-content: space-between; gap: .5rem;
-  background: var(--temple-panel); border: 1px solid var(--line);
-  border-bottom: none; padding: .75rem 1rem; border-radius: 10px 10px 0 0;
-}
-.banner strong { color: var(--temple-accent); letter-spacing: .12em; }
-.banner span, .fine { font-size: .82rem; color: var(--dim); }
+.fine { font-size: .82rem; color: var(--dim); }
 .board-frame { border: 3px solid var(--temple-accent); overflow: hidden; background: var(--temple-panel); }
 .board { position: relative; width: 100%; aspect-ratio: 4/3; touch-action: none; }
 /* Existing 16:9 scene art temporarily fills the 4:3 playfield without cropping its interactive locations. Future scene art will be authored at 4:3. */
@@ -98,7 +92,7 @@ button:focus-visible, select:focus-visible, input:focus-visible,
 footer { padding: 1.5rem; text-align: center; color: var(--temple-text); }
 footer nav { margin-bottom: .7rem; }
 @media(max-width:1100px) { .layout { grid-template-columns: 1fr; } .sidebar { grid-template-columns: repeat(2,minmax(0,1fr)); } }
-@media(max-width:600px) { .mast { display: block; padding: .65rem 1rem; } .head-actions { margin-top: .6rem; } .sidebar { grid-template-columns: 1fr; } .banner { display: block; } .movement span { width: 100%; } }
+@media(max-width:600px) { .mast { display: block; padding: .65rem 1rem; } .head-actions { margin-top: .6rem; } .sidebar { grid-template-columns: 1fr; }  .movement span { width: 100%; } }
 
 /* Fill the remaining desktop column height with writing space, not an empty gap.
    The image, controls, and sidebar retain their own dimensions and positions. */
