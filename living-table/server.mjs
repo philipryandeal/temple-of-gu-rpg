@@ -48,8 +48,11 @@ async function chatWithKore(req,res,headers) {
  }catch{if(!res.headersSent)reply(400,{error:'Unable to process this request.'});}
 }
 const ASSETS = new Set(['/','/index.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/casting.mjs','/ui.mjs','/kore-client.mjs','/favicon.ico','/courtyard.html','/courtyard.css','/courtyard-ui.mjs','/courtyard-data.mjs','/courtyard-state.mjs','/courtyard.svg']);
+const PUBLIC_ORIGIN = 'https://templeofgu.com';
+const INDEXABLE = new Set(['/', '/index.html', '/courtyard.html']);
 export function makeServer() {
   return http.createServer(async (req, res) => {
+    const publicHost = ['templeofgu.com', 'www.templeofgu.com'].includes(String(req.headers.host || '').toLowerCase().split(':')[0]);
     const headers = {
       'X-Content-Type-Options': 'nosniff',
       'X-Frame-Options': 'DENY',
@@ -71,6 +74,25 @@ export function makeServer() {
       res.writeHead(200, { ...headers, 'Content-Type': 'text/plain; charset=utf-8' });
       res.end(req.method === 'HEAD' ? undefined : 'ok'); return;
     }
+    if (pathname === '/robots.txt') {
+      const text = publicHost
+        ? 'User-agent: *\nAllow: /\nSitemap: ' + PUBLIC_ORIGIN + '/sitemap.xml\n'
+        : 'User-agent: *\nDisallow: /\n';
+      res.writeHead(200, { ...headers, 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end(req.method === 'HEAD' ? undefined : text);
+      return;
+    }
+    if (pathname === '/sitemap.xml' && publicHost) {
+      const xml = '<?xml version="1.0" encoding="UTF-8"?>' +
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' +
+        '<url><loc>' + PUBLIC_ORIGIN + '/</loc></url>' +
+        '<url><loc>' + PUBLIC_ORIGIN + '/courtyard.html</loc></url></urlset>';
+      const xmlHeaders = { ...headers, 'Content-Type': 'application/xml; charset=utf-8' };
+      delete xmlHeaders['X-Robots-Tag'];
+      res.writeHead(200, xmlHeaders);
+      res.end(req.method === 'HEAD' ? undefined : xml);
+      return;
+    }
     // Explicit allowlist prevents serving source code, tests, or dotfiles.
     if (!ASSETS.has(pathname)) { res.writeHead(404, headers); res.end(); return; }
     const filename = pathname === '/' ? 'index.html' : pathname.slice(1);
@@ -79,7 +101,8 @@ export function makeServer() {
     try {
       if (!(await stat(target)).isFile()) throw new Error('not a file');
       const body = await readFile(target);
-      res.writeHead(200, { ...headers, 'Content-Type': MIME[extname(target)] ?? 'application/octet-stream' });
+      const robots = publicHost && INDEXABLE.has(pathname) ? 'index, follow' : 'noindex, nofollow';
+      res.writeHead(200, { ...headers, 'X-Robots-Tag': robots, 'Content-Type': MIME[extname(target)] ?? 'application/octet-stream' });
       res.end(req.method === 'HEAD' ? undefined : body);
     } catch {
       res.writeHead(404, headers); res.end();
