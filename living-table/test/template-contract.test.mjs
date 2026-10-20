@@ -75,7 +75,7 @@ test('double-click fullscreen keeps the approved 4:3 map and interactive board t
   const ui = await read('courtyard-ui.mjs');
   const css = await read('courtyard.css');
   assert.doesNotMatch(html, /Double-click the map|Artwork is proposed for founder review|class="under"/, 'retired instructions stay removed');
-  assert.match(css, /\\.board-frame\\s*\\{[^}]*border:\\s*3px solid var\\(--temple-accent\\)/, 'orange board frame remains');
+  assert.match(css, /\.board-frame\s*\{[^}]*border:\s*3px solid var\(--temple-accent\)/, 'orange board frame remains');
   assert.match(ui, /board\.addEventListener\('dblclick'/);
   assert.match(ui, /board\.addEventListener\('pointerup'/, 'touch double-tap fallback remains');
   assert.match(ui, /isBareBoard\(event\.target\)/, 'game piece and zone button clicks are not fullscreen gestures');
