@@ -57,3 +57,5 @@ footer { font-size: .88rem; }
 .workshop-list li{padding:.55rem 0}
 .workshop-links ul{display:flex;flex-wrap:wrap;gap:1rem;padding-left:1rem}
 @media(max-width:620px){.creative-links{grid-template-columns:1fr}}
+/* Home page body copy that reads better left-aligned inside centered sections. */
+.align-left{text-align:left}
