@@ -38,3 +38,10 @@ This remains a **pre-release, single-browser prototype**, not full character cre
 ## Landing page (October 19 expansion)
 
 The main browser entrance is **Number of Seekers** beside **Choose Your Game + Scene**, with a single **Enter the Table** button. The dropdown has three named game groups—**Temple of Gu**, **Shinto No Kami**, and **Call of the Taíno**—with eight numbered slots each (24 total). Only **Temple of Gu 01 — The Courtyard Fèt** routes into the existing playable board. Every unbuilt scene is visibly *Coming Soon* and disabled to avoid mistakenly loading the Courtyard. Shinto No Kami retains its distinct published rules, and Call of the Taíno remains an expansion of Temple of Gu; grouping them in one entrance does not merge their mechanics. There is no account, session connection, or separate player-type entrance. Historical Human/Synthetic/Dyad/Egbe pages and `roads.json` remain reachable for compatibility but are not advertised as the current way to play. The separate, founder-approved courtyard tabletop layout and its Field Journal are unchanged.
+
+
+## Public search discovery (October 19, 2026)
+
+The Living Table's existing entrance and playable Scene 01 may now be indexed on `https://templeofgu.com/`. This is **search visibility for the existing browser prototype**, not approval for unrelated features or full RPG release. The root `/sitemap.xml` lists the entrance and `/courtyard.html`. The canonical host is `templeofgu.com`, without www. The robots file advertises this sitemap.
+
+Unfinished and legacy road pages remain `noindex`. Railway preview domains still block crawling and indexing. Private API routes, tests, and source files remain unlisted. The approved visual tabletop template, local journal, dice, and scene content are unchanged.
