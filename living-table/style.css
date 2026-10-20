@@ -40,3 +40,20 @@ footer { font-size: .88rem; }
 .kore-gate button{background:var(--temple-accent);border:0;border-radius:.6rem;padding:.75rem 1rem;font:inherit;font-weight:700;color:var(--temple-panel)}
 .kore-gate button:disabled{opacity:.7;cursor:not-allowed}
 #kore-status{font-size:.85rem;line-height:1.5}
+
+/* Landing welcome and four opt-in creative reference rooms. */
+.welcome-header{text-align:center}
+.welcome-header h1{font-size:clamp(1.75rem,4vw,2.8rem);line-height:1.2}
+.welcome-header .note{max-width:48rem;margin:1rem auto}
+.creative-threshold{text-align:center;margin-top:1.5rem}
+.creative-threshold h2{font-size:clamp(1.55rem,3vw,2rem);margin:.5rem 0}
+.creative-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin-top:1.25rem}
+.creative-links a{display:flex;justify-content:space-between;align-items:center;gap:.7rem;text-align:left;border:1px solid var(--temple-accent);border-radius:.7rem;padding:1rem;background:var(--temple-bg);color:var(--temple-text);font-weight:700;text-decoration:none}
+.creative-links a span{color:var(--temple-accent)}
+.creative-links a:hover{border-width:2px}
+.workshop-header{text-align:center}
+.workshop-kicker{letter-spacing:.15em;font-weight:800;font-size:.8rem}
+.workshop-list{padding-left:1.5rem;line-height:1.65}
+.workshop-list li{padding:.55rem 0}
+.workshop-links ul{display:flex;flex-wrap:wrap;gap:1rem;padding-left:1rem}
+@media(max-width:620px){.creative-links{grid-template-columns:1fr}}
