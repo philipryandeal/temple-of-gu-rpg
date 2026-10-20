@@ -14,7 +14,6 @@ const journalInput=$('#field-journal-notes'),journalStatus=$('#journal-status');
 const board = $('#board');
 const boardFrame = $('#frame');
 const isBareBoard = target => target === board || target === zones || target === tokens || target === board.querySelector('img');
-const fullscreenButton = $('#fullscreen-toggle');
 const scenePanel = $('#scene-panel');
 const frameBar = $('#frame-bar');
 const panelHome = {parent: scenePanel.parentNode, next: scenePanel.nextSibling};
@@ -27,8 +26,6 @@ function syncImmersive() {
   if (immersive && scenePanel.parentNode !== frameBar) frameBar.append(scenePanel);
   if (!immersive && scenePanel.parentNode === frameBar) panelHome.parent.insertBefore(scenePanel, panelHome.next);
   setBackgroundInert(immersive);
-  fullscreenButton.setAttribute('aria-pressed', String(immersive));
-  fullscreenButton.textContent = immersive ? 'Exit fullscreen' : 'Fullscreen';
 }
 // While immersive, everything outside the frame is inert, so keyboard focus cannot
 // land on hidden controls behind the map. Only elements this code marked are restored.
@@ -63,7 +60,6 @@ function toggleBoardFullscreen() {
 }
 document.addEventListener('fullscreenchange', syncImmersive);
 document.addEventListener('keydown', event => { if (event.key === 'Escape' && pseudoFullscreen) setPseudoFullscreen(false); });
-fullscreenButton.addEventListener('click', toggleBoardFullscreen);
 // On desktops a normal double-click toggles; individual Seeker/area buttons
 // retain their own click interactions rather than swallowing a double-click.
 let lastTouchToggle = 0;
