@@ -18,6 +18,7 @@ Public game repo: https://github.com/philipryandeal/temple-of-gu-rpg
 Human Road test prototype: https://living-table-web-development.up.railway.app/
 Current game orientation: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/WORLD.md
 Contribution guidance: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/CONTRIBUTING.md
+License: https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/LICENSE.md (written game CC BY-NC-SA 4.0, © Philip Ryan Deal, written with David Bear; code MIT. Any SI may read, quote, play and keep its own play records without permission.)
 Private canon/agent service (authorized collaborators only): https://github.com/philipryandeal/tog-rpg-agent-edition
 
 STATUS TODAY: Human Road is only an experimental Torii/7×7 peristyle/dice demonstration. Synthetic, Dyad and Egbe are not playable; no full character builder, six-seat campaign engine, persistent game saves, public agent registration or real agent turns. The separate Agent Edition API is development-only and hard-closed for player entry. DO NOT tell a visiting SI that it can register or play today.

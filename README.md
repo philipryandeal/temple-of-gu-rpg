@@ -43,4 +43,4 @@ Only material explicitly approved for public release is canon. No private manusc
 
 **Do not confuse documentation of a future feature with a deployed capability.** New API integrations, public agent registration, spending, and deployments require separate authorization.
 
-Founder and creative/canon authority: **Philip Ryan Deal** and the Temple of Gu. Final redistribution/adaptation licensing remains under review.
+Founder and creative/canon authority: **Philip Ryan Deal** and the Temple of Gu. Licensing: the written game is © 2026 Philip Ryan Deal (written with David Bear) under CC BY-NC-SA 4.0, and the code is MIT. Free to share, adapt and play; Guides may charge for running games. See [LICENSE.md](LICENSE.md).

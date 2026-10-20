@@ -39,7 +39,7 @@ The published book—not improvisation—is the starting point for the video gam
 - Original source: `TEMPLE OF GU MASTER GUIDEBOOK.docx`, supplied by Philip Ryan Deal for inclusion in this public repository.
 - Authored original is attributed in the manuscript to Philip Ryan Deal and David Bear.
 - Markdown converted with Pandoc; no creative rewriting or editing was intended.
-- This text is being placed in a public repository at the author's direction. Explicit redistribution / adaptation licensing terms should be documented separately, rather than presumed from repository visibility.
+- This text is published at the author's direction under CC BY-NC-SA 4.0: free to share, adapt and play, not to sell without permission. See [LICENSE.md](../LICENSE.md).
 - The independent [Living Tree experience](https://www.templeofgu.org/play) remains on the Temple website and is **not** the game engine.
 
 **Build the digital game around this book.**
