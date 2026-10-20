@@ -15,7 +15,7 @@ test('Living Table UI uses exactly the Temple of Gu four official hex colors', a
 
 test('courtyard artwork stays a separate layer; tokens and hotspots are HTML overlays', async () => {
   const html = await readFile(new URL('../courtyard.html', import.meta.url), 'utf8');
-  assert.ok(html.includes('src="./courtyard.svg"'));
+  assert.ok(html.includes('src="./courtyard-fet-board.png"'), 'new illustration remains a separate image layer');
   assert.ok(html.includes('id="zones"'));
   assert.ok(html.includes('id="tokens"'));
   const css = await readFile(new URL('../courtyard.css', import.meta.url), 'utf8');
