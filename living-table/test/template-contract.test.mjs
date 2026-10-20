@@ -53,7 +53,7 @@ test('scene illustration, interactive layers and full-width Field Journal remain
     'orange-framed board follows the main heading with no banner in between');
   assert.doesNotMatch(html, /THE FÈT IS GATHERING|Original Temple of Gu Second Edition rules · No grid required|class="banner"/,
     'retired Courtyard lip and its explanatory copy stay removed');
-  assert.ok(html.includes('<img src="./courtyard.svg"'), 'Scene 01 has its own illustration');
+  assert.ok(html.includes('<img src="./courtyard-fet-board.png"'), 'Scene 01 uses the founder-approved new overhead artwork');
   assert.ok(html.includes('id="roll"') && html.includes('id="seeker-select"'), 'dice and Seeker selection remain available');
   assert.ok(html.includes('id="info-title"') && html.includes('id="solo"'), 'Guide and exploration prompts remain available');
 });
