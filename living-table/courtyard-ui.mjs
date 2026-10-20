@@ -200,18 +200,21 @@ function stepSelected(direction){
  if(!delta||!t)return;
  table=moveToken(table,selected,clamp(t.x+delta[0],2,98),clamp(t.y+delta[1],2,98));
  renderTokens();
+ return true;
 }
 document.querySelectorAll('[data-move]').forEach(b=>b.addEventListener('click',()=>stepSelected(b.dataset.move)));
-// Keyboard movement works after choosing a token, but never hijacks typing,
-// native form control navigation, or modified browser shortcuts.
-document.addEventListener('keydown',e=>{
+// Arrow keys move the selected Seeker only while the board itself or a Seeker
+// token has focus, so normal page scrolling and other controls keep their keys.
+// After each move, focus returns to the moved Seeker (renderTokens rebuilds it).
+board.addEventListener('keydown',e=>{
  const direction={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'}[e.key];
  if(!direction||e.altKey||e.ctrlKey||e.metaKey||e.shiftKey)return;
  const target=e.target;
- if(target?.closest?.('input, textarea, select, [contenteditable], [role="textbox"], [role="slider"], [role="spinbutton"], [role="combobox"], [role="listbox"], [role="menu"]'))return;
- if(target?.closest?.('button')&&!target.closest('.token'))return;
+ if(target!==board&&!target?.closest?.('.token'))return;
  e.preventDefault();
- stepSelected(direction);
+ if(!stepSelected(direction))return;
+ const name=table.tokens.find(t=>t.id===selected)?.name;
+ [...tokens.children].find(b=>b.title===name)?.focus({preventScroll:true});
 });
 $('#inspect-selected').addEventListener('click',()=>{select.focus()});
 $('#roll').addEventListener('click',()=>{
