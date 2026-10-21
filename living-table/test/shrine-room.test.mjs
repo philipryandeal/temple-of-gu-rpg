@@ -27,7 +27,7 @@ test('entrance routes the enabled shrine choice, with scene 01 preserved',async(
  assert.match(script,/'courtyard-fet':'\.\/courtyard.html'/);
  const shrine=await read('../shrine.html');
  assert.match(shrine,/Scene 02: The Shrine Room/);
- assert.match(shrine,/shrine-room-board\.png\.png/);
+ assert.match(shrine,/shrine-room-board\.png/);
  assert.match(shrine,/shrine-ui\.mjs/);
  const ui=await read('../shrine-ui.mjs');
  assert.match(ui,/gu-rpg:scene02:field-journal:v1/);
@@ -37,7 +37,7 @@ test('server serves shrine and its art while keeping source files private',async
  const server=makeServer();await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  try{
   const base='http://127.0.0.1:'+server.address().port;
-  for(const route of ['/shrine.html','/shrine-ui.mjs','/shrine-state.mjs','/shrine-data.mjs','/shrine-room-board.png.png','/entrance-scenes.mjs']){
+  for(const route of ['/shrine.html','/shrine-ui.mjs','/shrine-state.mjs','/shrine-data.mjs','/shrine-room-board.png','/entrance-scenes.mjs']){
    const res=await fetch(base+route);assert.equal(res.status,200,route);
   }
   assert.equal((await fetch(base+'/test/shrine-room.test.mjs')).status,404);
