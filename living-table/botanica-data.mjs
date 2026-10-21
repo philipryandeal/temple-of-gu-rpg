@@ -5,13 +5,13 @@ export const SCENE=Object.freeze({
  proposedMystery:'An unclaimed parcel sits behind the counter, its label marked with a curious symbol. It may connect to the missing makout and the bells heard in earlier rooms, or it may begin an entirely different adventure. The Guide decides.'
 });
 export const ZONES=Object.freeze([
- {id:'entrance',title:'Botanica Entrance',x:16,y:75,description:'A little brass bell announces each visitor. The Fèt can still be heard outside.',objects:['doorbell']},
+ {id:'entrance',title:'Botanica Entrance',x:6,y:48,description:'A little brass bell announces each visitor. The Fèt can still be heard outside.',objects:['doorbell']},
  {id:'counter',title:'Keeper’s Counter',x:55,y:42,description:'The keeper greets visitors here. An open ledger and an unclaimed parcel invite questions, but the keeper determines what can be examined.',objects:['ledger','parcel']},
  {id:'herbs',title:'Herbal Shelves',x:20,y:27,description:'Dried herbs, labeled jars and bundles line the shelves. Their fictional uses require Guide approval; this room gives no real-world remedies.',objects:['herb-jars']},
  {id:'candles',title:'Candle Display',x:82,y:24,description:'Candles in many colors occupy a display near the wall. They carry no automatic game effects.',objects:['candles']},
  {id:'books',title:'Books and Records',x:76,y:55,description:'Books, notebooks and labels preserve stories and knowledge. The keeper may help interpret them.',objects:['book']},
  {id:'flag',title:'Puerto Rican Flag',x:49,y:16,description:'A Puerto Rican flag hangs with pride among the Botanica’s treasures, honoring the room’s cultural character.',objects:[]},
- {id:'worktable',title:'Preparation Table',x:42,y:81,description:'An orderly working space with vessels and tools, where conversation and observation can lead the next step of an adventure.',objects:['vessels']}
+ {id:'worktable',title:'Preparation Table',x:20,y:82,description:'An orderly working space with vessels and tools, where conversation and observation can lead the next step of an adventure.',objects:['vessels']}
 ]);
 export const OBJECTS=Object.freeze([
  {id:'doorbell',title:'Door bell',description:'A small brass bell over the entrance; perhaps an ordinary echo of other bells in the story.'},
