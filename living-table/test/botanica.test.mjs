@@ -21,7 +21,7 @@ test('Botanica uses the existing tabletop and gets its own journal',async()=>{
  const html=await readFile(new URL('../botanica.html',import.meta.url),'utf8');
  const ui=await readFile(new URL('../botanica-ui.mjs',import.meta.url),'utf8');
  assert.match(html,/Scene 03: The Botanica/);
- assert.match(html,/botanica-board.png.png/);
+ assert.match(html,/botanica-board.png/);
  assert.match(html,/id="tokens"/);
  assert.match(html,/id="field-journal-notes"/);
  assert.match(ui,/gu-rpg:scene03:field-journal:v1/);
@@ -30,7 +30,7 @@ test('Botanica uses the existing tabletop and gets its own journal',async()=>{
 test('Botanica art and scripts are served but test code is not',async()=>{
  const server=makeServer();await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  try{const base='http://127.0.0.1:'+server.address().port;
-  for(const path of ['/botanica.html','/botanica-ui.mjs','/botanica-data.mjs','/botanica-state.mjs','/botanica-board.png.png'])assert.equal((await fetch(base+path)).status,200,path);
+  for(const path of ['/botanica.html','/botanica-ui.mjs','/botanica-data.mjs','/botanica-state.mjs','/botanica-board.png'])assert.equal((await fetch(base+path)).status,200,path);
   assert.equal((await fetch(base+'/test/botanica.test.mjs')).status,404);
  }finally{await new Promise(resolve=>server.close(resolve));}
 });
