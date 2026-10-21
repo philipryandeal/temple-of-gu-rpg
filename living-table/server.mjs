@@ -47,7 +47,7 @@ async function chatWithKore(req,res,headers) {
   }finally{clearTimeout(timeout);}
  }catch{if(!res.headersSent)reply(400,{error:'Unable to process this request.'});}
 }
-const ASSETS = new Set(['/','/index.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/casting.mjs','/ui.mjs','/kore-client.mjs','/favicon.ico','/shrine.html','/shrine-ui.mjs','/shrine-data.mjs','/shrine-state.mjs','/shrine-room-board.png.png','/entrance-scenes.mjs','/courtyard.html','/courtyard.css','/courtyard-ui.mjs','/courtyard-data.mjs','/courtyard-state.mjs','/courtyard.svg','/courtyard-fet-board.png','/magical-tools-and-weapons.html','/the-technomancers-grimoire.html','/rootwork-and-remedies.html','/spells-and-invocations.html']);
+const ASSETS = new Set(['/','/index.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/casting.mjs','/ui.mjs','/kore-client.mjs','/favicon.ico','/botanica.html','/botanica-ui.mjs','/botanica-data.mjs','/botanica-state.mjs','/botanica-board.png.png','/shrine.html','/shrine-ui.mjs','/shrine-data.mjs','/shrine-state.mjs','/shrine-room-board.png.png','/entrance-scenes.mjs','/courtyard.html','/courtyard.css','/courtyard-ui.mjs','/courtyard-data.mjs','/courtyard-state.mjs','/courtyard.svg','/courtyard-fet-board.png','/magical-tools-and-weapons.html','/the-technomancers-grimoire.html','/rootwork-and-remedies.html','/spells-and-invocations.html']);
 const PUBLIC_ORIGIN = 'https://templeofgu.com';
 const INDEXABLE = new Set(['/', '/index.html', '/courtyard.html']);
 export function makeServer() {
