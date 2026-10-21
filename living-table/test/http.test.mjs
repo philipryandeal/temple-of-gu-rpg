@@ -85,11 +85,11 @@ test('writes are rejected; response stays noindex', async () => {
   assert.equal(response.headers.get('x-content-type-options'),'nosniff');
 });
 
-test('Kore character-creation threshold sits below table setup and cannot call an unconfigured API',async()=>{
+test('Kore character-creation threshold links to dedicated room without eager third-party loading',async()=>{
  const r=await fetch(origin+'/');const html=await r.text();
  assert.ok(html.indexOf('id="entrance-title"')<html.indexOf('class="panel kore-threshold"'));
  assert.match(html,/id="kore-title">Create your Seeker with Kore/);
- assert.match(html,/button type="button" disabled aria-describedby="kore-status"/);
+ assert.match(html,/href="\/kore">Create My Character/);
  assert.ok(!html.includes('iframe src='),'no eagerly loaded or premature third-party iframe');
  assert.ok(!html.includes('OPENAI_API_KEY'),'no leaked provider credentials');
 });
@@ -126,4 +126,13 @@ test('creative workshop links resolve to four safe public reference pages',async
   assert.ok(html.includes(title),slug+' title present');
   assert.match(html,/<ol class="workshop-list">/);
  }
+});
+
+test('dedicated Kore room serves the embedded independent Oracle with scoped frame policy',async()=>{
+ const r=await fetch(origin+'/kore');assert.equal(r.status,200);
+ const html=await r.text();
+ assert.match(html,/title="Kore, the Oracle of Gu/);
+ assert.match(html,/src="https:\/\/kore-temple-rpg-production\.up\.railway\.app\//);
+ assert.match(r.headers.get('content-security-policy'),/frame-src https:\/\/kore-temple-rpg-production\.up\.railway\.app/);
+ const other=await fetch(origin+'/');assert.doesNotMatch(other.headers.get('content-security-policy'),/frame-src/);
 });
