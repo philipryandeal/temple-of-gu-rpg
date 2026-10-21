@@ -119,8 +119,8 @@ test('Scene Journal precedes one combined Seeker and dice panel without sample s
   assert.ok(sidebar, 'scene sidebar exists');
   const scene=sidebar.indexOf('>SCENE JOURNAL<');
   const tools=sidebar.indexOf('id="seeker-tools"');
-  const seekers=sidebar.indexOf('>1. YOUR SEEKERS<');
-  const dice=sidebar.indexOf(">2. THE SEEKER'S DICE<");
+  const seekers=sidebar.indexOf('>YOUR SEEKERS<');
+  const dice=sidebar.indexOf(">THE SEEKER'S DICE<");
   const solo=sidebar.indexOf('>SOLO PATH');
   assert.ok(scene>=0 && scene<tools && tools<seekers && seekers<dice && dice<solo,
     'scene inspection comes first, followed by both tools in one card, then solo prompts');
