@@ -7,12 +7,12 @@ await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 after(() => new Promise(resolve => server.close(resolve)));
 const origin = 'http://127.0.0.1:' + server.address().port;
 
-test('simple entrance groups three games with eight scenes each, with only the Courtyard playable', async () => {
+test('simple entrance groups three games with eight scenes each, with Courtyard and Shrine playable', async () => {
  const response=await fetch(origin+'/');
  assert.equal(response.status,200);
  assert.ok((response.headers.get('content-type')||'').startsWith('text/html'));
  const html=await response.text();
- assert.ok(html.includes('<form action="./courtyard.html" method="get">'));
+ assert.ok(html.includes('<form action="./courtyard.html" method="get" id="table-entrance">'));
  assert.match(html,/<select id="seekers" name="seekers"/);
  assert.match(html,/<label for="scene">Choose Your Game \+ Scene<\/label>/);
  assert.match(html,/<select id="scene" name="scene"/);
@@ -24,11 +24,13 @@ test('simple entrance groups three games with eight scenes each, with only the C
  assert.equal((selection.match(/<option /g)||[]).length,24);
  const entries=Array.from(selection.matchAll(/<option value="([^"]+)"([^>]*)>/g));
  assert.equal(new Set(entries.map(e=>e[1])).size,24,'every scene selection has its own ID');
- assert.equal(entries.filter(e=>/\bdisabled\b/.test(e[2])).length,23,'future scenes cannot route to the live Courtyard');
- assert.equal(entries.filter(e=>!/\bdisabled\b/.test(e[2])).length,1,'only built scene is selectable');
+ assert.equal(entries.filter(e=>/\bdisabled\b/.test(e[2])).length,22,'unbuilt scenes remain disabled');
+ assert.equal(entries.filter(e=>!/\bdisabled\b/.test(e[2])).length,2,'both built Temple scenes are selectable');
  assert.equal(entries[0][1],'courtyard-fet');
  assert.match(entries[0][2],/\bselected\b/);
  assert.match(selection,/01 — The Courtyard Fèt/);
+ assert.match(selection,/02 — The Shrine Room/);
+ assert.equal(entries[1][1],'shrine-room');
  assert.match(html,/Enter the Table/);
  assert.ok(!html.includes('class="roads"'), 'Four Roads cards are retired from main entrance');
  assert.match(response.headers.get('content-security-policy'),/form-action 'self'/);
