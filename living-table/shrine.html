@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Shrine Room | Temple of Gu Living Table</title>
+<meta name="description" content="Play the Temple of Gu Shrine Room on your personal tabletop, with movable Seeker pieces, dice, inspectable places, and a field journal.">
+<link rel="canonical" href="https://templeofgu.com/shrine.html">
+<link rel="stylesheet" href="./courtyard.css"></head>
+<body>
+<header class="mast"><h1>Scene 02: The Shrine Room</h1><div class="head-actions"><button id="reset">Reset table</button><button id="export">Export session</button><label class="file-action">Import session<input id="import" type="file" accept="application/json,.json"></label></div></header>
+<main class="layout">
+<section class="table-section" aria-label="Shrine Room game board">
+ <div class="board-frame" id="frame">
+  <div class="board" id="board" tabindex="0" role="group" aria-label="Illustrated Shrine Room tabletop, with draggable Seeker tokens and inspectable zones">
+   <img src="./shrine-room-board.png.png" alt="A richly illustrated overhead Shrine Room board, with the entrance gate to the left, altar above, Poto Mitan at the center, offering supplies to the right, and gathering spaces below." draggable="false">
+   <div id="zones"></div><div id="tokens"></div>
+  </div>
+  <div class="frame-bar" id="frame-bar"></div>
+ </div>
+ <div class="movement"><span>Selected Seeker movement</span><button data-move="left" aria-label="Move selected token left">←</button><button data-move="up" aria-label="Move selected token up">↑</button><button data-move="down" aria-label="Move selected token down">↓</button><button data-move="right" aria-label="Move selected token right">→</button><button id="inspect-selected">Select Seeker</button></div>
+ <section class="field-journal" aria-labelledby="field-journal-title">
+  <div class="journal-heading">
+   <div><p class="eyebrow">THE SEEKER'S FIELD JOURNAL</p>
+   <h2 id="field-journal-title">Notes from the Shrine Room</h2></div>
+   <span class="journal-tag">SCENE 02</span>
+  </div>
+  <textarea id="field-journal-notes" name="journal" rows="14" maxlength="20000" spellcheck="true" aria-labelledby="field-journal-title" aria-describedby="journal-status" placeholder="The bell rang again… What did I notice? Who should I speak with next?"></textarea>
+  <div class="journal-footer">
+   <p id="journal-status" role="status" aria-live="polite">Notes stay in this browser until you export or clear them.</p>
+   <p>Stored on this device (other users of this browser may see it) · Included in Export session · Not sent to the game server</p>
+  </div>
+ </section>
+</section>
+<aside class="sidebar">
+ <section class="panel" id="scene-panel"><p class="eyebrow">SCENE JOURNAL</p><h2 id="info-title">Welcome to the shrine</h2><p id="info-body">The music of the Fèt fades behind you. Candles illuminate flowers, vessels, and offerings. Where will you begin?</p><div id="items"></div></section>
+ <section class="panel" id="seeker-tools" aria-label="Seeker pieces and dice">
+  <div class="control-group" aria-labelledby="seekers-heading">
+   <p class="eyebrow" id="seekers-heading">1. YOUR SEEKERS</p>
+   <label for="seat-count">How many pieces?</label>
+   <select id="seat-count"><option value="1">1 Seeker</option><option value="2">2 Seekers</option><option value="3">3 Seekers</option><option value="4">4 Seekers</option><option value="5">5 Seekers</option><option value="6">6 Seekers</option></select>
+   <label for="seeker-select">Which piece is active?</label><select id="seeker-select"></select>
+  </div>
+  <div class="control-group" aria-labelledby="dice-heading">
+   <p class="eyebrow" id="dice-heading">2. THE SEEKER'S DICE</p>
+   <label for="virtue">Choose your Virtue</label>
+   <select id="virtue"><option value="suuru">Suuru · Patience</option><option value="oye">Oye · Understanding</option><option value="foriti">Foriti · Perseverance</option><option value="iwa">Iwa · Integrity</option></select>
+   <label for="virtue-bonus">Virtue bonus from your character sheet (0–2)</label>
+   <input id="virtue-bonus" type="number" inputmode="numeric" min="0" max="2" step="1" value="0" aria-describedby="roll-result">
+   <button id="roll" class="primary">Roll 2d6 + Virtue</button>
+   <p id="roll-result" role="status" aria-live="polite">Enter your Virtue bonus, then roll.</p>
+   <div id="roll-history"></div>
+  </div>
+ </section>
+ <section class="panel"><p class="eyebrow">SOLO PATH · PREPARED PROMPTS</p><p>The Shrine Room is quiet. Which thread do you follow?</p><div id="solo"></div><p id="solo-reply" role="status" aria-live="polite"></p></section>
+</aside>
+</main>
+<footer><nav class="footer-links" aria-label="Tabletop navigation"><a href="./index.html">← Choose a scene</a><span>or</span><a href="https://github.com/philipryandeal/temple-of-gu-rpg/blob/main/guidebook/README.md">Read the rules</a></nav></footer>
+<script type="module" src="./shrine-ui.mjs"></script></body></html>
