@@ -10,7 +10,7 @@
 <main>
 <section class="panel entrance" aria-labelledby="entrance-title">
 <h2 id="entrance-title">Set up the table</h2>
-<form action="./courtyard.html" method="get">
+<form action="./courtyard.html" method="get" id="table-entrance">
  <div class="entry-grid">
   <div class="entry-field">
    <label for="seekers">Number of Seekers</label>
@@ -28,7 +28,7 @@
    <select id="scene" name="scene" required>
     <optgroup label="Temple of Gu">
     <option value="courtyard-fet" selected>01 — The Courtyard Fèt</option>
-    <option value="shrine-room" disabled>02 — The Shrine Room (Coming Soon)</option>
+    <option value="shrine-room">02 — The Shrine Room</option>
     <option value="botanica" disabled>03 — The Botanica (Coming Soon)</option>
     <option value="river-crossing" disabled>04 — The River Crossing (Coming Soon)</option>
     <option value="cemetery-gate" disabled>05 — The Cemetery Gate (Coming Soon)</option>
@@ -59,7 +59,7 @@
    </select>
   </div>
  </div>
- <p class="note">Three games, eight scene slots each. Only Temple of Gu · 01 — The Courtyard Fèt is playable now; all other scenes are coming soon. The Game Guide is separate from the 1–6 Seekers.</p>
+ <p class="note">Three games, eight scene slots each. Temple of Gu scenes 01 — The Courtyard Fèt and 02 — The Shrine Room are playable; all other scenes are coming soon. The Game Guide is separate from the 1–6 Seekers.</p>
  <button type="submit" class="enter-button">Enter the Table →</button>
 </form>
 </section>
@@ -82,4 +82,4 @@
 </section>
 </main>
 <footer>Development playtest · Each game retains its own published rules; the available Courtyard scene uses Temple of Gu Second Edition. No real-world initiation or spiritual status is conferred. <a href="https://www.templeofgu.org/">Return to the Temple</a>.</footer>
-</body></html>
+<script type="module" src="./entrance-scenes.mjs"></script></body></html>
