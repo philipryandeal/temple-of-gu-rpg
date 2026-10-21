@@ -47,7 +47,7 @@ async function chatWithKore(req,res,headers) {
   }finally{clearTimeout(timeout);}
  }catch{if(!res.headersSent)reply(400,{error:'Unable to process this request.'});}
 }
-const ASSETS = new Set(['/','/index.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/casting.mjs','/ui.mjs','/kore-client.mjs','/favicon.ico','/botanica.html','/botanica-ui.mjs','/botanica-data.mjs','/botanica-state.mjs','/botanica-board.png.png','/shrine.html','/shrine-ui.mjs','/shrine-data.mjs','/shrine-state.mjs','/shrine-room-board.png.png','/entrance-scenes.mjs','/courtyard.html','/courtyard.css','/courtyard-ui.mjs','/courtyard-data.mjs','/courtyard-state.mjs','/courtyard.svg','/courtyard-fet-board.png','/magical-tools-and-weapons.html','/the-technomancers-grimoire.html','/rootwork-and-remedies.html','/spells-and-invocations.html']);
+const ASSETS = new Set(['/','/index.html','/kore.html','/human.html','/synthetic.html','/dyad.html','/egbe.html','/roads.json','/style.css','/game.mjs','/casting.mjs','/ui.mjs','/kore-client.mjs','/favicon.ico','/botanica.html','/botanica-ui.mjs','/botanica-data.mjs','/botanica-state.mjs','/botanica-board.png.png','/shrine.html','/shrine-ui.mjs','/shrine-data.mjs','/shrine-state.mjs','/shrine-room-board.png.png','/entrance-scenes.mjs','/courtyard.html','/courtyard.css','/courtyard-ui.mjs','/courtyard-data.mjs','/courtyard-state.mjs','/courtyard.svg','/courtyard-fet-board.png','/magical-tools-and-weapons.html','/the-technomancers-grimoire.html','/rootwork-and-remedies.html','/spells-and-invocations.html']);
 const PUBLIC_ORIGIN = 'https://templeofgu.com';
 const INDEXABLE = new Set(['/', '/index.html', '/courtyard.html']);
 export function makeServer() {
@@ -70,6 +70,7 @@ export function makeServer() {
     let pathname;
     try { pathname = new URL(req.url, 'http://localhost').pathname; }
     catch { res.writeHead(400, headers); res.end(); return; }
+    if (pathname === '/kore' || pathname === '/kore/') pathname = '/kore.html';
     if (pathname === '/health') {
       res.writeHead(200, { ...headers, 'Content-Type': 'text/plain; charset=utf-8' });
       res.end(req.method === 'HEAD' ? undefined : 'ok'); return;
@@ -102,7 +103,9 @@ export function makeServer() {
       if (!(await stat(target)).isFile()) throw new Error('not a file');
       const body = await readFile(target);
       const robots = publicHost && INDEXABLE.has(pathname) ? 'index, follow' : 'noindex, nofollow';
-      res.writeHead(200, { ...headers, 'X-Robots-Tag': robots, 'Content-Type': MIME[extname(target)] ?? 'application/octet-stream' });
+      const assetHeaders={...headers,'X-Robots-Tag': robots, 'Content-Type': MIME[extname(target)] ?? 'application/octet-stream'};
+      if(pathname==='/kore.html')assetHeaders['Content-Security-Policy'] += '; frame-src https://kore-temple-rpg-production.up.railway.app';
+      res.writeHead(200, assetHeaders);
       res.end(req.method === 'HEAD' ? undefined : body);
     } catch {
       res.writeHead(404, headers); res.end();
