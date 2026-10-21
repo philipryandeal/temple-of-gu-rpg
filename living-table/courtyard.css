@@ -33,8 +33,9 @@ button:focus-visible, select:focus-visible, input:focus-visible,
   outline: 3px solid var(--temple-accent);
   outline-offset: 3px;
 }
-.primary { background: var(--temple-accent); border-color: var(--temple-accent); color: var(--temple-panel); font-weight: 750; }
-.primary:hover { background: var(--temple-text); color: var(--temple-panel); }
+/* Light text on orange is ~3.06:1, so orange buttons use WCAG large text (>=18.66px bold, 3:1). */
+.primary { background: var(--temple-accent); border-color: var(--temple-accent); color: var(--temple-text); font-size: 1.1875rem; font-weight: 750; }
+.primary:hover { background: var(--temple-accent); filter: brightness(.92); }
 .eyebrow { letter-spacing: .16em; color: var(--temple-accent); font-size: .75rem; font-weight: 750; text-transform: uppercase; }
 .mast {
   display: flex; justify-content: space-between; align-items: center; gap: 1rem;
@@ -44,7 +45,10 @@ button:focus-visible, select:focus-visible, input:focus-visible,
 .mast h1 { font-family: Georgia, serif; margin: .1rem 0; font-size: clamp(1.45rem, 2.4vw, 2.2rem); color: var(--temple-text); }
 .mast p { margin: .3rem 0; }
 .head-actions { display: flex; gap: .5rem; flex-wrap: wrap; flex: 0 0 auto; }
-.file-action input { display: none; }
+/* The file input stays in the tab order (covering its label) so Import is keyboard-operable. */
+.file-action { position: relative; display: inline-block; }
+.file-action input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; font-size: 0; }
+.file-action:focus-within { outline: 3px solid var(--temple-accent); outline-offset: 2px; }
 .layout { display: grid; grid-template-columns: minmax(0,1fr) minmax(270px,330px); gap: 1rem; padding: 1rem; max-width: 1900px; margin: auto; }
 .table-section { min-width: 0; }
 .fine { font-size: .82rem; color: var(--dim); }
@@ -57,19 +61,19 @@ button:focus-visible, select:focus-visible, input:focus-visible,
   border: 2px solid var(--temple-accent); background: var(--temple-panel);
   border-radius: 50%; width: clamp(24px,3vw,39px); aspect-ratio: 1;
   display: grid; place-items: center; color: var(--temple-text);
-  font-weight: 900; box-shadow: 0 0 0 5px color-mix(in srgb, var(--temple-panel) 56%, transparent);
+  font-weight: 900; font-size: 1.1875rem; line-height: 1; box-shadow: 0 0 0 5px color-mix(in srgb, var(--temple-panel) 56%, transparent);
   padding: 0;
 }
-.hotspot:hover, .hotspot.active { background: var(--temple-accent); color: var(--temple-panel); }
+.hotspot:hover, .hotspot.active { background: var(--temple-accent); color: var(--temple-text); }
 .token {
   width: clamp(28px,3.5vw,54px); height: clamp(28px,3.5vw,54px); padding: 0;
   border: 3px solid var(--temple-accent); border-radius: 50%;
   background: var(--temple-panel); color: var(--temple-text);
-  font-family: Georgia, serif; font-weight: 900; font-size: clamp(.8rem,2vw,1.3rem);
+  font-family: Georgia, serif; font-weight: 900; font-size: clamp(1.1875rem,2vw,1.3rem);
   box-shadow: 0 3px 9px color-mix(in srgb, var(--temple-panel) 72%, transparent);
   cursor: grab; touch-action: none;
 }
-.token.selected { background: var(--temple-accent); color: var(--temple-panel); outline: 3px solid var(--temple-text); outline-offset: 3px; z-index: 4; }
+.token.selected { background: var(--temple-accent); color: var(--temple-text); outline: 3px solid var(--temple-text); outline-offset: 3px; z-index: 4; }
 .token:active { cursor: grabbing; }
 .movement {
   display: flex; gap: .45rem; align-items: center; flex-wrap: wrap;

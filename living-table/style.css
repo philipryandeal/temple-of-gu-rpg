@@ -27,8 +27,9 @@ a:focus-visible { outline: 3px solid var(--temple-accent); outline-offset: 3px; 
 .entry-field label { display: block; margin-bottom: .55rem; font-weight: 700; }
 .entry-field select { width: 100%; padding: .8rem; border-radius: .6rem; border: 1px solid var(--temple-accent); background: var(--temple-bg); color: var(--temple-text); font: inherit; }
 .entry-field select:focus-visible, .enter-button:focus-visible { outline: 3px solid var(--temple-accent); outline-offset: 3px; }
-.enter-button { background: var(--temple-accent); color: var(--temple-text); border: 0; border-radius: .6rem; padding: .85rem 1.35rem; font: inherit; font-weight: 700; cursor: pointer; }
-.enter-button:hover { filter: brightness(1.1); }
+/* Light text on orange is ~3.06:1, so orange buttons use WCAG large text (>=18.66px bold, 3:1). */
+.enter-button { background: var(--temple-accent); color: var(--temple-text); border: 0; border-radius: .6rem; padding: .85rem 1.35rem; font: inherit; font-size: 1.1875rem; font-weight: 700; cursor: pointer; }
+.enter-button:hover { filter: brightness(.92); }
 footer { font-size: .88rem; }
 @media(max-width:620px) { .entry-grid { grid-template-columns: 1fr; } header,main,footer { padding: .8rem; } }
 
@@ -61,7 +62,7 @@ footer { font-size: .88rem; }
 .align-left{text-align:left}
 
 /* Dedicated Kore room, preserving the Temple palette. */
-.kore-entry{display:inline-block;text-decoration:none;color:var(--temple-panel)!important}
+.kore-entry{display:inline-block;text-decoration:none;color:var(--temple-text)!important}
 .kore-room{max-width:1100px}.kore-room h1{font-size:clamp(1.8rem,4vw,2.5rem)}.kore-frame{display:block;width:100%;height:720px;height:min(78dvh,900px);min-height:560px;border:1px solid var(--temple-accent);border-radius:1rem;background:var(--temple-panel)}.kore-back{display:inline-block;margin-bottom:1rem}@media(max-width:620px){.kore-frame{height:78dvh;min-height:540px}}
 
 /* Center the single visitor notice beneath Kore's dedicated chat. */
