@@ -136,3 +136,22 @@ test('dedicated Kore room serves the embedded independent Oracle with scoped fra
  assert.match(r.headers.get('content-security-policy'),/frame-src https:\/\/kore-temple-rpg-production\.up\.railway\.app/);
  const other=await fetch(origin+'/');assert.doesNotMatch(other.headers.get('content-security-policy'),/frame-src/);
 });
+
+
+test('every dice widget shows the shared Temple/Shinto Virtue names without changing its values',async()=>{
+ const expected=[
+  ['suuru','Suuru/Nintai'],
+  ['oye','Oye/Satori'],
+  ['foriti','Foriti/Yuuki'],
+  ['iwa','Iwa/Makoto']
+ ];
+ for(const scene of ['courtyard.html','shrine.html','botanica.html','scene.html','human.html']){
+  const response=await fetch(origin+'/'+scene);
+  assert.equal(response.status,200,scene);
+  const html=await response.text();
+  const select=html.match(/<select id="virtue">([\s\S]*?)<\/select>/);
+  assert.ok(select,scene+' has a Virtue picker');
+  const options=[...select[1].matchAll(/<option value="([^"]+)">([^<]+)<\/option>/g)].map(match=>[match[1],match[2]]);
+  assert.deepEqual(options,expected,scene+' keeps the four dice engine keys and displays paired names');
+ }
+});
