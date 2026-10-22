@@ -7,7 +7,7 @@ await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 after(() => new Promise(resolve => server.close(resolve)));
 const origin = 'http://127.0.0.1:' + server.address().port;
 
-test('simple entrance groups three games with eight scenes each, with three Temple scenes playable', async () => {
+test('simple entrance groups three game groups with ten Temple scenes', async () => {
  const response=await fetch(origin+'/');
  assert.equal(response.status,200);
  assert.ok((response.headers.get('content-type')||'').startsWith('text/html'));
@@ -20,12 +20,12 @@ test('simple entrance groups three games with eight scenes each, with three Temp
  const selection=html.split('<select id="scene" name="scene" required>')[1]?.split('</select>')[0]||'';
  const groups=Array.from(selection.matchAll(/<optgroup label="([^"]+)">([\s\S]*?)<\/optgroup>/g));
  assert.deepEqual(groups.map(g=>g[1]),['Temple of Gu','Shinto No Kami','Call of the Taíno']);
- assert.deepEqual(groups.map(g=>(g[2].match(/<option /g)||[]).length),[8,8,8]);
- assert.equal((selection.match(/<option /g)||[]).length,24);
+ assert.deepEqual(groups.map(g=>(g[2].match(/<option /g)||[]).length),[10,8,8]);
+ assert.equal((selection.match(/<option /g)||[]).length,26);
  const entries=Array.from(selection.matchAll(/<option value="([^"]+)"([^>]*)>/g));
- assert.equal(new Set(entries.map(e=>e[1])).size,24,'every scene selection has its own ID');
- assert.equal(entries.filter(e=>/\bdisabled\b/.test(e[2])).length,21,'unbuilt scenes remain disabled');
- assert.equal(entries.filter(e=>!/\bdisabled\b/.test(e[2])).length,3,'three built Temple scenes are selectable');
+ assert.equal(new Set(entries.map(e=>e[1])).size,26,'every scene selection has its own ID');
+ assert.equal(entries.filter(e=>/\bdisabled\b/.test(e[2])).length,16,'unbuilt scenes remain disabled');
+ assert.equal(entries.filter(e=>!/\bdisabled\b/.test(e[2])).length,10,'ten Temple scenes are selectable');
  assert.equal(entries[0][1],'courtyard-fet');
  assert.match(entries[0][2],/\bselected\b/);
  assert.match(selection,/01 — The Courtyard Fèt/);
