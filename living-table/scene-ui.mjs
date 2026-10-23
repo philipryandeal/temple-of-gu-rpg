@@ -104,7 +104,9 @@ board.addEventListener('pointerup', event => {
   }
 });
 board.addEventListener('pointercancel', () => { touchDown = null; previousTap = null; });
-const JOURNAL_KEY='gu-rpg:scene'+SCENE.number+':field-journal:v1';
+const JOURNAL_KEY=SCENE.id.startsWith('shinto-no-kami-')||SCENE.id.startsWith('call-of-the-taino-')
+ ? 'gu-rpg:'+SCENE.id+':field-journal:v1'
+ : 'gu-rpg:scene'+SCENE.number+':field-journal:v1';
 const journalMessage=message=>{if(journalStatus.textContent!==message)escText(journalStatus,message);};
 // Device-only storage; writing to the journal never sends notes to the server.
 function saveJournalInBrowser() {
@@ -251,7 +253,7 @@ $('#roll').addEventListener('click',()=>{
 $('#reset').addEventListener('click',()=>{if(!confirm('Reset the table AND clear your Field Journal? Export session first if you want to keep your notes, tokens and rolls.'))return;table=initialTable(table.tokens.length);selected='s1';clearSavedJournal();render()});
 $('#export').addEventListener('click',()=>{
  const data=new Blob([JSON.stringify(table,null,2)],{type:'application/json'});
- const url=URL.createObjectURL(data);const link=document.createElement('a');link.href=url;link.download='gu-scene'+SCENE.number+'-session.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ const url=URL.createObjectURL(data);const link=document.createElement('a');link.href=url;link.download='gu-'+SCENE.id+'-session.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 $('#import').addEventListener('change',async e=>{
  const f=e.target.files[0];if(!f)return;
