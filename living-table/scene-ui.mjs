@@ -104,7 +104,9 @@ board.addEventListener('pointerup', event => {
   }
 });
 board.addEventListener('pointercancel', () => { touchDown = null; previousTap = null; });
-const JOURNAL_KEY='gu-rpg:scene'+SCENE.number+':field-journal:v1';
+const JOURNAL_KEY=SCENE.id.startsWith('shinto-no-kami-')||SCENE.id.startsWith('call-of-the-taino-')
+ ? 'gu-rpg:'+SCENE.id+':field-journal:v1'
+ : 'gu-rpg:scene'+SCENE.number+':field-journal:v1';
 const journalMessage=message=>{if(journalStatus.textContent!==message)escText(journalStatus,message);};
 // Device-only storage; writing to the journal never sends notes to the server.
 function saveJournalInBrowser() {
