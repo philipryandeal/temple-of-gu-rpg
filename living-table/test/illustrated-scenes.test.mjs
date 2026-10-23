@@ -30,7 +30,7 @@ test('seven new rooms share approved template controls and have isolated save na
  assert.match(ui,/recordRoll/);
  assert.match(state,/SCENE_ID = SCENE.id/);
  for(const [id] of [...expected,...additional])assert.ok(entrance.includes("'"+id+"':'./scene.html'"),id);
- assert.match(ui,/gu-rpg:'+SCENE.id/);
+ assert.ok(ui.includes("'gu-rpg:'+SCENE.id"));
  const landing=await readFile(new URL('../index.html',import.meta.url),'utf8');
  for(const [id,number,name] of additional)assert.ok(landing.includes('<option value="'+id+'">'+number+' — '+name+'</option>'),id);
 });
