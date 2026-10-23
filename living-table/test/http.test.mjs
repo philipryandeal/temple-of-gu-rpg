@@ -24,8 +24,8 @@ test('simple entrance groups three game groups with ten Temple scenes', async ()
  assert.equal((selection.match(/<option /g)||[]).length,26);
  const entries=Array.from(selection.matchAll(/<option value="([^"]+)"([^>]*)>/g));
  assert.equal(new Set(entries.map(e=>e[1])).size,26,'every scene selection has its own ID');
- assert.equal(entries.filter(e=>/\bdisabled\b/.test(e[2])).length,16,'unbuilt scenes remain disabled');
- assert.equal(entries.filter(e=>!/\bdisabled\b/.test(e[2])).length,10,'ten Temple scenes are selectable');
+ assert.equal(entries.filter(e=>/\bdisabled\b/.test(e[2])).length,0,'all illustrated scenes are enabled');
+ assert.equal(entries.filter(e=>!/\bdisabled\b/.test(e[2])).length,26,'all 26 scenes are selectable');
  assert.equal(entries[0][1],'courtyard-fet');
  assert.match(entries[0][2],/\bselected\b/);
  assert.match(selection,/01 — The Courtyard Fèt/);
